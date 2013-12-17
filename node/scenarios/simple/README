@@ -1,0 +1,6 @@
+This is a simple scenario where there's one service that calls another service with a lower trust level.
+
+s1  -> s2
+
+s1 has the operation "get_deal" which calls "get_price" of s2.
+

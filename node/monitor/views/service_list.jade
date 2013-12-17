@@ -1,0 +1,16 @@
+h1 Services
+
+a(href='/add_service_show')='Add New Service'
+
+h2 Service List
+
+table
+	tr
+		th='Name'
+		th='Trust Level'
+
+	for entry in entries
+		tr	
+			td=entry.name
+			td=entry.trust_level
+
