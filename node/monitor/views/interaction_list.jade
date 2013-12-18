@@ -1,0 +1,17 @@
+h1 Interactions
+
+table
+	tr
+		th='From'
+		th='To'
+		th='Start'
+		th='End'
+		th='Timestamp'
+
+	for entry in entries
+		tr	
+			td=entry.from_service
+			td=entry.to_service
+			td=entry.start
+			td=entry.end
+			td=entry.ts
