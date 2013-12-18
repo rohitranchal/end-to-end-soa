@@ -10,7 +10,8 @@ DROP TABLE Interaction;
 CREATE TABLE Interaction (
 	from_service INT,
 	to_service INT,
-	ts TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-	time_taken INT
+	start BIGINT,
+	end BIGINT,
+	ts TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 

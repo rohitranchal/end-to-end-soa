@@ -7,25 +7,24 @@ var monitor = 'http://localhost:3000/interaction'
 var _req = request;
 
 /*
-	Send given data to the monitor
-	
-*/
-function sm_log($data) {
+ * Send given data to the monitor
+ */
+function sm_log(data) {
+
 	var msg = '?';
-	for(var i = 0; i < data.lenght; i++) {
+	for(var i = 0; i < data.length; i++) {
 		if(i > 0) {
 			msg += '&';
 		}
 		msg += data[i][0] + '=' + data[i][1];
 	}
-
 	_req(monitor+msg, function(error, response, body) {
 		console.log('Response from monitor : ' + body);
 	});
 }
 
-request = function() {
 
+request = function() {
 
 	var sm_data = new Array();
 	sm_data[0] = new Array('from', my_url);

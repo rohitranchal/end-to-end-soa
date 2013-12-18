@@ -37,6 +37,7 @@ app.post('/add_service_process', routes.add_service_process);
 app.get('/add_service_show', routes.add_service_show);
 
 app.get('/interaction', routes.interaction);
+app.get('/interaction_list', routes.interaction_list);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
