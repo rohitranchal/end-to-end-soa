@@ -1,0 +1,8 @@
+s1  -> s2
+s1  -> s3
+
+s1 has the operation "get_deal" which calls "get_price" of s2 and s3.
+
+To run each application application do:
+npm install
+node app.js
