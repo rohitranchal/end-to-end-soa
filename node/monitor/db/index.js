@@ -29,6 +29,19 @@ exports.get_service_id = function(name, cb) {
 	});	
 }
 
+exports.get_service_trust_level = function(id, cb) {
+	connection.query("SELECT trust_level FROM Service WHERE id=" + id, function(err, rows, fields) {
+		if (err) throw err;
+		cb(rows[0].trust_level);
+	});	
+}
+
+exports.set_service_trust_level = function(id, trust_level) {
+	connection.query("UPDATE Service SET trust_level= " + trust_level + " WHERE id=" + id, function(err, rows, fields) {
+		if (err) throw err;
+	});
+}
+
 
 exports.add_interaction = function(from, to, start, end) {
 	var sql = "INSERT INTO Interaction(from_service, to_service, start, end) VALUES ('" + 

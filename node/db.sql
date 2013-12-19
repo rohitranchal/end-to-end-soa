@@ -8,6 +8,7 @@ CREATE TABLE Service (
 
 DROP TABLE Interaction;
 CREATE TABLE Interaction (
+	id INT AUTO_INCREMENT PRIMARY KEY,
 	from_service INT,
 	to_service INT,
 	start BIGINT,
