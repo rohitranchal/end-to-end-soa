@@ -8,7 +8,6 @@ exports.get_deal = function(req, res){
 			//Call s3
 			request('http://localhost:3003/get_price', function (error2, response2, body2) {
 				if (!error2 && response2.statusCode == 200) {
-					
 					s2 = parseInt(body);
 					s3 = parseInt(body2);
 

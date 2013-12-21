@@ -4,5 +4,5 @@ exports.index = function(req, res){
 
 
 exports.get_price = function(req, res){
-  res.send('40');
+  res.send(JSON.stringify(40));
 };
