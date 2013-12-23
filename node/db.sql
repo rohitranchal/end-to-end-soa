@@ -6,8 +6,8 @@ CREATE TABLE Scenario (
 );
 INSERT INTO Scenario(id, name, description) VALUES
 (1, 'Simple Proxy', 's1 -> s2'),
-(2, 'Service Chain', 's1 -> s2 -> s3'),
-(3, 'Service Facade', 's1 -> s2 and s1 -> s3');
+(2, 'Service Facade', 's1 -> s2 and s1 -> s3'),
+(3, 'Service Chain', 's1 -> s2 -> s3');
 
 DROP TABLE Service;
 CREATE TABLE Service (
@@ -20,14 +20,14 @@ CREATE TABLE Service (
 );
 
 INSERT INTO Service(id, name, trust_level, host, port, url) VALUES
-(1, 'localhost:4101', 0.0, 'localhost', 4101, 'http://localhost:4101'),
-(2, 'localhost:4102', 0.0, 'localhost', 4102, 'http://localhost:4102'),
-(3, 'localhost:4103', 0.0, 'localhost', 4103, 'http://localhost:4103'),
-(4, 'localhost:4104', 0.0, 'localhost', 4104, 'http://localhost:4104'),
-(5, 'localhost:4105', 0.0, 'localhost', 4105, 'http://localhost:4105'),
-(6, 'localhost:4106', 0.0, 'localhost', 4106, 'http://localhost:4106'),
-(7, 'localhost:4107', 0.0, 'localhost', 4107, 'http://localhost:4107'),
-(8, 'localhost:4108', 0.0, 'localhost', 4108, 'http://localhost:4108');
+(1, 'localhost:4101', 10.0, 'localhost', 4101, 'http://localhost:4101'),
+(2, 'localhost:4102', 10.0, 'localhost', 4102, 'http://localhost:4102'),
+(3, 'localhost:4103', 10.0, 'localhost', 4103, 'http://localhost:4103'),
+(4, 'localhost:4104', 10.0, 'localhost', 4104, 'http://localhost:4104'),
+(5, 'localhost:4105', 10.0, 'localhost', 4105, 'http://localhost:4105'),
+(6, 'localhost:4106', 10.0, 'localhost', 4106, 'http://localhost:4106'),
+(7, 'localhost:4107', 10.0, 'localhost', 4107, 'http://localhost:4107'),
+(8, 'localhost:4108', 10.0, 'localhost', 4108, 'http://localhost:4108');
 
 
 DROP TABLE Scenario_Service;

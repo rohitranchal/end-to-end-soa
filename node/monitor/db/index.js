@@ -61,7 +61,6 @@ exports.set_service_trust_level = function(id, trust_level) {
 exports.add_interaction = function(from, to, start, end) {
 	var sql = "INSERT INTO Interaction(from_service, to_service, start, end) VALUES ('" + 
 		from + "','" + to  + "'," +  start  + "," + end + ")";
-	console.log(sql);
 	connection.query(sql, function(err, rows, fields) {
 		if (err) throw err;
 	});

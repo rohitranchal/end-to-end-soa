@@ -9,16 +9,18 @@ div(class="navbar navbar-inverse navbar-default-top", role="navigation")
 		div(class="navbar-collapse collapse")
 			ul(class="nav navbar-nav navbar-right")
 				li
+					a(href="/interaction_list") Interaction List
+				li
 					a(href="/service_list") Service List
 				li(class="dropdown")
 					a(href="#" class="dropdown-toggle" data-toggle="dropdown") Passive Scenarios 
 						b(class="caret")
 					ul(class="dropdown-menu")
 						li
-							a(href="#") Simple Proxy Service
+							a(href="/scenario?s_id=1") Simple Proxy Service
 						li
-							a(href="#") Service Chain
+							a(href="/scenario?s_id=2") Service Chain
 						li
-							a(href="#") Service Facade
+							a(href="/scenario?s_id=3") Service Facade
 				li
 					a(href="https://code.google.com/p/end-to-end-soa/") Source Code

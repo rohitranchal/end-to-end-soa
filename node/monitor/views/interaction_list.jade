@@ -1,17 +1,27 @@
-h1 Interactions
+html(lang="en")
+	include header
+	body
+		include nav
 
-table
-	tr
-		th='From'
-		th='To'
-		th='Start'
-		th='End'
-		th='Timestamp'
-
-	for entry in entries
-		tr	
-			td=entry.from_service
-			td=entry.to_service
-			td=entry.start
-			td=entry.end
-			td=entry.ts
+		div(class="container")
+			div(class="panel panel-default")
+				div(class="panel-body")
+					h2 Interactions
+					div(class="row")
+						div(class="col-md-2") 
+							strong From
+						div(class="col-md-2") 
+							strong To
+						div(class="col-md-2") 
+							strong Start
+						div(class="col-md-2") 
+							strong End
+						div(class="col-md-2") 
+							strong Timestamp
+					for entry in entries
+						div(class="row")
+							div(class="col-md-2")=entry.from_service
+							div(class="col-md-2")=entry.to_service
+							div(class="col-md-2")=entry.start
+							div(class="col-md-2")=entry.end
+							div(class="col-md-4")=entry.ts

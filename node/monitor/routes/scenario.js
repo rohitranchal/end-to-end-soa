@@ -29,7 +29,7 @@ exports.get_topology = function(req, res) {
 
 			var conns = new Array();
 			conns[0] = new Array(3, 4);
-			conns[1] = new Array(4, 5);
+			conns[1] = new Array(3, 5);
 			var topology = {services: svrs, connections: conns};
 
 			res.send(JSON.stringify(topology));	
@@ -38,7 +38,7 @@ exports.get_topology = function(req, res) {
 
 			var conns = new Array();
 			conns[0] = new Array(6, 7);
-			conns[1] = new Array(6, 8);
+			conns[1] = new Array(7, 8);
 
 			var topology = {services: svrs, connections: conns};
 
