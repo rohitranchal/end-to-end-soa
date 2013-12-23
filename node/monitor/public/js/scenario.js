@@ -70,10 +70,10 @@
 				});
 
 				if(count%2 > 0) {
-					left += 100;
-					top += 100;
+					left += 150;
+					top += 120;
 				} else {
-					left += 200;
+					left += 300;
 				}
 				count++;
 

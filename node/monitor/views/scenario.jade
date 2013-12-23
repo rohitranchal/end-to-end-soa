@@ -9,6 +9,8 @@ html(lang="en")
 		div(class="container")
 			div(class="scenario-title")
 				h4=scenario.name
+					a(href=scenario.access_url, target="_blank")
+						small=(' ' + scenario.access_url)
 			div(id="main")
 				div(id="scenario-container", class="scenario-container")
 					for service in services
