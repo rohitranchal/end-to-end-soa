@@ -26,7 +26,7 @@
 		});
 
 		instance.bind("connection", function(info) {
-			info.connection.getOverlay("label").setLabel(info.connection.id);
+			info.connection.getOverlay("label").setLabel('');
 		});
 		
 		instance.doWhileSuspended(function() {
@@ -47,7 +47,17 @@
 				anchor:"Continuous"				
 			});
 			
-			instance.connect({ source:"item1", target:"item2" });
+			var s_id = $('#scenario_id').text();
+			$.getJSON( "/scenario_topology?s_id=" + s_id, function( data ) {
+				for(var i = 0; i < data.connections.length; i++) {
+					var conn = data.connections[i];
+					instance.connect({ source:'service' + conn[0], 
+										target:'service' + conn[1]});
+				}
+				
+			});
+
+			
 
 			//Positions
 			var left = 0;

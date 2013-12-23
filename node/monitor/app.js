@@ -31,13 +31,17 @@ if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
 
+//Demo related
 app.get('/', routes.index);
 app.get('/scenario', scenario.show);
-
+app.get('/scenario_topology', scenario.get_topology);
 app.get('/service_list', routes.service_list);
 app.post('/add_service_process', routes.add_service_process);
 app.get('/add_service_show', routes.add_service_show);
 
+
+
+//Monitor functionality related
 app.get('/interaction', routes.interaction);
 app.get('/interaction_list', routes.interaction_list);
 

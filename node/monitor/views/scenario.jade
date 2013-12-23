@@ -5,17 +5,13 @@ html(lang="en")
 	link(rel="stylesheet", href="./css/scenario.css")
 	body
 		include nav
-
+		div(id="scenario_id", style="visibility:hidden;")=scenario.id
 		div(class="container")
 			div(class="scenario-title")
-				h4 Scenario 1
+				h4=scenario.name
 			div(id="main")
 				div(id="scenario-container", class="scenario-container")
-					div(class="w", id="item1") Service 1
-						div(class="ep")
-					div(class="w", id="item2") Service 2
-						div(class="ep")
-					div(class="w", id="item") Service 3
-						div(class="ep")
-					div(class="w", id="item4") Service 4
-						div(class="ep")
+					for service in services
+						div(class="w", id="service" + service.id)=service.name
+							div=service.trust_level 
+							div(class="ep")
