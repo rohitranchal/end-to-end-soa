@@ -1,0 +1,21 @@
+html(lang="en")
+	include header
+	script(src="http://jsplumbtoolkit.com/demo/js/jquery.jsPlumb-1.5.5-min.js")
+	script(src="./js/scenario.js")
+	link(rel="stylesheet", href="./css/scenario.css")
+	body
+		include nav
+
+		div(class="container")
+			div(class="scenario-title")
+				h4 Scenario 1
+			div(id="main")
+				div(id="scenario-container", class="scenario-container")
+					div(class="w", id="item1") Service 1
+						div(class="ep")
+					div(class="w", id="item2") Service 2
+						div(class="ep")
+					div(class="w", id="item") Service 3
+						div(class="ep")
+					div(class="w", id="item4") Service 4
+						div(class="ep")

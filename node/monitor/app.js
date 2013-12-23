@@ -5,6 +5,7 @@
 
 var express = require('express');
 var routes = require('./routes');
+var scenario = require('./routes/scenario');
 var http = require('http');
 var path = require('path');
 
@@ -31,6 +32,7 @@ if ('development' == app.get('env')) {
 }
 
 app.get('/', routes.index);
+app.get('/scenario', scenario.show);
 
 app.get('/service_list', routes.service_list);
 app.post('/add_service_process', routes.add_service_process);

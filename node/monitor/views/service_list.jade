@@ -1,16 +1,21 @@
-h1 Services
+html(lang="en")
+	include header
+	body
+		include nav
 
-a(href='/add_service_show')='Add New Service'
-
-h2 Service List
-
-table
-	tr
-		th='Name'
-		th='Trust Level'
-
-	for entry in entries
-		tr	
-			td=entry.name
-			td=entry.trust_level
-
+		div(class="container")
+			div(class="panel panel-default")
+				div(class="panel-body")
+					h2 Service List
+					div(class="row")
+						div(class="col-md-2")
+							td Service
+						div(class="col-md-2")
+							td Trust Level
+					for entry in entries
+						div(class="row")
+							div(class="col-md-2")
+								div
+									a(href=entry.url)=entry.name
+							div(class="col-md-2")
+								div=entry.trust_level
