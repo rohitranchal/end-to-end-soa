@@ -13,5 +13,6 @@ html(lang="en")
 				div(id="scenario-container", class="scenario-container")
 					for service in services
 						div(class="w", id="service" + service.id)=service.name
-							div=service.trust_level 
+							div(style="color:red")
+								strong=service.trust_level 
 							div(class="ep")
