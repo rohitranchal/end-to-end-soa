@@ -1,0 +1,40 @@
+echo "Starting Service Monitor..."
+cd monitor
+node app.js &
+cd -
+echo "Starting Service Monitor : DONE"
+
+echo "Starting Simple Proxy ..."
+cd scenarios/simple/s1
+node app.js &
+cd -
+cd scenarios/simple/s2
+node app.js &
+cd -
+echo "Starting Simple Proxy : DONE"
+
+echo "Starting Service Chain ..."
+cd scenarios/1/s1
+node app.js &
+cd -
+cd scenarios/1/s2
+node app.js &
+cd -
+cd scenarios/1/s3
+echo "Starting Service Chain : DONE"
+
+echo "Starting Service Facade ..."
+node app.js &
+cd -
+cd scenarios/2/s1
+node app.js &
+cd -
+cd scenarios/2/s2
+node app.js &
+cd -
+cd scenarios/2/s3
+node app.js &
+cd -
+echo "Starting Service Facade : DONE"
+
+echo "System Started!"
