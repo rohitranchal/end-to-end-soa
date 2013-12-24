@@ -12,6 +12,17 @@ exports.service_list = function(req, res){
 	});
 };
 
+exports.trust_values_reset = function(req, res) {
+	trust.reset();
+	res.send('OK');
+};
+
+exports.trust_algo_list = function(req, res) {
+	trust.algo_list(function(list) {
+		res.render('trust_algo_list', {algos : list});
+	});
+};
+
 exports.add_service_show = function(req, res){
 	res.render('add_service_show', {});
 };
@@ -56,7 +67,7 @@ exports.interaction = function(req, res){
 
 			if(start != null) { //When we get confirmation
 				//Update trust level
-				simple_update_trust_level(from_id, to_id);
+				update_trust_level(from_id, to_id);
 			}
 		});	
 	});
@@ -65,7 +76,7 @@ exports.interaction = function(req, res){
 };
 
 
-function simple_update_trust_level(from, to) {
+function update_trust_level(from, to) {
 	
 	db.get_service_trust_level(from, function(f_tv) {
 		db.get_service_trust_level(to, function(t_tv) {
@@ -76,9 +87,6 @@ function simple_update_trust_level(from, to) {
 				console.log(from + ' New : ' + new_f_tv);
 				db.set_service_trust_level(from, new_f_tv);				
 			});
-			// //Calculate new trust level
-			// f_tv = parseFloat(f_tv) * (parseFloat(t_tv)/f_tv);
-			// db.set_service_trust_level(from, f_tv);
 		});
 	});
 }

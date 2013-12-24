@@ -40,7 +40,8 @@ app.get('/service_list', routes.service_list);
 app.post('/add_service_process', routes.add_service_process);
 app.get('/add_service_show', routes.add_service_show);
 
-app.get('/reset_trust', trust.reset);
+app.get('/reset_trust_values', routes.trust_values_reset);
+app.get('/trust_algo_list', routes.trust_algo_list);
 
 //Monitor functionality related
 app.get('/interaction', routes.interaction);

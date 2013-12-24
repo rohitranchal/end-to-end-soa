@@ -1,0 +1,14 @@
+html(lang="en")
+	include header
+	body
+		include nav
+
+		div(class="container")
+			div(class="panel panel-default")
+				div(class="panel-body")
+					h2 Supported Trust Calculation Algorithms
+					for alg in algos
+						div(class="row")
+							div(class="col-md-2")=alg.name
+							div(class="col-md-10")
+								pre=alg.alg

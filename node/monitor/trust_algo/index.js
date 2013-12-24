@@ -5,7 +5,7 @@ var simple_trust = function simple_trust_update(from, to, cb) {
 };
 
 var moving_avg_trust = function moving_avg_trust_update(from, to, cb) {
-
+	//TODO
 };
 
 var algos = new Array();
@@ -18,9 +18,8 @@ algos[algos.length] = tmp;
 var default_trust_algo = 0;
 
 
-exports.reset = function(req, res){
+exports.reset = function(){
 	db.reset_trust_levels(10); //Read this default value from config
-	res.send(JSON.stringify('OK'));
 };
 
 //Call cb with the new trust value of 'from'
@@ -31,6 +30,11 @@ exports.update = function(from, to, cb) {
 };
 
 exports.algo_list = function(cb) {
-	cb(algos); //Return list
-};
+	var ret = new Array();
 
+	for(var i = 0; i < algos.length; i++) {
+		ret[i] = {name : algos[i].name, alg : String(algos[i].alg)};
+	}
+
+	cb(ret); //Return list
+};
