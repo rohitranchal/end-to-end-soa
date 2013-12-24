@@ -6,6 +6,7 @@
 var express = require('express');
 var routes = require('./routes');
 var scenario = require('./routes/scenario');
+var trust = require('./trust_algo');
 var http = require('http');
 var path = require('path');
 
@@ -39,7 +40,7 @@ app.get('/service_list', routes.service_list);
 app.post('/add_service_process', routes.add_service_process);
 app.get('/add_service_show', routes.add_service_show);
 
-
+app.get('/reset_trust', trust.reset);
 
 //Monitor functionality related
 app.get('/interaction', routes.interaction);

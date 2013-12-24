@@ -1,4 +1,5 @@
 var db = require('../db');
+var trust = require('../trust_algo');
 url = require('url');
 
 exports.index = function(req, res){
@@ -71,12 +72,13 @@ function simple_update_trust_level(from, to) {
 
 			console.log(from + ' Old : ' + f_tv);
 			
-			//Calculate new trust level
-			f_tv = parseFloat(f_tv) * (parseFloat(t_tv)/f_tv);
-
-			console.log(from + ' New : ' + f_tv);
-
-			db.set_service_trust_level(from, f_tv);
+			trust.update(f_tv, t_tv, function(new_f_tv) {
+				console.log(from + ' New : ' + new_f_tv);
+				db.set_service_trust_level(from, new_f_tv);				
+			});
+			// //Calculate new trust level
+			// f_tv = parseFloat(f_tv) * (parseFloat(t_tv)/f_tv);
+			// db.set_service_trust_level(from, f_tv);
 		});
 	});
 }

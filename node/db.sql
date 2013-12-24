@@ -22,7 +22,7 @@ CREATE TABLE Service (
 
 INSERT INTO Service(id, name, trust_level, host, port, url) VALUES
 (1, 'localhost:4101', 10.0, 'localhost', 4101, 'http://localhost:4101'),
-(2, 'localhost:4102', 10.0, 'localhost', 4102, 'http://localhost:4102'),
+(2, 'localhost:4102', 5.0, 'localhost', 4102, 'http://localhost:4102'),
 (3, 'localhost:4103', 10.0, 'localhost', 4103, 'http://localhost:4103'),
 (4, 'localhost:4104', 10.0, 'localhost', 4104, 'http://localhost:4104'),
 (5, 'localhost:4105', 10.0, 'localhost', 4105, 'http://localhost:4105'),

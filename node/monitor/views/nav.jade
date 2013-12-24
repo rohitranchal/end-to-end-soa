@@ -8,10 +8,6 @@ div(class="navbar navbar-inverse navbar-default-top", role="navigation")
 			a(class="navbar-brand" href="/")  Service Monitor
 		div(class="navbar-collapse collapse")
 			ul(class="nav navbar-nav navbar-right")
-				li
-					a(href="/interaction_list") Interaction List
-				li
-					a(href="/service_list") Service List
 				li(class="dropdown")
 					a(href="#" class="dropdown-toggle" data-toggle="dropdown") Passive Scenarios 
 						b(class="caret")
@@ -22,6 +18,16 @@ div(class="navbar navbar-inverse navbar-default-top", role="navigation")
 							a(href="/scenario?s_id=2") Service Facade
 						li
 							a(href="/scenario?s_id=3") Service Chain
+				li(class="dropdown")
+					a(href="#" class="dropdown-toggle" data-toggle="dropdown") Status 
+						b(class="caret")
+					ul(class="dropdown-menu")
+						li
+							a(href="/interaction_list") Interaction List
+						li
+							a(href="/service_list") Service List
+				li
+					a(href="/configure") Configure
 
 				li
 					a(href="https://code.google.com/p/end-to-end-soa/", target="_blank") Source Code

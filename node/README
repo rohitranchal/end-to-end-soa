@@ -1,2 +1,17 @@
 Port Assignment
 monitor : 3000
+
+
+To install:
+- Install nodejs
+- Setup a new mysql database named : soa_trust
+- Use db.sql to initialize it.
+- Set the mysql username and password in monitor/db/index.php
+
+- run ./install
+
+To start all services (including monitor):
+./start
+
+To stop everything:
+./stop

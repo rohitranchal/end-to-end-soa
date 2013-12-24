@@ -44,6 +44,12 @@ exports.get_service_id = function(name, cb) {
 	});	
 }
 
+exports.reset_trust_levels = function(value) {
+	connection.query("UPDATE Service SET trust_level = " + value, function(err, rows, fields) {
+		if (err) throw err;
+	});
+}
+
 exports.get_service_trust_level = function(id, cb) {
 	connection.query("SELECT trust_level FROM Service WHERE id=" + id, function(err, rows, fields) {
 		if (err) throw err;
