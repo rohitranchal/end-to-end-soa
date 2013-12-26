@@ -11,7 +11,7 @@
 			});
 
 			$.post("/update_service_tl", {values : vals}, function (data) {
-				console.log(data);
+				location.reload();
 			});
 
 		});
