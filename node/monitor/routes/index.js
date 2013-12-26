@@ -12,6 +12,17 @@ exports.service_list = function(req, res){
 	});
 };
 
+exports.set_trust_levels = function(req, res) {
+	//Get the list of services
+	var values = req.body.values;
+	for(var i = 0; i < values.length; i++) {
+		//console.log(values[i]);
+		db.set_service_trust_level(values[i].name, values[i].value);
+	}
+
+	res.send('OK');
+};
+
 exports.trust_values_reset = function(req, res) {
 	trust.reset();
 	res.send('OK');

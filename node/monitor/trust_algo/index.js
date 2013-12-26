@@ -25,7 +25,6 @@ exports.reset = function(){
 //Call cb with the new trust value of 'from'
 exports.update = function(from, to, cb) {
 	algorithm = algos[default_trust_algo];
-	console.log(algorithm)
 	algorithm.alg(from, to, cb); //Call
 };
 

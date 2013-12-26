@@ -40,6 +40,8 @@ app.get('/service_list', routes.service_list);
 app.post('/add_service_process', routes.add_service_process);
 app.get('/add_service_show', routes.add_service_show);
 
+
+app.post('/update_service_tl', routes.set_trust_levels);
 app.get('/reset_trust_values', routes.trust_values_reset);
 app.get('/trust_algo_list', routes.trust_algo_list);
 

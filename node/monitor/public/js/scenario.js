@@ -1,21 +1,37 @@
 //Based on http://jsplumbtoolkit.com/demo/statemachine/demo-jquery.js
 ;(function() {
 	jsPlumb.ready(function() {
-				// setup some defaults for jsPlumb.	
-			var instance = jsPlumb.getInstance({
-				Endpoint : ["Dot", {radius:2}],
-				HoverPaintStyle : {strokeStyle:"#1e8151", lineWidth:2 },
-				ConnectionOverlays : [
-					[ "Arrow", { 
-						location:1,
-						id:"arrow",
-						length:14,
-						foldback:0.8
-					} ],
-					[ "Label", { label:"FOO", id:"label", cssClass:"aLabel" }]
-				],
-				Container:"scenario-container"
+
+		//Handle update service trust levels
+		$("#btn_update_tl").click(function() {
+			//Get new values
+			var vals = new Array();
+			$(".form-control").each( function() {
+				vals[vals.length] = {name : this.id, value: $(this).val()};
 			});
+
+			$.post("/update_service_tl", {values : vals}, function (data) {
+				console.log(data);
+			});
+
+		});
+
+
+		// setup some defaults for jsPlumb.	
+		var instance = jsPlumb.getInstance({
+			Endpoint : ["Dot", {radius:2}],
+			HoverPaintStyle : {strokeStyle:"#1e8151", lineWidth:2 },
+			ConnectionOverlays : [
+				[ "Arrow", { 
+					location:1,
+					id:"arrow",
+					length:14,
+					foldback:0.8
+				} ],
+				[ "Label", { label:"FOO", id:"label", cssClass:"aLabel" }]
+			],
+			Container:"scenario-container"
+		});
 
 		var windows = jsPlumb.getSelector(".w");
 

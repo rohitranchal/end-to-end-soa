@@ -7,14 +7,39 @@ html(lang="en")
 		include nav
 		div(id="scenario_id", style="visibility:hidden;")=scenario.id
 		div(class="container")
-			div(class="scenario-title")
-				h4=scenario.name
-					a(href=scenario.access_url, target="_blank")
-						small=(' ' + scenario.access_url)
-			div(id="main")
-				div(id="scenario-container", class="scenario-container")
-					for service in services
-						div(class="w", id="service" + service.id)=service.name
-							div(style="color:red")
-								strong=service.trust_level 
-							div(class="ep")
+			div(class="col-md-12")
+				div(class="panel panel-default text-center")
+					h3=scenario.name
+			div(class="col-md-8")
+				div(class="panel panel-default")
+					div(class="panel-heading text-center")
+						h4 Scenario Topology
+					div(class="panel-body")
+						div(id="main")
+							div(id="scenario-container", class="scenario-container")
+								for service in services
+									div(class="w", id="service" + service.id)=service.name
+										div(style="color:red")
+											strong=service.trust_level 
+										div(class="ep")
+			div(class="col-md-4")
+				div(class="panel panel-default")
+					div(class="panel-heading text-center")
+						h4 Invoke
+					div(class="panel-body")
+						a(href=scenario.access_url, target="_blank")=scenario.access_url
+			div(class="col-md-4")
+				div(class="panel panel-default")
+					div(class="panel-heading text-center")
+						h4 Scenario Configuration
+					div(class="panel-body")
+						div(class="input-group")
+							for service in services
+								div(class="row top-buffer")
+									div(class="col-md-6")=service.name
+									div(class="col-md-6")
+										input(type="text", class="form-control", id=service.id value=service.trust_level)
+							div(class="row top-buffer")
+								div(class="col-md-6")
+								div(class="col-md-6")
+									button(id="btn_update_tl", class="btn button-default") Update
