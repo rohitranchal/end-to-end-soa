@@ -93,7 +93,7 @@
 				}
 				count++;
 
-				if(left > 800) {
+				if(left > 500) {
 					left = 0;
 				}
 				

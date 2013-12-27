@@ -30,11 +30,19 @@ exports.show = function(req, res){
 		}
 	}
 
-	s_list = scenario.services.join(',');
-	db.get_services_of_scenario(s_list, function(svrs) {
-		scenario.services = svrs;
+	if(typeof scenario.services[0] == 'number') {
+		s_list = scenario.services.join(',');
+		db.get_services_of_scenario(s_list, function(svrs) {
+			scenario.services = svrs;
+			res.render('scenario.jade', scenario);
+		});	
+	} else {
+		//Cached
+		//At this point the scenario object already contains
+		//the complete service descriptions
 		res.render('scenario.jade', scenario);
-	});
+	}
+	
 };
 
 //Return scenario topology to the scenario viewer.
