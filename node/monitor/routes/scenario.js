@@ -22,12 +22,18 @@ for(var i = 0; i < files.length; i++) {
 exports.show = function(req, res){
 	var s_id = req.query.s_id;
 
-	db.get_scenario(s_id, function(scenario_data){
-		db.get_services_of_scenario(s_id, function(svrs) {
-			res.render('scenario.jade', 
-					{'services' : svrs, 
-					'scenario' : scenario_data});
-		});
+	//Linear search through the availalbe scenarios
+	var scenario = null;
+	for(var i = 0; i < scenarios.length; i++) {
+		if(scenarios[i].id == s_id) {
+			scenario = scenarios[i];
+		}
+	}
+
+	s_list = scenario.services.join(',');
+	db.get_services_of_scenario(s_list, function(svrs) {
+		scenario.services = svrs;
+		res.render('scenario.jade', scenario);
 	});
 };
 

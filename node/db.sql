@@ -1,15 +1,3 @@
-DROP TABLE Scenario;
-CREATE TABLE Scenario (
-	id INT AUTO_INCREMENT PRIMARY KEY,
-	name VARCHAR(2048),
-	access_url VARCHAR(2048),
-	description TEXT
-);
-INSERT INTO Scenario(id, name, access_url, description) VALUES
-(1, 'Simple Proxy', 'http://localhost:4101/get_deal', 's1 -> s2'),
-(2, 'Service Facade', 'http://localhost:4103/get_deal', 's1 -> s2 and s1 -> s3'),
-(3, 'Service Chain', 'http://localhost:4106/get_deal', 's1 -> s2 -> s3');
-
 DROP TABLE Service;
 CREATE TABLE Service (
 	id INT AUTO_INCREMENT PRIMARY KEY,
@@ -29,23 +17,6 @@ INSERT INTO Service(id, name, trust_level, host, port, url) VALUES
 (6, 'localhost:4106', 10.0, 'localhost', 4106, 'http://localhost:4106'),
 (7, 'localhost:4107', 10.0, 'localhost', 4107, 'http://localhost:4107'),
 (8, 'localhost:4108', 10.0, 'localhost', 4108, 'http://localhost:4108');
-
-
-DROP TABLE Scenario_Service;
-CREATE TABLE Scenario_Service (
-	scenario INT,
-	service INT
-);
-
-INSERT INTO Scenario_Service VALUES
-(1, 1),
-(1, 2),
-(2, 3),
-(2, 4),
-(2, 5),
-(3, 6),
-(3, 7),
-(3, 8);
 
 
 DROP TABLE Interaction;

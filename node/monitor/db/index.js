@@ -9,15 +9,8 @@ var connection = mysql.createConnection({
 connection.connect();
 
 
-exports.get_scenario = function(s_id, cb) {
-	connection.query('SELECT * FROM Scenario WHERE id=' + s_id, function(err, rows, fields) {
-		if (err) throw err;
-		cb(rows[0]);
-	});	
-}
-
-exports.get_services_of_scenario = function(s_id, cb) {
-	connection.query('SELECT * FROM Service WHERE id IN (SELECT service FROM Scenario_Service WHERE scenario=' + s_id + ')', function(err, rows, fields) {
+exports.get_services_of_scenario = function(services, cb) {
+	connection.query('SELECT * FROM Service WHERE id IN (' + services + ')', function(err, rows, fields) {
 		if (err) throw err;
 		cb(rows);
 	});	

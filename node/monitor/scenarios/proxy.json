@@ -1,5 +1,7 @@
 {
 	"id" : 1,
+	"access_url" : "http://localhost:4101/get_deal",
+	"description" : "s1 -> s2",
 	"name": "Service Proxy",
 	"services" : [1, 2],
 	"connections" :[[1,2]]

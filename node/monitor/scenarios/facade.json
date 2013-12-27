@@ -1,5 +1,7 @@
 {
 	"id" : 2,
+	"access_url" : "http://localhost:4103/get_deal",
+	"description" : "s1 -> s2 and s1 -> s3",
 	"name": "Service Facade",
 	"services" : [3, 4, 5],
 	"connections" :[[3,4] , [3, 5]]
