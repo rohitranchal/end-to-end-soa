@@ -5,9 +5,11 @@ var do_nothing_trust = function do_nothing_trust_update(from, to) {
 };
 
 var simple_trust = function simple_trust_update(from, to, cb) {
-	var new_trust_level = from.trust_level * to.trust_level/from.trust_level;
-	db.set_service_trust_level(from.id, new_trust_level);
-	cb(new_trust_level);
+	if(from.trust_level != 0) {
+		var new_trust_level = from.trust_level * to.trust_level/from.trust_level;
+		db.set_service_trust_level(from.id, new_trust_level);
+		cb(new_trust_level);	
+	}
 };
 
 var moving_avg_trust = function moving_avg_trust_update(from, to) {
