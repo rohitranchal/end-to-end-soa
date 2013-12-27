@@ -53,6 +53,10 @@ CREATE TABLE Interaction (
 	id INT AUTO_INCREMENT PRIMARY KEY,
 	from_service INT,
 	to_service INT,
+	from_service_trust_level_pre FLOAT,
+	to_service_trust_level_pre FLOAT,
+	from_service_trust_level_post FLOAT,
+	to_service_trust_level_post FLOAT,
 	start BIGINT,
 	end BIGINT,
 	ts TIMESTAMP DEFAULT CURRENT_TIMESTAMP

@@ -1,0 +1,6 @@
+{
+	"id" : 2,
+	"name": "Service Facade",
+	"services" : [3, 4, 5],
+	"connections" :[[3,4] , [3, 5]]
+}

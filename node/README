@@ -15,3 +15,7 @@ To start all services (including monitor):
 
 To stop everything:
 ./stop
+
+
+All services in scenarios are assigned ports starting with 4101.
+Please make sure there are no conflicts.

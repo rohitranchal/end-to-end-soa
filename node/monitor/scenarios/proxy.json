@@ -1,0 +1,6 @@
+{
+	"id" : 1,
+	"name": "Service Proxy",
+	"services" : [1, 2],
+	"connections" :[[1,2]]
+}

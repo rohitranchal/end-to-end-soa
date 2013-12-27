@@ -74,12 +74,11 @@ exports.interaction = function(req, res){
 	
 	db.get_service_id(from, function(from_id) {
 		db.get_service_id(to, function(to_id) {
-			db.add_interaction(from_id, to_id, start, end);
-
 			if(start != null) { //When we get confirmation
 				//Update trust level
 				update_trust_level(from_id, to_id);
 			}
+			db.add_interaction(from_id, to_id, start, end);
 		});	
 	});
 
