@@ -5,9 +5,10 @@ html(lang="en")
 		include nav
 		div(id="default_algo", style="visibility:hidden;")=default_algo
 		div(class="container")
+			div(class="panel panel-default text-center")
+				h2 Supported Trust Calculation Algorithms
 			div(class="panel panel-default")
 				div(class="panel-body")
-					h2 Supported Trust Calculation Algorithms
 					for alg in algos
 						div(class="row")
 							div(class="col-md-2")=alg.name
