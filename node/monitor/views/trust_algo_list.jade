@@ -10,8 +10,8 @@ html(lang="en")
 					h2 Supported Trust Calculation Algorithms
 					for alg in algos
 						div(class="row")
-							div(class="col-md-3")=alg.name
-							div(class="col-md-7")
+							div(class="col-md-2")=alg.name
+							div(class="col-md-8")
 								pre=alg.alg
 							div(class="col-md-2")
 								button(type="button", class="btn btn-primary", id=alg.id) Set as default

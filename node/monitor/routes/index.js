@@ -116,13 +116,11 @@ function update_trust_level(from, to) {
 	
 	db.get_service_trust_level(from, function(f_tv) {
 		db.get_service_trust_level(to, function(t_tv) {
-
-			console.log(from + ' Old : ' + f_tv);
 			
-			trust.update(f_tv, t_tv, function(new_f_tv) {
-				console.log(from + ' New : ' + new_f_tv);
-				db.set_service_trust_level(from, new_f_tv);				
-			});
+			var f = {id : from, trust_level : f_tv};
+			var t = {id : to, trust_level : t_tv};
+
+			trust.update(f, t);
 		});
 	});
 }

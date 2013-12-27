@@ -1,23 +1,39 @@
 var db = require('../db');
 
-var do_nothing_trust = function do_nothing_trust_update(from, to, cb) {
+var do_nothing_trust = function do_nothing_trust_update(from, to) {
 	//Nothing to do
 };
 
-
 var simple_trust = function simple_trust_update(from, to, cb) {
-	cb(parseFloat(from) * (parseFloat(to)/from));
+	var new_trust_level = from.trust_level * to.trust_level/from.trust_level;
+	db.set_service_trust_level(from.id, new_trust_level);
+	cb(new_trust_level);
 };
 
-var moving_avg_trust = function moving_avg_trust_update(from, to, cb) {
+var moving_avg_trust = function moving_avg_trust_update(from, to) {
 	//TODO
 };
 
-var no_lower_access_trust = function no_lower_access_trust_update(from, to, cb) {
-	if(to < from) {
+var no_lower_access_trust = function no_lower_access_trust_update(from, to) {
+	if(to.trust_level < from.trust_level) {
 		//Punishment!!!
-		cb(0);
+		db.set_service_trust_level(form.id, 0);
 	}
+};
+
+var chained_trust = function chained_trust_update(from, to) {
+	//Call simple trust update for this service
+	simple_trust(from, to, function(n_tl) {
+		db.get_caller_services(from.id, function(services) {
+			//Call simple trust update for all services 
+			//that called this service
+			for(var i = 0; i < services.length; i++) {
+				from.trust_level = n_tl;
+				chained_trust_update(services[i], from);
+			}
+		});
+	});
+	
 };
 
 var algos = new Array();
@@ -34,7 +50,11 @@ algos[algos.length] = tmp;
 tmp = {name : 'Lower Trusted Service Access Denied', alg : no_lower_access_trust};
 algos[algos.length] = tmp;
 
-var default_trust_algo = 1;
+tmp = {name : 'Chained Trust', alg : chained_trust};
+algos[algos.length] = tmp;
+
+
+var default_trust_algo = 4;
 
 exports.set_default_algo = function(algo_id){
 	if(algo_id >= 0 || algo_id < algos.length) {
@@ -51,9 +71,9 @@ exports.reset = function(){
 };
 
 //Call cb with the new trust value of 'from'
-exports.update = function(from, to, cb) {
+exports.update = function(from, to) {
 	algorithm = algos[default_trust_algo];
-	algorithm.alg(from, to, cb); //Call
+	algorithm.alg(from, to); //Call
 };
 
 exports.algo_list = function(cb) {
