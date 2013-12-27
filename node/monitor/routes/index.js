@@ -3,7 +3,7 @@ var trust = require('../trust_algo');
 url = require('url');
 
 exports.index = function(req, res){
-	res.render('index', { title: 'Express' });
+	res.render('index');
 };
 
 exports.service_list = function(req, res){

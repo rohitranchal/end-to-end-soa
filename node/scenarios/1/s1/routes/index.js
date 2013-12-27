@@ -1,12 +1,14 @@
+var host = 'localhost';
+
 var request = require('../../../../instr_request');
-global.my_url = 'http://localhost:4103';
+global.my_url = 'http://' + host + ':4103';
 
 exports.get_deal = function(req, res){
 	//Call s2
-	request('http://localhost:4104/get_price', function (error, response, body) {
+	request('http://' + host + ':4104/get_price', function (error, response, body) {
 		if (!error && response.statusCode == 200) {
 			//Call s3
-			request('http://localhost:4105/get_price', function (error2, response2, body2) {
+			request('http://' + host + ':4105/get_price', function (error2, response2, body2) {
 				if (!error2 && response2.statusCode == 200) {
 					s2 = parseInt(body);
 					s3 = parseInt(body2);
