@@ -1,14 +1,17 @@
 html(lang="en")
 	include header
+	script(src="./js/trust_algo.js")
 	body
 		include nav
-
+		div(id="default_algo", style="visibility:hidden;")=default_algo
 		div(class="container")
 			div(class="panel panel-default")
 				div(class="panel-body")
 					h2 Supported Trust Calculation Algorithms
 					for alg in algos
 						div(class="row")
-							div(class="col-md-2")=alg.name
-							div(class="col-md-10")
+							div(class="col-md-3")=alg.name
+							div(class="col-md-7")
 								pre=alg.alg
+							div(class="col-md-2")
+								button(type="button", class="btn btn-primary", id=alg.id) Set as default

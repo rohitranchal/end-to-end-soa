@@ -45,6 +45,9 @@ app.get('/add_service_show', routes.add_service_show);
 app.post('/update_service_tl', routes.set_trust_levels);
 app.get('/reset_trust_values', routes.trust_values_reset);
 app.get('/trust_algo_list', routes.trust_algo_list);
+app.get('/get_default_trust_algo', routes.get_default_trust_algo);
+app.post('/set_default_trust_algo', routes.set_default_trust_algo);
+
 
 //Monitor functionality related
 app.get('/interaction', routes.interaction);

@@ -30,18 +30,15 @@ exports.show = function(req, res){
 		}
 	}
 
-	if(typeof scenario.services[0] == 'number') {
-		s_list = scenario.services.join(',');
-		db.get_services_of_scenario(s_list, function(svrs) {
-			scenario.services = svrs;
-			res.render('scenario.jade', scenario);
-		});	
-	} else {
-		//Cached
-		//At this point the scenario object already contains
-		//the complete service descriptions
+	var tmp_s = scenario.services;
+	
+	s_list = scenario.services.join(',');
+	db.get_services_of_scenario(s_list, function(svrs) {
+		scenario.services = svrs;
 		res.render('scenario.jade', scenario);
-	}
+		scenario.services = tmp_s;
+	});	
+
 	
 };
 

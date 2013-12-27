@@ -12,11 +12,15 @@ exports.service_list = function(req, res){
 	});
 };
 
+
+///////////////////////////////////////////////////////////////////////////////
+////////////TRUST RELATED
+///////////////////////////////////////////////////////////////////////////////
 exports.set_trust_levels = function(req, res) {
 	//Get the list of services
 	var values = req.body.values;
 	for(var i = 0; i < values.length; i++) {
-		//console.log(values[i]);
+		console.log(values[i]);
 		db.set_service_trust_level(values[i].name, values[i].value);
 	}
 
@@ -30,9 +34,27 @@ exports.trust_values_reset = function(req, res) {
 
 exports.trust_algo_list = function(req, res) {
 	trust.algo_list(function(list) {
-		res.render('trust_algo_list', {algos : list});
+		trust.get_default_algo(function(algo_id) {
+			res.render('trust_algo_list', {algos : list, default_algo : algo_id});
+		});
 	});
 };
+
+exports.get_default_trust_algo = function(req, res) {
+	trust.get_default_algo(function(algo_id) {
+		res.send(algo_id);
+	});
+};
+
+exports.set_default_trust_algo = function(req, res) {
+	var algo_id  = req.body.algo_id;
+	trust.set_default_algo(algo_id);
+	res.send('OK');
+};
+
+///////////////////////////////////////////////////////////////////////////////
+////////////TRUST RELATED : END
+///////////////////////////////////////////////////////////////////////////////
 
 exports.add_service_show = function(req, res){
 	res.render('add_service_show', {});
@@ -47,12 +69,16 @@ exports.add_service_process = function(req, res){
 	res.redirect('/service_list');
 };
 
+
 exports.interaction_list = function(req, res){
 	db.get_interactions(function(val){
 		res.render('interaction_list', { entries : val  });
 	});
 };
 
+///////////////////////////////////////////////////////////////////////////////
+////////////MONITOR RELATED
+///////////////////////////////////////////////////////////////////////////////
 exports.interaction = function(req, res){
 	var from  = req.query.from;
 	var to  = req.query.to;

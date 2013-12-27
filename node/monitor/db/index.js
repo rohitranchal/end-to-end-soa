@@ -11,7 +11,6 @@ connection.connect();
 
 exports.get_services_of_scenario = function(services, cb) {
 	var sql = 'SELECT * FROM Service WHERE id IN (' + services + ')';
-	console.log(sql);
 	connection.query(sql, function(err, rows, fields) {
 		if (err) throw err;
 		cb(rows);
