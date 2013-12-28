@@ -21,7 +21,7 @@ var moving_avg_trust = function moving_avg_trust_update(from, to) {
 var no_lower_access_trust = function no_lower_access_trust_update(from, to) {
 	if(to.trust_level < from.trust_level) {
 		//Punishment!!!
-		db.set_service_trust_level(form.id, 0);
+		db.set_service_trust_level(from.id, 0);
 	}
 };
 

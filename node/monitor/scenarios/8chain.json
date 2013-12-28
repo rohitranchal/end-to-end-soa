@@ -1,0 +1,8 @@
+{
+	"id" : 4,
+	"access_url" : "http://localhost:4109/get_deal",
+	"description" : "s1 -> s2 -> s3 -> s4 -> s5 -> s6 ->s7 -> s8",
+	"name": "Service Chain with 8 Services",
+	"services" : [9, 10, 11, 12, 13, 14, 15, 16],
+	"connections" :[[9, 10] , [10, 11], [11, 12], [12, 13], [13, 14], [14, 15], [15, 16]]
+}

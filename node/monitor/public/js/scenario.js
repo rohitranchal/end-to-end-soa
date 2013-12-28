@@ -57,7 +57,7 @@
 			instance.makeSource(windows, {
 				filter:".ep",				// only supported by jquery
 				anchor:"Continuous",
-				connector:["Flowchart"],
+				connector:["Straight"],
 				connectorStyle:{ strokeStyle:"#5c96bc", lineWidth:2, outlineColor:"transparent", outlineWidth:4 },
 				maxConnections:5,
 				onMaxConnections:function(info, e) {

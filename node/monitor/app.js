@@ -35,6 +35,7 @@ if ('development' == app.get('env')) {
 
 //Demo related
 app.get('/', routes.index);
+app.get('/scenario_list', scenario.show_all);
 app.get('/scenario', scenario.show);
 app.get('/scenario_topology', scenario.get_topology);
 app.get('/service_list', routes.service_list);

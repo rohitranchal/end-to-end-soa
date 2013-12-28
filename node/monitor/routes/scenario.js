@@ -18,6 +18,10 @@ for(var i = 0; i < files.length; i++) {
 	});	
 }
 
+exports.show_all = function(req, res) {
+	res.render('scenario_list', {sl : scenarios});
+};
+
 
 exports.show = function(req, res){
 	var s_id = req.query.s_id;
@@ -35,7 +39,7 @@ exports.show = function(req, res){
 	s_list = scenario.services.join(',');
 	db.get_services_of_scenario(s_list, function(svrs) {
 		scenario.services = svrs;
-		res.render('scenario.jade', scenario);
+		res.render('scenario', scenario);
 		scenario.services = tmp_s;
 	});	
 

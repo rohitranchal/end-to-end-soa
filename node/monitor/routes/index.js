@@ -4,7 +4,8 @@ url = require('url');
 request = require('request');
 
 exports.index = function(req, res){
-	res.render('index');
+	// res.render('index');
+	res.redirect('/scenario_list');
 };
 
 exports.service_list = function(req, res){
