@@ -24,7 +24,8 @@ INSERT INTO Service(id, name, trust_level, host, port, url) VALUES
 (13, 'localhost:4113', 10.0, 'localhost', 4113, 'http://localhost:4113'),
 (14, 'localhost:4114', 10.0, 'localhost', 4114, 'http://localhost:4114'),
 (15, 'localhost:4115', 10.0, 'localhost', 4115, 'http://localhost:4115'),
-(16, 'localhost:4116', 10.0, 'localhost', 4116, 'http://localhost:4116');
+(16, 'localhost:4116', 10.0, 'localhost', 4116, 'http://localhost:4116'),
+(17, 'localhost:4117', 10.0, 'localhost', 4117, 'http://localhost:4117');
 
 
 DROP TABLE Interaction;

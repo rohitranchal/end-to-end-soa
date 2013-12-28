@@ -65,4 +65,8 @@ node app.js &
 cd -
 echo "Starting 8 Service Chain : DONE"
 
+cd scenarios/4/s1
+node app.js &
+cd -
+
 echo "System Started!"

@@ -59,7 +59,7 @@
 				anchor:"Continuous",
 				connector:["Straight"],
 				connectorStyle:{ strokeStyle:"#5c96bc", lineWidth:2, outlineColor:"transparent", outlineWidth:4 },
-				maxConnections:5,
+				maxConnections:6,
 				onMaxConnections:function(info, e) {
 					alert("Maximum connections (" + info.maxConnections + ") reached");
 				}
