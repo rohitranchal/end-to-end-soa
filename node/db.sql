@@ -16,7 +16,15 @@ INSERT INTO Service(id, name, trust_level, host, port, url) VALUES
 (5, 'localhost:4105', 10.0, 'localhost', 4105, 'http://localhost:4105'),
 (6, 'localhost:4106', 10.0, 'localhost', 4106, 'http://localhost:4106'),
 (7, 'localhost:4107', 10.0, 'localhost', 4107, 'http://localhost:4107'),
-(8, 'localhost:4108', 10.0, 'localhost', 4108, 'http://localhost:4108');
+(8, 'localhost:4108', 10.0, 'localhost', 4108, 'http://localhost:4108'),
+(9, 'localhost:4109', 10.0, 'localhost', 4109, 'http://localhost:4109'),
+(10, 'localhost:4110', 5.0, 'localhost', 4110, 'http://localhost:4110'),
+(11, 'localhost:4111', 10.0, 'localhost', 4111, 'http://localhost:4111'),
+(12, 'localhost:4112', 10.0, 'localhost', 4112, 'http://localhost:4112'),
+(13, 'localhost:4113', 10.0, 'localhost', 4113, 'http://localhost:4113'),
+(14, 'localhost:4114', 10.0, 'localhost', 4114, 'http://localhost:4114'),
+(15, 'localhost:4115', 10.0, 'localhost', 4115, 'http://localhost:4115'),
+(16, 'localhost:4116', 10.0, 'localhost', 4116, 'http://localhost:4116');
 
 
 DROP TABLE Interaction;

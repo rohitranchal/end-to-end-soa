@@ -57,7 +57,7 @@
 			instance.makeSource(windows, {
 				filter:".ep",				// only supported by jquery
 				anchor:"Continuous",
-				connector:[ "Straight"],
+				connector:["Flowchart"],
 				connectorStyle:{ strokeStyle:"#5c96bc", lineWidth:2, outlineColor:"transparent", outlineWidth:4 },
 				maxConnections:5,
 				onMaxConnections:function(info, e) {
@@ -95,7 +95,7 @@
 
 				if(count%2 > 0) {
 					left += 150;
-					top += 120;
+					top += 150;
 				} else {
 					left += 300;
 				}

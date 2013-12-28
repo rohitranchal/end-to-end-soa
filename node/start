@@ -21,11 +21,11 @@ cd scenarios/1/s2
 node app.js &
 cd -
 cd scenarios/1/s3
+node app.js &
+cd -
 echo "Starting Service Chain : DONE"
 
 echo "Starting Service Facade ..."
-node app.js &
-cd -
 cd scenarios/2/s1
 node app.js &
 cd -
@@ -36,5 +36,33 @@ cd scenarios/2/s3
 node app.js &
 cd -
 echo "Starting Service Facade : DONE"
+
+
+echo "Starting 8 Service Chain ..."
+cd scenarios/3/s1
+node app.js &
+cd -
+cd scenarios/3/s2
+node app.js &
+cd -
+cd scenarios/3/s3
+node app.js &
+cd -
+cd scenarios/3/s4
+node app.js &
+cd -
+cd scenarios/3/s5
+node app.js &
+cd -
+cd scenarios/3/s6
+node app.js &
+cd -
+cd scenarios/3/s7
+node app.js &
+cd -
+cd scenarios/3/s8
+node app.js &
+cd -
+echo "Starting 8 Service Chain : DONE"
 
 echo "System Started!"

@@ -1,5 +1,5 @@
 exports.index = function(req, res){
-  res.send('S1');
+  res.send('S2');
 };
 
 

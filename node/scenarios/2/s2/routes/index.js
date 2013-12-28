@@ -1,7 +1,7 @@
 var host = 'localhost';
 
 var request = require('../../../../instr_request');
-global.my_url = 'http://' + host + ':4107';
+global.my_url = 'http://' + host + ':' + global.my_port;
 
 
 exports.index = function(req, res){

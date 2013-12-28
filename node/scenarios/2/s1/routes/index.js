@@ -1,7 +1,7 @@
 var host = 'localhost';
 
 var request = require('../../../../instr_request');
-global.my_url = 'http://' + host + ':4106';
+global.my_url = 'http://' + host + ':' + global.my_port;
 
 exports.get_deal = function(req, res){
 	//Call s2
