@@ -1,6 +1,7 @@
 cd monitor
 npm install
 npm install mysql
+npm install request
 cd -
 
 cd instr_request

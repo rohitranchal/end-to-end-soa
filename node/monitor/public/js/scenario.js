@@ -2,6 +2,14 @@
 ;(function() {
 	jsPlumb.ready(function() {
 
+		//Invoke service for user
+		$('.try-it').click(function() {
+			//Reder serverside and get the output
+			$.post("/try_it", {link : $(this).data('link')}, function (data) {
+				location.reload();
+			});
+		});
+
 		//Handle update service trust levels
 		$("#btn_update_tl").click(function() {
 			//Get new values

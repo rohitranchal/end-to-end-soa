@@ -1,6 +1,7 @@
 var db = require('../db');
 var trust = require('../trust_algo');
 url = require('url');
+request = require('request');
 
 exports.index = function(req, res){
 	res.render('index');
@@ -55,6 +56,12 @@ exports.set_default_trust_algo = function(req, res) {
 ///////////////////////////////////////////////////////////////////////////////
 ////////////TRUST RELATED : END
 ///////////////////////////////////////////////////////////////////////////////
+
+exports.try_it = function(req, res) {
+	request(req.body.link, function (error, response, body) {
+		res.send(body)
+	});
+}
 
 exports.add_service_show = function(req, res){
 	res.render('add_service_show', {});

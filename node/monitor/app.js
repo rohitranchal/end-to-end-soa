@@ -48,6 +48,7 @@ app.get('/trust_algo_list', routes.trust_algo_list);
 app.get('/get_default_trust_algo', routes.get_default_trust_algo);
 app.post('/set_default_trust_algo', routes.set_default_trust_algo);
 
+app.post('/try_it', routes.try_it);
 
 //Monitor functionality related
 app.get('/interaction', routes.interaction);

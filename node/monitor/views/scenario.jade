@@ -25,9 +25,12 @@ html(lang="en")
 			div(class="col-md-4")
 				div(class="panel panel-default")
 					div(class="panel-heading text-center")
-						h4 Invoke
+						h4 Access Endpoints
 					div(class="panel-body")
-						a(href=access_url, target="_blank")=access_url
+						div(class="row")
+							div(class="col-md-8")=access_url
+							div(class="col-md-4")
+								button(class="btn btn-primary try-it", data-link=access_url) Try It
 			div(class="col-md-4")
 				div(class="panel panel-default")
 					div(class="panel-heading text-center")
@@ -42,4 +45,4 @@ html(lang="en")
 							div(class="row top-buffer")
 								div(class="col-md-6")
 								div(class="col-md-6")
-									button(id="btn_update_tl", class="btn button-default") Update
+									button(id="btn_update_tl", class="btn btn-default") Update
