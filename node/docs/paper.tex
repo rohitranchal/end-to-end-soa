@@ -1,0 +1,55 @@
+%\documentclass[journal,10pt,draftclsnofoot,onecolumn]{IEEEtran}
+\documentclass[10pt,journal,cspaper,compsoc]{IEEEtran}
+%\documentclass[journal,compsoc]{IEEEtran}
+\usepackage{graphicx}
+\usepackage{amsfonts}
+\usepackage{wasysym}
+\usepackage{listings}
+\usepackage{bm}
+\usepackage{booktabs}
+
+
+\pdfminorversion=4
+
+% correct bad hyphenation here
+\hyphenation{op-tical net-works semi-conduc-tor}
+
+
+\begin{document}
+%
+% paper title
+% can use linebreaks \\ within to get better formatting as desired
+\title{Trust Propagation in SOA Topologies}
+
+
+% author names and affiliations
+% use a multiple column layout for up to three different
+% affiliations
+\author{\IEEEauthorblockN{Ruchith Fernando, Rohit Ranchal, Bharat Bhargava\\}
+\IEEEauthorblockA{Department of Computer Science, Purdue University\\
+West Lafayette, IN\\
+rfernand@cs.purdue.edu, rranchal@purdue.edu, bb@cs.purdue.edu}}
+
+
+\IEEEcompsoctitleabstractindextext{%
+\begin{abstract}
+%\boldmath
+This work identifies a set of common service topologies and explores how service trust changes based on various types of service interactions within those topologies. The notion of a passive service monitor is utilized in minotoring service interactions, which is configured with a set of trust management algorithms. Details of the design and implementation of a RESTful service monitoring framework, and experiments conducted with it are provided. 
+\end{abstract}
+
+\begin{keywords}
+SOA, REST, Trust
+\end{keywords}}
+
+\maketitle
+
+\input{intro}
+\input{design}
+\input{impl}
+\input{experiments}
+
+
+\bibliographystyle{unsrt} 
+\bibliography{ref}
+
+\end{document}
