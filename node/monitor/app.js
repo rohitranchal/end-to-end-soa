@@ -52,6 +52,7 @@ app.post('/set_default_trust_algo', routes.set_default_trust_algo);
 app.post('/try_it', routes.try_it);
 
 //Monitor functionality related
+app.get('/interaction_block', routes.interaction_block);
 app.get('/interaction', routes.interaction);
 app.get('/interaction_list', routes.interaction_list);
 

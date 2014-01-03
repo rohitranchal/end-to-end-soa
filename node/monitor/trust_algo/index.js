@@ -80,6 +80,10 @@ exports.update = function(from, to) {
 	algorithm.alg(from, to); //Call
 };
 
+exports.update_block = function(from, to, callback) {
+	//TODO
+};
+
 exports.algo_list = function(cb) {
 	var ret = new Array();
 

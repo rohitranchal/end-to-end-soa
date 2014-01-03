@@ -132,3 +132,52 @@ function update_trust_level(from, to) {
 		});
 	});
 }
+
+exports.interaction_block = function(req, res){
+	var from  = req.query.from;
+	var to  = req.query.to;
+	var start  = req.query.start;
+	var end  = req.query.end;
+
+	if(typeof start == 'undefined') {
+		start = null;
+	}
+
+	if(typeof end == 'undefined') {
+		end = null;
+	}
+
+	from = url.parse(from);
+	from = from.host;
+	to = url.parse(to);
+	to = to.host;
+	
+	db.get_service_id(from, function(from_id) {
+		db.get_service_id(to, function(to_id) {
+			if(start != null) { //When we get confirmation
+				//Update trust level
+				update_trust_level_block(from_id, to_id, function(status) {
+					if(status == 1) {
+						res.send('OK');
+					} else {
+						res.send('BLOCK');
+					}
+				});
+			}
+			db.add_interaction(from_id, to_id, start, end);
+		});	
+	});
+};
+
+function update_trust_level_block(from, to, callback) {
+	
+	db.get_service_trust_level(from, function(f_tv) {
+		db.get_service_trust_level(to, function(t_tv) {
+			
+			var f = {id : from, trust_level : f_tv};
+			var t = {id : to, trust_level : t_tv};
+
+			trust.update_block(f, t, callback);
+		});
+	});
+}
