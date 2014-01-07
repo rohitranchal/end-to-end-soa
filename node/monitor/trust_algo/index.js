@@ -16,25 +16,6 @@ for(var i = 0; i < files.length; i++) {
 	active_algos[active_algos.length] = require('./active/' + files[i]);	
 }
 
-
-// var algos = new Array();
-
-// var tmp = {name :'Do Nothing (Trust Update Disabled)', alg : do_nothing_trust};
-// algos[algos.length] = tmp;
-
-// var tmp = {name :'Simple Trust', alg : simple_trust};
-// algos[algos.length] = tmp;
-
-// tmp = {name : 'Moving Average', alg : moving_avg_trust};
-// algos[algos.length] = tmp;
-
-// tmp = {name : 'Lower Trusted Service Access Denied', alg : no_lower_access_trust};
-// algos[algos.length] = tmp;
-
-// tmp = {name : 'Chained Trust', alg : chained_trust};
-// algos[algos.length] = tmp;
-
-
 var default_trust_algo = 4;
 
 exports.set_default_algo = function(algo_id){
