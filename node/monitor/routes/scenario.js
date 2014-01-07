@@ -15,7 +15,7 @@ for(var i = 0; i < files.length; i++) {
 			scenarios[scenarios.length] = JSON.parse(data);
 		}
 		
-	});	
+	});
 }
 
 files = fs.readdirSync('./scenarios/active/');
@@ -62,6 +62,7 @@ exports.show = function(req, res){
 
 	var tmp_s = scenario.services;
 	
+	scenario.type = type;
 	s_list = scenario.services.join(',');
 	db.get_services_of_scenario(s_list, function(svrs) {
 		scenario.services = svrs;

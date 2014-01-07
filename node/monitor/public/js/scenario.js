@@ -72,7 +72,8 @@
 			});
 			
 			var s_id = $('#scenario_id').text();
-			$.getJSON( "/scenario_topology?s_id=" + s_id, function( data ) {
+			var s_type = $('#scenario_type').text();
+			$.getJSON( "/scenario_topology?type=" + s_type + "&s_id=" + s_id, function( data ) {
 				for(var i = 0; i < data.connections.length; i++) {
 					var conn = data.connections[i];
 					instance.connect({ source:'service' + conn[0], 
