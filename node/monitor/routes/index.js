@@ -147,6 +147,7 @@ exports.interaction_block = function(req, res){
 		end = null;
 	}
 
+
 	from = url.parse(from);
 	from = from.host;
 	to = url.parse(to);
@@ -156,11 +157,15 @@ exports.interaction_block = function(req, res){
 		db.get_service_id(to, function(to_id) {
 			if(start != null) { //When we get confirmation
 				//Update trust level
-				update_trust_level_block(from_id, to_id, function(status) {
+				console.log(req.query);
+				update_trust_level_block(from_id, to_id);
+			} else {
+				//This is before the actual invocation
+				authorize_access(from_id, to_id, function(status) {
 					if(status == 1) {
 						res.send('OK');
 					} else {
-						res.send('BLOCK');
+						res.send(403);
 					}
 				});
 			}
@@ -169,7 +174,19 @@ exports.interaction_block = function(req, res){
 	});
 };
 
-function update_trust_level_block(from, to, callback) {
+function authorize_access(from, to, callback) {
+	db.get_service_trust_level(from, function(f_tv) {
+		db.get_service_trust_level(to, function(t_tv) {
+			
+			var f = {id : from, trust_level : f_tv};
+			var t = {id : to, trust_level : t_tv};
+
+			trust.authorize(f, t, callback);
+		});
+	});
+}
+
+function update_trust_level_block(from, to) {
 	
 	db.get_service_trust_level(from, function(f_tv) {
 		db.get_service_trust_level(to, function(t_tv) {
@@ -177,7 +194,7 @@ function update_trust_level_block(from, to, callback) {
 			var f = {id : from, trust_level : f_tv};
 			var t = {id : to, trust_level : t_tv};
 
-			trust.update_block(f, t, callback);
+			trust.update(f, t);
 		});
 	});
 }

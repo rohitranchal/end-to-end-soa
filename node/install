@@ -15,6 +15,13 @@ cd scenarios/simple/s2/
 npm install
 cd -
 
+cd scenarios/active/s1/
+npm install
+cd -
+cd scenarios/active/s2/
+npm install
+cd -
+
 cd scenarios/1/s1/
 npm install
 cd -

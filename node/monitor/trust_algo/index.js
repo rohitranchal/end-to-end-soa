@@ -37,7 +37,6 @@ var chained_trust = function chained_trust_update(from, to) {
 			}
 		});
 	});
-	
 };
 
 var algos = new Array();
@@ -80,8 +79,11 @@ exports.update = function(from, to) {
 	algorithm.alg(from, to); //Call
 };
 
-exports.update_block = function(from, to, callback) {
+exports.authorize = function(from, to, callback) {
 	//TODO
+	console.log(from);
+	console.log('Returning error by default');
+	callback(0);
 };
 
 exports.algo_list = function(cb) {
