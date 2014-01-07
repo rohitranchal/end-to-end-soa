@@ -1,1 +1,22 @@
 \section{Implementation}
+
+\subsection{Scenario}
+A scenario consists of a set of services and their interactions. The scenario is developed independently and its functionality must be tested. Then this scenario can be incorporated into the monitoring framework. 
+
+\subsection{Services}
+Each REST service is developed as a nodejs/express application. When one service depends on another, it may invoke a remote operation to obtain some data. This is simulated here by making an HTTP GET request to another similar application. In making these inter service requests, the "request" node module is used. 
+
+\subsection{Instrumented request Module}
+Standard "request" module was instrumented to intercept service interaction. The instrumentation logic reports these interactions to a service monitor. 
+In the case of the passive service monitor the instrumented request does not interrupt the regular operation of the interaction. However, when using the active service monitor, the instrumentation logic blocks communication waiting for the approval of the service monitor. 
+
+
+Active Case:
+
+The service monitor may send various actions to the request module. 
+
+It may simply ask the interaction to be stopped. 
+
+Or it may force the connection to use a particular algorithm in setting up an SSL connection with the other party. 
+
+\subsection{Trust Management Algorithms}
