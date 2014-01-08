@@ -150,6 +150,7 @@ exports.interaction_block = function(req, res){
 
 	from = url.parse(from);
 	from = from.host;
+
 	to = url.parse(to);
 	to = to.host;
 	

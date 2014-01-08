@@ -1,9 +1,10 @@
 var db = require('../../db');
 var java = require('java');
+var xml2js = require('xml2js');
+var fs = require('fs');
 
 //Java dependancies
 var jars_dir = process.cwd() + '/lib/';
-console.log(jars_dir);
 java.classpath.push(jars_dir + "apache-mime4j-core-0.7.2.jar");
 java.classpath.push(jars_dir + "balana-distribution-1.0.0-wso2v7.jar");
 java.classpath.push(jars_dir + "geronimo-activation_1.1_spec-1.1.jar");
@@ -19,8 +20,13 @@ java.classpath.push(jars_dir + "geronimo-stax-api_1.0_spec-1.0.1.jar");
 java.classpath.push(jars_dir + "org.wso2.balana-1.0.0-wso2v7.jar");
 java.classpath.push(jars_dir + "policy-1.0-SNAPSHOT.jar");
 
+
+var text = fs.readFileSync(process.cwd() + '/trust_algo/active/request_templates/req_1.json','utf8');
+var req_template = JSON.parse(text);
+
+
 var AccessController = java.import('edu.purdue.cs.endtoendsoa.AccessController');
-var ac = new AccessController(process.cwd() + "/trust_algo/active/policies/");
+var ac = new AccessController();
 
 
 var simple_trust = function simple_trust_update(from, to, cb) {
@@ -34,7 +40,29 @@ var simple_trust = function simple_trust_update(from, to, cb) {
 };
 
 var simple_auth = function(from, to, cb) {
-	//TODO
+
+	//Make a copy of req_template
+	var req = JSON.parse(JSON.stringify(req_template));
+	
+	//Update obj with incoming parameters
+	for(var i in req.Request.Attributes) {
+		var attr = req.Request.Attributes[i];
+		var attr_id = attr.Attribute[0].$.AttributeId;
+		if(attr_id == 'urn:oasis:names:tc:xacml:1.0:resource:resource-id') {
+			attr.Attribute[0].AttributeValue[0]._=from.id;
+		} else if(attr_id == 'http://endtoendsoa.cs.purdue.edu/policy/service_uri') {
+			attr.Attribute[0].AttributeValue[0]._=to.id;
+		} else if(attr_id == 'urn:oasis:names:tc:xacml:1.0:action:action-id') {
+			attr.Attribute[0].AttributeValue[0]._='READ';
+		} else if(attr_id == 'http://test.org/trust_level') {
+			attr.Attribute[0].AttributeValue[0]._=to.trust_level;
+		}
+	}
+
+	var builder = new xml2js.Builder();
+	var xml = builder.buildObject(req);
+	console.log(xml);
+
 	if(to.trust_level < from.trust_level) {
 		cb(0);
 	} else {
@@ -43,3 +71,14 @@ var simple_auth = function(from, to, cb) {
 };
 
 module.exports = {name :'Simple Blocking Trust', alg : simple_trust, authorize : simple_auth};
+
+/**
+Resource: Target service 
+User: Service invoking the target service
+Action: Always READ
+Environment: 
+	- trust levels of the user and the resource
+	- Certain times of day the access is not allowed
+	- Certain load levels at which access is not allowed
+
+*/
