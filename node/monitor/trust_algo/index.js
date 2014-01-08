@@ -12,8 +12,11 @@ for(var i = 0; i < files.length; i++) {
 }
 var files = fs.readdirSync('./trust_algo/active/');
 for(var i = 0; i < files.length; i++) {
-	console.log('Reading : ' + files[i]);
-	active_algos[active_algos.length] = require('./active/' + files[i]);	
+	
+	if(files[i].indexOf('.js', files[i].length - 3) !== -1) {
+		console.log('Reading : ' + files[i]);
+		active_algos[active_algos.length] = require('./active/' + files[i]);
+	}
 }
 
 var default_trust_algo = 4;

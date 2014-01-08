@@ -1,8 +1,14 @@
+mkdir monitor/lib/
+cp ../policy/target/policy-1.0-SNAPSHOT.jar monitor/lib/
+cp ../policy/target/lib/* monitor/lib/
+
 cd monitor
 npm install
 npm install mysql
 npm install request
+npm install java
 cd -
+
 
 cd instr_request
 npm install request
