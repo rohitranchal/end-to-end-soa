@@ -21,7 +21,8 @@ java.classpath.push(jars_dir + "org.wso2.balana-1.0.0-wso2v7.jar");
 java.classpath.push(jars_dir + "policy-1.0-SNAPSHOT.jar");
 
 
-var text = fs.readFileSync(process.cwd() + '/trust_algo/active/request_templates/req_1.json','utf8');
+var active_dir = process.cwd() + '/trust_algo/active/';
+var text = fs.readFileSync(active_dir + 'request_templates/req_1.json','utf8');
 var req_template = JSON.parse(text);
 
 
@@ -49,9 +50,9 @@ var simple_auth = function(from, to, cb) {
 		var attr = req.Request.Attributes[i];
 		var attr_id = attr.Attribute[0].$.AttributeId;
 		if(attr_id == 'urn:oasis:names:tc:xacml:1.0:resource:resource-id') {
-			attr.Attribute[0].AttributeValue[0]._=from.id;
+			attr.Attribute[0].AttributeValue[0]._=to.host;
 		} else if(attr_id == 'http://endtoendsoa.cs.purdue.edu/policy/service_uri') {
-			attr.Attribute[0].AttributeValue[0]._=to.id;
+			attr.Attribute[0].AttributeValue[0]._=from.host;
 		} else if(attr_id == 'urn:oasis:names:tc:xacml:1.0:action:action-id') {
 			attr.Attribute[0].AttributeValue[0]._='READ';
 		} else if(attr_id == 'http://test.org/trust_level') {
@@ -60,14 +61,18 @@ var simple_auth = function(from, to, cb) {
 	}
 
 	var builder = new xml2js.Builder();
-	var xml = builder.buildObject(req);
-	console.log(xml);
-
-	if(to.trust_level < from.trust_level) {
-		cb(0);
-	} else {
-		cb(1);
-	}
+	var req_xml = builder.buildObject(req);
+	ac.evaluate(active_dir + 'policies/policy_1.xml', req_xml, function(err, result) {
+		if(err) {
+			console.log(err);
+		} else {
+			if(result == 'Permit') {
+				cb(1);
+			} else {
+				cb(0);
+			}
+		}
+	});
 };
 
 module.exports = {name :'Simple Blocking Trust', alg : simple_trust, authorize : simple_auth};

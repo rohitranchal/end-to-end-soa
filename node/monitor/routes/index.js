@@ -149,20 +149,24 @@ exports.interaction_block = function(req, res){
 
 
 	from = url.parse(from);
-	from = from.host;
+	// from = from.host;
 
 	to = url.parse(to);
-	to = to.host;
+	// to = to.host;
 	
-	db.get_service_id(from, function(from_id) {
-		db.get_service_id(to, function(to_id) {
+	db.get_service_id(from.host, function(from_id) {
+		db.get_service_id(to.host, function(to_id) {
+			from.id = from_id;
+			to.id = to_id;
+
 			if(start != null) { //When we get confirmation
 				//Update trust level
-				console.log(req.query);
-				update_trust_level_block(from_id, to_id);
+				update_trust_level_block(from, to);
+				//Reaching here means access was permitted
+				res.send('OK');
 			} else {
 				//This is before the actual invocation
-				authorize_access(from_id, to_id, function(status) {
+				authorize_access(from, to, function(status) {
 					if(status == 1) {
 						res.send('OK');
 					} else {
@@ -176,26 +180,26 @@ exports.interaction_block = function(req, res){
 };
 
 function authorize_access(from, to, callback) {
-	db.get_service_trust_level(from, function(f_tv) {
-		db.get_service_trust_level(to, function(t_tv) {
+	db.get_service_trust_level(from.id, function(f_tv) {
+		db.get_service_trust_level(to.id, function(t_tv) {
 			
-			var f = {id : from, trust_level : f_tv};
-			var t = {id : to, trust_level : t_tv};
+			from.trust_level = f_tv;
+			to.trust_level = t_tv;
 
-			trust.authorize(f, t, callback);
+			trust.authorize(from, to, callback);
 		});
 	});
 }
 
 function update_trust_level_block(from, to) {
 	
-	db.get_service_trust_level(from, function(f_tv) {
-		db.get_service_trust_level(to, function(t_tv) {
+	db.get_service_trust_level(from.id, function(f_tv) {
+		db.get_service_trust_level(to.id, function(t_tv) {
 			
-			var f = {id : from, trust_level : f_tv};
-			var t = {id : to, trust_level : t_tv};
+			from.trust_level = f_tv;
+			to.trust_level = t_tv;
 
-			trust.update_block(f, t);
+			trust.update_block(from, to);
 		});
 	});
 }
