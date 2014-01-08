@@ -11,14 +11,29 @@ public class TestAccessController extends TestCase {
 
 	public void testEvaluate() throws Exception {
 
-		URL policiesPath = getClass().getClassLoader().getResource("policies/");
-		URL req1Path = getClass().getClassLoader().getResource("req1.xml");
+		URL policiesPath = getClass().getClassLoader().getResource("policies/sample_policy.xml");
+		URL reqPath = getClass().getClassLoader().getResource("req1.xml");
 		
-		AccessController controller = new AccessController(policiesPath.getFile());
-		String request = FileUtils.readFileToString(new File(req1Path.getFile()));
-		String res = controller.evaluate(request);
+		AccessController controller = new AccessController();
+		String request = FileUtils.readFileToString(new File(reqPath.getFile()));
+		String res = controller.evaluate(policiesPath.getFile(), request);
 		assertEquals("Permit", res);
-
 	}
+	
+	public void testEvaluateServicePolicy() throws Exception {
+		URL policiesPath = getClass().getClassLoader().getResource("policies/policy.xml");
+		URL reqPath = getClass().getClassLoader().getResource("req2.xml");
+		
+		AccessController controller = new AccessController();
+		String request = FileUtils.readFileToString(new File(reqPath.getFile()));
+		String res = controller.evaluate(policiesPath.getFile(), request);
+		assertEquals("Permit", res);
+		
+		reqPath = getClass().getClassLoader().getResource("req2.1.xml");
+		request = FileUtils.readFileToString(new File(reqPath.getFile()));
+		res = controller.evaluate(policiesPath.getFile(), request);
+		assertEquals("Deny", res);
+	}
+
 
 }
