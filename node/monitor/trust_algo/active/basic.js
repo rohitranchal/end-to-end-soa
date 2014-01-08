@@ -10,4 +10,12 @@ var simple_trust = function simple_trust_update(from, to, cb) {
 	}
 };
 
-module.exports = {name :'Simple Blocking Trust', alg : simple_trust};
+var simple_auth = function(from, to, cb) {
+	if(to.trust_level < from.trust_level) {
+		cb(0);
+	} else {
+		cb(1);
+	}
+};
+
+module.exports = {name :'Simple Blocking Trust', alg : simple_trust, authorize : simple_auth};

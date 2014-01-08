@@ -17,6 +17,7 @@ for(var i = 0; i < files.length; i++) {
 }
 
 var default_trust_algo = 4;
+var default_active_trust_algo = 0;
 
 exports.set_default_algo = function(algo_id){
 	if(algo_id >= 0 || algo_id < passive_algos.length) {
@@ -39,11 +40,16 @@ exports.update = function(from, to) {
 };
 
 exports.authorize = function(from, to, callback) {
-	//TODO
-	console.log(from);
-	console.log('Returning error by default');
-	callback(0);
+	algorithm = active_algos[default_active_trust_algo];
+
+	algorithm.authorize(from, to, callback);
 };
+
+exports.update_block = function(from, to, callback) {
+	algorithm = active_algos[default_active_trust_algo];
+	algorithm.alg(from, to);
+};
+
 
 exports.algo_list = function(cb) {
 	var ret = new Array();

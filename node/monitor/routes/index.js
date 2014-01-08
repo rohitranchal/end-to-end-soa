@@ -194,7 +194,7 @@ function update_trust_level_block(from, to) {
 			var f = {id : from, trust_level : f_tv};
 			var t = {id : to, trust_level : t_tv};
 
-			trust.update(f, t);
+			trust.update_block(f, t);
 		});
 	});
 }
