@@ -22,18 +22,23 @@ for(var i = 0; i < files.length; i++) {
 var default_trust_algo = 4;
 var default_active_trust_algo = 1;
 
-exports.set_default_algo = function(algo_id){
-	if(algo_id >= 0 || algo_id < passive_algos.length) {
-		default_trust_algo = algo_id;	
+exports.set_default_algo = function(algo_id_str) {
+	algo_id = algo_id_str.substring(1);
+	if(algo_id_str.indexOf('p') == 0) {
+		//Passive algo
+		if(algo_id >= 0 || algo_id < passive_algos.length) {
+			default_trust_algo = algo_id;	
+		}
+	} else if(algo_id_str.indexOf('a') == 0) {
+		//Active algo
+		if(algo_id >= 0 || algo_id < active_algos.length) {
+			default_active_trust_algo = algo_id;	
+		}
 	}
 };
 
 exports.get_default_algo = function(cb) {
 	cb(default_trust_algo);
-};
-
-exports.reset = function(){
-	db.reset_trust_levels(10); //Read this default value from config
 };
 
 //Call cb with the new trust value of 'from'
@@ -55,13 +60,23 @@ exports.update_block = function(from, to, callback) {
 
 
 exports.algo_list = function(cb) {
-	var ret = new Array();
+	var p_a = new Array();
+	var a_a = new Array();
 
 	for(var i = 0; i < passive_algos.length; i++) {
-		ret[i] = {id: i, 
+		p_a[i] = {id: i, 
 					name : passive_algos[i].name, 
 					alg : String(passive_algos[i].alg)};
 	}
 
-	cb(ret); //Return list
+	for(var i = 0; i < active_algos.length; i++) {
+		a_a[i] = {id: i, 
+					name : active_algos[i].name, 
+					alg : String(active_algos[i].alg),
+					auth : String(active_algos[i].authorize)};
+	}
+
+	algos = {p_algos : p_a, p_default : default_trust_algo,
+			a_algos : a_a, a_default : default_active_trust_algo};
+	cb(algos); //Return list
 };

@@ -36,9 +36,8 @@ exports.trust_values_reset = function(req, res) {
 
 exports.trust_algo_list = function(req, res) {
 	trust.algo_list(function(list) {
-		trust.get_default_algo(function(algo_id) {
-			res.render('trust_algo_list', {algos : list, default_algo : algo_id});
-		});
+
+		res.render('trust_algo_list', list);
 	});
 };
 

@@ -3,16 +3,30 @@ html(lang="en")
 	script(src="./js/trust_algo.js")
 	body
 		include nav
-		div(id="default_algo", style="visibility:hidden;")=default_algo
+		div(id="default_algo_passive", style="visibility:hidden;")=p_default
+		div(id="default_algo_active", style="visibility:hidden;")=a_default
 		div(class="container")
 			div(class="panel panel-default text-center")
 				h2 Supported Trust Calculation Algorithms
 			div(class="panel panel-default")
 				div(class="panel-body")
-					for alg in algos
+					for alg in p_algos
 						div(class="row")
 							div(class="col-md-2")=alg.name
 							div(class="col-md-8")
 								pre=alg.alg
 							div(class="col-md-2")
-								button(type="button", class="btn btn-primary", id=alg.id) Set as default
+								button(type="button", class="btn btn-primary", id=('p' + alg.id)) Set as default
+			div(class="panel panel-default")
+				div(class="panel-body")
+					for alg in a_algos
+						div(class="row")
+							div(class="col-md-2")=alg.name
+							div(class="col-md-8")
+								pre=alg.alg
+							div(class="col-md-1")
+								button(type="button", class="btn btn-primary", id=('a' + alg.id)) Set as default
+						div(class="row")
+							div(class="col-md-2")
+							div(class="col-md-10")
+								pre=alg.auth
