@@ -48,3 +48,33 @@ cd -
 cd scenarios/2/s3/
 npm install
 cd -
+
+
+cd scenarios/3/s1/
+npm install
+cd -
+cd scenarios/3/s2/
+npm install
+cd -
+cd scenarios/3/s3/
+npm install
+cd -
+cd scenarios/3/s4/
+npm install
+cd -
+cd scenarios/3/s5/
+npm install
+cd -
+cd scenarios/3/s6/
+npm install
+cd -
+cd scenarios/3/s7/
+npm install
+cd -
+cd scenarios/3/s8/
+npm install
+cd -
+
+cd scenarios/4/s1/
+npm install
+cd -
