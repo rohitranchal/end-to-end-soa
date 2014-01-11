@@ -14,6 +14,25 @@ exports.service_list = function(req, res){
 	});
 };
 
+exports.service = function(req, res) {
+	db.get_service(req.query.id, function(val){
+		if(val != null) {
+			res.render('service', val);	
+		} else {
+			res.send('Invalid Service id : ' + req.query.id);
+		}
+		
+	});
+};
+
+exports.update_service_params = function(req, res) {
+	var params = req.body.params;
+	var sid = req.body.id;
+	db.update_service_params(sid, params, function(){
+		res.send('OK');
+	});
+};
+
 
 ///////////////////////////////////////////////////////////////////////////////
 ////////////TRUST RELATED

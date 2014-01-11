@@ -34,6 +34,18 @@ exports.add_service = function(name, trust_level) {
 	});
 }
 
+exports.get_service = function(id, cb) {
+	connection.query("SELECT * FROM Service WHERE id =" + id, function(err, rows, fields) {
+		if (err) throw err;
+		if(rows.length > 0) {
+			cb(rows[0]);	
+		} else {
+			cb(null);
+		}
+		
+	});
+}
+
 exports.get_services = function(cb) {
 	connection.query('SELECT * FROM Service', function(err, rows, fields) {
 		if (err) throw err;
@@ -52,6 +64,14 @@ exports.get_service_id = function(name, cb) {
 exports.reset_trust_levels = function(value) {
 	connection.query("UPDATE Service SET trust_level = " + value, function(err, rows, fields) {
 		if (err) throw err;
+	});
+}
+
+exports.update_service_params = function(sid, val, done) {
+	var sql = "UPDATE Service SET params ='" + val + "' WHERE id=" + sid;
+	connection.query(sql, function(err, rows, fields) {
+		if (err) throw err;
+		done();
 	});
 }
 

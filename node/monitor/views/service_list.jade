@@ -17,6 +17,6 @@ html(lang="en")
 						div(class="row")
 							div(class="col-md-2")
 								div
-									a(href=entry.url)=entry.name
+									a(href=('./service?id=' + entry.id))=entry.name
 							div(class="col-md-2")
 								div=entry.trust_level

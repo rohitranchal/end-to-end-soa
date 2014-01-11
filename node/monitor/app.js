@@ -39,6 +39,8 @@ app.get('/scenario_list', scenario.show_all);
 app.get('/scenario', scenario.show);
 app.get('/scenario_topology', scenario.get_topology);
 app.get('/service_list', routes.service_list);
+app.get('/service', routes.service);
+app.post('/update_service_params', routes.update_service_params);
 app.post('/add_service_process', routes.add_service_process);
 app.get('/add_service_show', routes.add_service_show);
 

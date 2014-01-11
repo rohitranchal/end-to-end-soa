@@ -1,0 +1,53 @@
+html(lang="en")
+	include header
+	script(src="http://jsplumbtoolkit.com/demo/js/jquery.jsPlumb-1.5.5-min.js")
+	link(rel="stylesheet", href="./css/service.css")
+	body
+		include nav
+		div(id="service_id", style="visibility:hidden;")=id
+		div(class="container")
+			div(class="col-md-12")
+				div(class="panel-heading text-center")
+					h3=name
+				div(class="panel panel-default")
+					div(class="panel-body")
+						div(class="row")
+							div(class="col-md-2")
+								div Trust Level
+							div(class="col-md-8")
+								div=trust_level
+						div(class="row")
+							div(class="col-md-2")
+								div Host
+							div(class="col-md-8")
+								div=host
+						div(class="row")
+							div(class="col-md-2")
+								div Port
+							div(class="col-md-8")
+								div=port
+						div(class="row")
+							div(class="col-md-2")
+								div Url
+							div(class="col-md-8")
+								div=url
+						div(class="row")
+							div(class="col-md-2")
+								div Parameters
+							div(class="col-md-8")
+								div
+									pre=params
+									button(class="btn btn-primary btn", data-toggle="modal", data-target="#param-edit") Edit
+				div(class="modal fade", tabindex="-1", role="dialog", id="param-edit", style="display: none;", aria-hidden="true")
+					div(class="modal-dialog")
+						div(class="modal-content")
+							div(class="modal-header")
+								button(type="button", class="close", data-dismiss="modal", aria-hidden="true") &times;
+								h4(class="modal-title") Parameters
+							div(class="modal-body")
+								div(id="params-editor", class="form-control", style="height: 400; width: 100%;")=params
+								script(src="./js/ace/ace.js")
+								script(src="./js/service.js")
+							div(class="modal-footer")
+								button(type="button", class="btn btn-primary", data-dismiss="modal", id="save-button") Save changes
+
