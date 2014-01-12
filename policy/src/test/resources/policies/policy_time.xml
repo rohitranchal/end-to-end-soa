@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Policy xmlns="urn:oasis:names:tc:xacml:3.0:core:schema:wd-17" PolicyId="sample2" RuleCombiningAlgId="urn:oasis:names:tc:xacml:3.0:rule-combining-algorithm:deny-overrides" Version="1.0">
+	<Target>
+		<AnyOf>
+			<AllOf>
+				<Match MatchId="urn:oasis:names:tc:xacml:1.0:function:string-equal">
+					<AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">localhost:6102</AttributeValue>
+					<AttributeDesignator AttributeId="urn:oasis:names:tc:xacml:1.0:resource:resource-id" Category="urn:oasis:names:tc:xacml:3.0:attribute-category:resource" DataType="http://www.w3.org/2001/XMLSchema#string" MustBePresent="true" />
+				</Match>
+			</AllOf>
+		</AnyOf>
+		<AnyOf>
+			<AllOf>
+				<Match MatchId="urn:oasis:names:tc:xacml:1.0:function:string-equal">
+					<AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">READ</AttributeValue>
+					<AttributeDesignator AttributeId="urn:oasis:names:tc:xacml:1.0:action:action-id" Category="urn:oasis:names:tc:xacml:3.0:attribute-category:action" DataType="http://www.w3.org/2001/XMLSchema#string" MustBePresent="true" />
+				</Match>
+			</AllOf>
+		</AnyOf>
+		<AnyOf>
+			<AllOf>
+				<Match MatchId="urn:oasis:names:tc:xacml:1.0:function:string-equal">
+					<AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">localhost:6101</AttributeValue>
+					<AttributeDesignator AttributeId="http://endtoendsoa.cs.purdue.edu/policy/service_uri" Category="urn:oasis:names:tc:xacml:1.0:subject-category:access-subject" DataType="http://www.w3.org/2001/XMLSchema#string" MustBePresent="true" />
+				</Match>
+			</AllOf>
+		</AnyOf>
+	</Target>
+	<Rule Effect="Deny" RuleId="time_rule">
+		<Condition>
+			<Apply FunctionId="urn:oasis:names:tc:xacml:1.0:function:and">
+				<Apply FunctionId="urn:oasis:names:tc:xacml:1.0:function:and">
+					<Apply FunctionId="urn:oasis:names:tc:xacml:1.0:function:time-greater-than-or-equal">
+						<Apply FunctionId="urn:oasis:names:tc:xacml:1.0:function:time-one-and-only">
+							<AttributeDesignator AttributeId="urn:oasis:names:tc:xacml:1.0:environment:current-time" Category="urn:oasis:names:tc:xacml:3.0:attribute-category:environment" DataType="http://www.w3.org/2001/XMLSchema#time" MustBePresent="true" />
+						</Apply>
+						<AttributeValue DataType="http://www.w3.org/2001/XMLSchema#time">09:00:00</AttributeValue>
+					</Apply>
+					<Apply FunctionId="urn:oasis:names:tc:xacml:1.0:function:time-less-than-or-equal">
+						<Apply FunctionId="urn:oasis:names:tc:xacml:1.0:function:time-one-and-only">
+							<AttributeDesignator AttributeId="urn:oasis:names:tc:xacml:1.0:environment:current-time" Category="urn:oasis:names:tc:xacml:3.0:attribute-category:environment" DataType="http://www.w3.org/2001/XMLSchema#time" MustBePresent="true" />
+						</Apply>
+						<AttributeValue DataType="http://www.w3.org/2001/XMLSchema#time">16:00:00</AttributeValue>
+					</Apply>
+				</Apply>
+			</Apply>
+		</Condition>
+	</Rule>
+	<Rule Effect="Permit" RuleId="permit-rule" />
+</Policy>
