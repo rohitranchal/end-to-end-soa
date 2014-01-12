@@ -1,32 +1,43 @@
 html(lang="en")
 	include header
 	script(src="./js/trust_algo.js")
+	link(rel="stylesheet", href="./css/trust_algo.css")
 	body
 		include nav
 		div(id="default_algo_passive", style="visibility:hidden;")=p_default
 		div(id="default_algo_active", style="visibility:hidden;")=a_default
 		div(class="container")
-			div(class="panel panel-default text-center")
+			div(class="panel panel-default")
 				h2 Supported Trust Calculation Algorithms
-			div(class="panel panel-default")
+			div(class="panel panel-primary")
+				div(class="panel-heading")
+					h3(class="panel-title") Passive Monitoring
 				div(class="panel-body")
-					for alg in p_algos
-						div(class="row")
-							div(class="col-md-2")=alg.name
-							div(class="col-md-8")
-								pre=alg.alg
-							div(class="col-md-2")
-								button(type="button", class="btn btn-primary", id=('p' + alg.id)) Set as default
-			div(class="panel panel-default")
+					div(class="panel-group" id="accordion_p")
+						for alg in p_algos
+							div(class="panel panel-default")
+								div(class="panel-heading")
+									h4(class="panel-title")
+										a(data-toggle="collapse", data-parent="#accordion_p", href='#collapse_p_' + alg.id)=alg.name
+								div(id='collapse_p_' + alg.id, class="panel-collapse collapse")
+									div(class="panel-body")
+										pre=alg.alg
+										button(type="button", class="btn btn-primary", id=('p' + alg.id)) Set as default
+			div(class="panel panel-primary")
+				div(class="panel-heading")
+					h3(class="panel-title") Active Monitoring
 				div(class="panel-body")
-					for alg in a_algos
-						div(class="row")
-							div(class="col-md-2")=alg.name
-							div(class="col-md-8")
-								pre=alg.alg
-							div(class="col-md-1")
-								button(type="button", class="btn btn-primary", id=('a' + alg.id)) Set as default
-						div(class="row")
-							div(class="col-md-2")
-							div(class="col-md-10")
-								pre=alg.auth
+					div(class="panel-group" id="accordion_a")
+						for alg in a_algos
+							div(class="panel panel-default")
+								div(class="panel-heading")
+									h4(class="panel-title")
+										a(data-toggle="collapse", data-parent="#accordion_a", href='#collapse_a_' + alg.id)=alg.name
+								div(id='collapse_a_' + alg.id, class="panel-collapse collapse")
+									div(class="panel-body")
+										h4 Authorization Algorithm
+										pre=alg.auth
+										h4 Trust Management Algorithm
+										pre=alg.alg
+										
+										button(type="button", class="btn btn-primary", id=('a' + alg.id)) Set as default
