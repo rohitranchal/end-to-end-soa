@@ -28,7 +28,9 @@ INSERT INTO Service(id, name, trust_level, host, port, url, params) VALUES
 (16, 'localhost:4116', 10.0, 'localhost', 4116, 'http://localhost:4116', '{}'),
 (17, 'localhost:4117', 10.0, 'localhost', 4117, 'http://localhost:4117', '{}'),
 (18, 'localhost:6101', 10.0, 'localhost', 6101, 'http://localhost:6101', '{}'),
-(19, 'localhost:6102', 10.0, 'localhost', 6102, 'http://localhost:6102', '{}');
+(19, 'localhost:6102', 10.0, 'localhost', 6102, 'http://localhost:6102', '{
+    "load":20
+}');
 
 
 DROP TABLE Interaction;

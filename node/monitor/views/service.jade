@@ -14,22 +14,22 @@ html(lang="en")
 						div(class="row")
 							div(class="col-md-2")
 								div Trust Level
-							div(class="col-md-8")
+							div(class="col-md-10")
 								div=trust_level
 						div(class="row")
 							div(class="col-md-2")
 								div Host
-							div(class="col-md-8")
+							div(class="col-md-10")
 								div=host
 						div(class="row")
 							div(class="col-md-2")
 								div Port
-							div(class="col-md-8")
+							div(class="col-md-10")
 								div=port
 						div(class="row")
 							div(class="col-md-2")
 								div Url
-							div(class="col-md-8")
+							div(class="col-md-10")
 								div=url
 						div(class="row")
 							div(class="col-md-2")
@@ -37,7 +37,8 @@ html(lang="en")
 							div(class="col-md-8")
 								div
 									pre=params
-									button(class="btn btn-primary btn", data-toggle="modal", data-target="#param-edit") Edit
+							div(class="col-md-2")
+								button(class="btn btn-primary btn", data-toggle="modal", data-target="#param-edit") Edit
 				div(class="modal fade", tabindex="-1", role="dialog", id="param-edit", style="display: none;", aria-hidden="true")
 					div(class="modal-dialog")
 						div(class="modal-content")
