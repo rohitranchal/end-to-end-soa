@@ -47,7 +47,7 @@ var get_deal = function(req, res){
 		} else {
 			// console.log("ERROR: " + error);
 			// console.log("STATUS: " + response.statusCode);
-			res.send('Internal Error: proxy request blocked!');
+			res.send('Internal Error: request to http://' + global.my_host + ':6102/get_price blocked!');
 		}
 	});	
 };

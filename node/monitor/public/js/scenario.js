@@ -6,6 +6,8 @@
 		$('.try-it').click(function() {
 			//Reder serverside and get the output
 			$.post("/try_it", {link : $(this).data('link')}, function (data) {
+				alert(data);
+				// location.replace('/scenario?type=' + $('#scenario_type').text() + '&s_id=' + $('#scenario_id').text() + '&test=abc');
 				location.reload();
 			});
 		});
