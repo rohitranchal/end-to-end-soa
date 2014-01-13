@@ -4,5 +4,7 @@ exports.index = function(req, res){
 
 
 exports.get_price = function(req, res){
-  res.send('2311');
+	setTimeout(function() {
+		res.send('2311');
+	}, 0);
 };

@@ -31,10 +31,20 @@ module.exports = function() {
 	//Do interaction
 	//Note that function invocation does not wait for the SM to return a response
 	var start = new Date().getTime();
-	_req.apply(this, arguments);
-	var end = new Date().getTime();
 
-	sm_data[2] = new Array('start', start);
-	sm_data[3] = new Array('end', end);
-	sm_log(sm_data);
-}
+	var cb = arguments[1];//Backup callback
+	var profiling_cb = function (error, response, body) {
+		var end = new Date().getTime();
+		cb(error, response, body); //Fire off the callback
+
+		sm_data[2] = new Array('start', start);
+		sm_data[3] = new Array('end', end);
+		//this is async
+		sm_log(sm_data);
+	};
+
+	arguments[1] = profiling_cb;
+	_req.apply(this, arguments);
+
+};
+
