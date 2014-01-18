@@ -17,6 +17,7 @@ cd -
 
 cd scenarios/simple/s1/
 npm install
+ cp -r instr_request scenarios/simple/s1/node_modules/request 
 cd -
 cd scenarios/simple/s2/
 npm install

@@ -14,7 +14,7 @@ var path = require('path');
 
 var app = express();
 
-var request = require('../../../instr_request');
+var request = require('request');
 global.my_url = 'http://' + global.my_host + ':' + global.my_port;
 
 // all environments
