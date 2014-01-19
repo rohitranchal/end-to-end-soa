@@ -25,6 +25,7 @@ var active_dir = process.cwd() + '/trust_algo/active/';
 var text = fs.readFileSync(active_dir + 'request_templates/req_time.json','utf8');
 var req_template = JSON.parse(text);
 
+var policy_text = fs.readFileSync(active_dir + 'policies/policy_time.xml','utf8');
 
 var AccessController = java.import('edu.purdue.cs.endtoendsoa.AccessController');
 var ac = new AccessController();
@@ -78,4 +79,4 @@ var auth = function(from, to, cb) {
 	});
 };
 
-module.exports = {name :'XACML-Policy : Time Based', alg : trust, authorize : auth};
+module.exports = {name :'XACML-Policy : Time Based', alg : trust, authorize : auth, policy : policy_text};

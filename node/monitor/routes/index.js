@@ -55,7 +55,6 @@ exports.trust_values_reset = function(req, res) {
 
 exports.trust_algo_list = function(req, res) {
 	trust.algo_list(function(list) {
-
 		res.render('trust_algo_list', list);
 	});
 };
@@ -63,6 +62,12 @@ exports.trust_algo_list = function(req, res) {
 exports.get_default_trust_algo = function(req, res) {
 	trust.get_default_algo(function(algo_id) {
 		res.send(algo_id);
+	});
+};
+
+exports.show_active_authz_policy = function(req, res) {
+	trust.get_authz_oplicy(req.query.id, function(val) {
+		res.render('authz_policy', val)
 	});
 };
 

@@ -1,7 +1,6 @@
 html(lang="en")
 	include header
 	script(src="./js/trust_algo.js")
-	link(rel="stylesheet", href="./css/trust_algo.css")
 	body
 		include nav
 		div(id="default_algo_passive", style="visibility:hidden;")=p_default
@@ -39,5 +38,7 @@ html(lang="en")
 										pre=alg.auth
 										h4 Trust Management Algorithm
 										pre=alg.alg
-										
+										pre
+											a(href='/show_active_authz_policy?id=' + alg.id) Show Policy
 										button(type="button", class="btn btn-primary", id=('a' + alg.id)) Set as default
+										

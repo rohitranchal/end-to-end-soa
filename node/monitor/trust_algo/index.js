@@ -80,3 +80,7 @@ exports.algo_list = function(cb) {
 			a_algos : a_a, a_default : default_active_trust_algo};
 	cb(algos); //Return list
 };
+
+exports.get_authz_oplicy = function(id, cb) {
+	cb({policy: active_algos[id].policy});
+};

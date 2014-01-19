@@ -1,0 +1,13 @@
+html(lang="en")
+	include header
+	body
+		include nav
+		div(id="default_algo_passive", style="visibility:hidden;")=p_default
+		div(id="default_algo_active", style="visibility:hidden;")=a_default
+		div(class="container")
+			div(class="panel panel-primary")
+				div(class="panel-heading")
+					h3(class="panel-title") Authorization Policy
+				div(class="panel-body")
+					div(id="policy-view")
+						pre=policy

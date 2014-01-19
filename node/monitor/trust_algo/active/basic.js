@@ -18,4 +18,4 @@ var simple_auth = function(from, to, cb) {
 	}
 };
 
-module.exports = {name :'Simple Blocking Trust', alg : simple_trust, authorize : simple_auth};
+module.exports = {name :'Simple Blocking Trust', alg : simple_trust, authorize : simple_auth, policy : "NONE"};
