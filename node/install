@@ -15,9 +15,13 @@ cd instr_request
 npm install request
 cd -
 
+cd instr_request_block
+npm install request
+cd -
+
 cd scenarios/simple/s1/
 npm install
- cp -r instr_request scenarios/simple/s1/node_modules/request 
+cp -r ../../../instr_request ./node_modules/request
 cd -
 cd scenarios/simple/s2/
 npm install
