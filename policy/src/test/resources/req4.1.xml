@@ -30,7 +30,7 @@
 
 		<Attribute AttributeId="http://endtoendsoa.cs.purdue.edu/policy/operation"
 			IncludeInResult="false">
-			<AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">advertisement</AttributeValue>
+			<AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">test</AttributeValue>
 		</Attribute>
 	</Attributes>
 

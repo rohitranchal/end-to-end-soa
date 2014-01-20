@@ -25,12 +25,12 @@
 		Category="urn:oasis:names:tc:xacml:3.0:attribute-category:environment">
 		<Attribute AttributeId="http://endtoendsoa.cs.purdue.edu/policy/trust_level"
 			IncludeInResult="false">
-			<AttributeValue DataType="http://www.w3.org/2001/XMLSchema#integer">6</AttributeValue>
+			<AttributeValue DataType="http://www.w3.org/2001/XMLSchema#integer">4</AttributeValue>
 		</Attribute>
 
 		<Attribute AttributeId="http://endtoendsoa.cs.purdue.edu/policy/operation"
 			IncludeInResult="false">
-			<AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">advertisement</AttributeValue>
+			<AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">test</AttributeValue>
 		</Attribute>
 	</Attributes>
 
