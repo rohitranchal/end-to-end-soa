@@ -59,12 +59,13 @@ var auth = function(from, to, cb) {
 			var sec  = date.getSeconds();
 			sec = (sec < 10 ? "0" : "") + sec;
 
-			attr.Attribute[0].AttributeValue[0]._=hour + ':' + min + ':' + sec;
+			attr.Attribute[0].AttributeValue[0]._= hour + ':' + min + ':' + sec + '-05:00';
 		}
 	}
 
 	var builder = new xml2js.Builder();
 	var req_xml = builder.buildObject(req);
+	console.log(req_xml)
 	ac.evaluate(active_dir + 'policies/policy_time.xml', req_xml, function(err, result) {
 		if(err) {
 			console.log(err);

@@ -1,10 +1,10 @@
 var fs = require('fs');
 
-global.my_port = 6102;
+global.my_port = 6105;
 global.my_host = 'localhost';
 
 //Override hostname
-fs.readFile('../../host', 'utf8', function (err,data) {
+fs.readFile('../../../host', 'utf8', function (err,data) {
 	global.my_host = data;
 });
 
@@ -35,8 +35,7 @@ if ('development' == app.get('env')) {
 }
 
 app.get('/', routes.index);
-app.get('/get_price', routes.get_price);
-
+app.get('/get_advertisement', routes.get_price);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));

@@ -14,13 +14,26 @@ cd -
 echo "Starting Simple Proxy : DONE"
 
 echo "[Active] Starting Simple Proxy ..."
-cd scenarios/active/s1
+cd scenarios/active/simple/s1
 node app.js &
 cd -
-cd scenarios/active/s2
+cd scenarios/active/simple/s2
 node app.js &
 cd -
 echo "[Active] Starting Simple Proxy : DONE"
+
+echo "[Active] Starting DEMO ..."
+cd scenarios/active/demo/s1
+node app.js &
+cd -
+cd scenarios/active/demo/s2
+node app.js &
+cd -
+cd scenarios/active/demo/s3
+node app.js &
+cd -
+echo "[Active] Starting DEMO : DONE"
+
 
 echo "Starting Service Chain ..."
 cd scenarios/1/s1
