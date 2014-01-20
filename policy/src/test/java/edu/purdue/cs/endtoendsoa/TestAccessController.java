@@ -50,6 +50,15 @@ public class TestAccessController extends TestCase {
 		assertEquals("Deny", res);
 	}
 
+	public void testEvaluateServiceAdPolicy() throws Exception {
+		URL policiesPath = getClass().getClassLoader().getResource("policies/policy_adblock.xml");
+		URL reqPath = getClass().getClassLoader().getResource("req4.xml");
+		
+		AccessController controller = new AccessController();
+		String request = FileUtils.readFileToString(new File(reqPath.getFile()));
+		String res = controller.evaluate(policiesPath.getFile(), request);
+		assertEquals("Permit", res);
+	}
 
 
 }
