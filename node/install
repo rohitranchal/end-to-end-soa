@@ -8,6 +8,7 @@ npm install mysql
 npm install request
 npm install java
 npm install xml2js
+npm install node-uuid
 cd -
 
 cd tools/xml2json

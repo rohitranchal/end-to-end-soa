@@ -2,6 +2,7 @@ var db = require('../../db');
 var java = require('java');
 var xml2js = require('xml2js');
 var fs = require('fs');
+var uuid = require('node-uuid');
 
 //Java dependancies
 var jars_dir = process.cwd() + '/lib/';
@@ -63,7 +64,13 @@ var simple_auth = function(from, to, cb) {
 
 	var builder = new xml2js.Builder();
 	var req_xml = builder.buildObject(req);
-	ac.evaluate(active_dir + 'policies/policy_1.xml', req_xml, function(err, result) {
+
+	//Write policy to a tmp file
+	var tmp_policy_file = '/tmp/' + uuid.v4();
+	fs.writeFileSync(tmp_policy_file, policy_text);
+	console.log(tmp_policy_file);
+
+	ac.evaluate(tmp_policy_file, req_xml, function(err, result) {
 		if(err) {
 			console.log(err);
 		} else {
