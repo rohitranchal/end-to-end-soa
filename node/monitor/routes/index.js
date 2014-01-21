@@ -161,6 +161,7 @@ exports.interaction_block = function(req, res){
 	var to  = req.query.to;
 	var start  = req.query.start;
 	var end  = req.query.end;
+	var data = req.query.data;
 
 	if(typeof start == 'undefined') {
 		start = null;
@@ -180,6 +181,7 @@ exports.interaction_block = function(req, res){
 	db.get_service_id(from.host, function(from_id) {
 		db.get_service_id(to.host, function(to_id) {
 			from.id = from_id;
+			from.data = data; //Setting data if there's any
 			to.id = to_id;
 
 			if(start != null) { //When we get confirmation

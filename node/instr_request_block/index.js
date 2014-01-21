@@ -61,7 +61,6 @@ my_req.post = function() {
 	sm_log(sm_data, function(error, response, body) {
 		if(!error && response.statusCode == 200) {
 			var start = new Date().getTime();
-			console.log(_args[1]);
 			_req.post(_args[0], _args[1], _args[2]);
 			var end = new Date().getTime();
 
