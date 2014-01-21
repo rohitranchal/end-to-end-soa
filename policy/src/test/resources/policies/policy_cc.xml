@@ -1,0 +1,81 @@
+<Policy xmlns="urn:oasis:names:tc:xacml:3.0:core:schema:wd-17"
+	PolicyId="sample2"
+	RuleCombiningAlgId="urn:oasis:names:tc:xacml:3.0:rule-combining-algorithm:deny-overrides"
+	Version="1.0">
+	<Target>
+		<AnyOf>
+			<AllOf>			
+				<Match MatchId="urn:oasis:names:tc:xacml:1.0:function:string-regexp-match">
+						<AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">localhost:610[0-9]+</AttributeValue>					
+					<AttributeDesignator
+						AttributeId="urn:oasis:names:tc:xacml:1.0:resource:resource-id"
+						Category="urn:oasis:names:tc:xacml:3.0:attribute-category:resource"
+						DataType="http://www.w3.org/2001/XMLSchema#string" MustBePresent="true" />
+				</Match>
+			</AllOf>
+		</AnyOf>
+		<AnyOf>
+			<AllOf>
+				<Match MatchId="urn:oasis:names:tc:xacml:1.0:function:string-equal">
+					<AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">WRITE</AttributeValue>
+					<AttributeDesignator
+						AttributeId="urn:oasis:names:tc:xacml:1.0:action:action-id"
+						Category="urn:oasis:names:tc:xacml:3.0:attribute-category:action"
+						DataType="http://www.w3.org/2001/XMLSchema#string" MustBePresent="true" />
+				</Match>
+			</AllOf>
+		</AnyOf>
+		<AnyOf>
+			<AllOf>
+				<Match MatchId="urn:oasis:names:tc:xacml:1.0:function:string-equal">
+					<AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">localhost:6103</AttributeValue>
+					<AttributeDesignator
+						AttributeId="http://endtoendsoa.cs.purdue.edu/policy/service_uri"
+						Category="urn:oasis:names:tc:xacml:1.0:subject-category:access-subject"
+						DataType="http://www.w3.org/2001/XMLSchema#string" MustBePresent="true" />
+				</Match>
+			</AllOf>
+		</AnyOf>
+	</Target>
+	<Rule Effect="Deny" RuleId="trust_level">
+		<Condition>
+			<Apply FunctionId="urn:oasis:names:tc:xacml:1.0:function:and">
+				<Apply FunctionId="urn:oasis:names:tc:xacml:1.0:function:integer-less-than">
+					<Apply FunctionId="urn:oasis:names:tc:xacml:1.0:function:integer-one-and-only">
+						<AttributeDesignator
+							AttributeId="http://endtoendsoa.cs.purdue.edu/policy/trust_level"
+							Category="urn:oasis:names:tc:xacml:3.0:attribute-category:environment"
+							DataType="http://www.w3.org/2001/XMLSchema#integer"
+							MustBePresent="true" />
+					</Apply>
+					<AttributeValue DataType="http://www.w3.org/2001/XMLSchema#integer">5</AttributeValue>
+				</Apply>
+				
+				<Apply FunctionId="urn:oasis:names:tc:xacml:1.0:function:or">
+					<!-- VISA -->
+					<Apply FunctionId="urn:oasis:names:tc:xacml:1.0:function:string-regexp-match">
+						<AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">\S*4[0-9]{12}(?:[0-9]{3})?\S*</AttributeValue>
+						<Apply FunctionId="urn:oasis:names:tc:xacml:1.0:function:string-one-and-only">
+							<AttributeDesignator
+								AttributeId="http://endtoendsoa.cs.purdue.edu/policy/data"
+								Category="urn:oasis:names:tc:xacml:3.0:attribute-category:environment"
+								DataType="http://www.w3.org/2001/XMLSchema#string" MustBePresent="true" />
+						</Apply>
+					</Apply>
+					<!-- MasterCard -->
+					<Apply FunctionId="urn:oasis:names:tc:xacml:1.0:function:string-regexp-match">
+						<AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">\S*^5[1-5][0-9]{14}$\S*</AttributeValue>
+						<Apply FunctionId="urn:oasis:names:tc:xacml:1.0:function:string-one-and-only">
+							<AttributeDesignator
+								AttributeId="http://endtoendsoa.cs.purdue.edu/policy/data"
+								Category="urn:oasis:names:tc:xacml:3.0:attribute-category:environment"
+								DataType="http://www.w3.org/2001/XMLSchema#string" MustBePresent="true" />
+						</Apply>
+					</Apply>
+				</Apply>
+			</Apply>
+		</Condition>
+
+	</Rule>
+	<Rule Effect="Permit" RuleId="permit-rule" />
+</Policy>
