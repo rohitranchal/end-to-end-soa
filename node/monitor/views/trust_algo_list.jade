@@ -14,7 +14,7 @@ html(lang="en")
 				div(class="panel-body")
 					div(class="panel-group" id="accordion_p")
 						for alg in p_algos
-							div(class="panel panel-default")
+							div(class="panel panel-default", id='collapse_p_panel' + alg.id)
 								div(class="panel-heading")
 									h4(class="panel-title")
 										a(data-toggle="collapse", data-parent="#accordion_p", href='#collapse_p_' + alg.id)=alg.name
@@ -28,7 +28,7 @@ html(lang="en")
 				div(class="panel-body")
 					div(class="panel-group" id="accordion_a")
 						for alg in a_algos
-							div(class="panel panel-default")
+							div(class="panel panel-default", id='collapse_a_panel' + alg.id)
 								div(class="panel-heading")
 									h4(class="panel-title")
 										a(data-toggle="collapse", data-parent="#accordion_a", href='#collapse_a_' + alg.id)=alg.name
