@@ -32,7 +32,9 @@ INSERT INTO Service(id, name, display_name, trust_level, host, port, url, params
 (19, 'localhost:6102','localhost:6102', 10.0, 'localhost', 6102, 'http://localhost:6102', '{"load":20}'),
 (20, 'localhost:6103','Travel Agent', 10.0, 'localhost', 6103, 'http://localhost:6103', '{}'),
 (21, 'localhost:6104','Airline', 10.0, 'localhost', 6104, 'http://localhost:6104', '{}'),
-(22, 'localhost:6105','Advertiser', 10.0, 'localhost', 6105, 'http://localhost:6105', '{}');
+(22, 'localhost:6105','Advertiser', 10.0, 'localhost', 6105, 'http://localhost:6105', '{}'),
+(23, 'localhost:6106','Travel Agent', 10.0, 'localhost', 6106, 'http://localhost:6106', '{}'),
+(24, 'localhost:6107','Airline', 10.0, 'localhost', 6107, 'http://localhost:6107', '{}');
 
 
 DROP TABLE Interaction;
