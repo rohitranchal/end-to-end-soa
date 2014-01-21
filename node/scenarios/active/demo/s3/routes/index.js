@@ -4,5 +4,5 @@ exports.index = function(req, res){
 
 
 exports.get_price = function(req, res){
-  res.send(JSON.stringify(20));
+  res.send(' ----Advertisement---- Go great vacation deals call : 1-800-VACATIONS!!!');
 };
