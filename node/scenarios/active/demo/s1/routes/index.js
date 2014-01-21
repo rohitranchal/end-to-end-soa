@@ -13,7 +13,7 @@ exports.get_deal = function(req, res){
 
 					res.send('Price is $' + s2 + '          \n' + adv);
 				} else {
-					res.send('Internal Error: Blocked by Service Monitor : status code :' + response.statusCode);
+					res.send('Internal Error: Blocked by Service Monitor : status code :' + response2.statusCode);
 				}
 			});
 		} else {
