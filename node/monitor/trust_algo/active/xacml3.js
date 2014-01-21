@@ -40,8 +40,7 @@ var auth = function(from, to, cb) {
 
 	//Make a copy of req_template
 	var req = JSON.parse(JSON.stringify(req_template));
-	console.log(to);
-	console.log(from);
+
 	//Update obj with incoming parameters
 	for(var i in req.Request.Attributes) {
 		var attr = req.Request.Attributes[i];
@@ -68,6 +67,8 @@ var auth = function(from, to, cb) {
 	var builder = new xml2js.Builder();
 	var req_xml = builder.buildObject(req);
 
+	console.log(req_xml);
+	
 	//Write policy to a tmp file
 	var tmp_policy_file = '/tmp/' + uuid.v4();
 	fs.writeFileSync(tmp_policy_file, policy_text);

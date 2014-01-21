@@ -11,15 +11,17 @@ exports.get_deal = function(req, res){
 					s2 = parseInt(body);
 					var adv = body2;
 
-					res.send('Price is : ' + s2 + ', Advertisement: ' + adv);
+					res.send('Price is $' + s2 + '          \n' + adv);
 				} else {
-					res.send('Internal Error: Blocked by Service Monitor');
+					res.send('Internal Error: Blocked by Service Monitor : status code :' + response.statusCode);
 				}
 			});
+		} else {
+			res.send('Internal Error: Blocked by Service Monitor : status code :' + response.statusCode);
 		}
 	});	
 };
 
 exports.index = function(req, res){
-	res.send('S1');
+	res.render('index');
 };
