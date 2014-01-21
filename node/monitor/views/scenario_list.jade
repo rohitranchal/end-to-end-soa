@@ -9,25 +9,6 @@ html(lang="en")
 				h2 Scenario List
 			div(class="panel panel-default")
 				div(class="panel-head text-center")
-					h3 Passive
-				div(class="panel-body")
-					div(class="row")
-						div(class="col-md-1")
-							h4 Action
-						div(class="col-md-3")
-							h4 Scenario
-						div(class="col-md-4")
-							h4 Description
-					for s in passive_sl
-						div(class="row top-buffer")
-							div(class="col-md-1")
-								a(class="btn btn-primary", href="./scenario?type=passive&s_id=" + s.id, role="button") Launch
-							div(class="col-md-3")
-								div=s.name
-							div(class="col-md-4")
-								div=s.description
-			div(class="panel panel-default")
-				div(class="panel-head text-center")
 					h3 Active
 				div(class="panel-body")
 					div(class="row")
@@ -45,4 +26,22 @@ html(lang="en")
 								div=s.name
 							div(class="col-md-4")
 								div=s.description
-							
+			div(class="panel panel-default")
+				div(class="panel-head text-center")
+					h3 Passive
+				div(class="panel-body")
+					div(class="row")
+						div(class="col-md-1")
+							h4 Action
+						div(class="col-md-3")
+							h4 Scenario
+						div(class="col-md-4")
+							h4 Description
+					for s in passive_sl
+						div(class="row top-buffer")
+							div(class="col-md-1")
+								a(class="btn btn-primary", href="./scenario?type=passive&s_id=" + s.id, role="button") Launch
+							div(class="col-md-3")
+								div=s.name
+							div(class="col-md-4")
+								div=s.description
