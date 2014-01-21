@@ -1,0 +1,4 @@
+This application can be used to create a visualization of the trust level between 2 Services. It shows the variation of the trust level of an invoked service based on the various possible scenarios during service invocation or after service completion.
+
+The application considers a 2 Service interaction model, and shows the flunctuation of the trust level Service 1 has on Service 2.
+
