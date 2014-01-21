@@ -54,7 +54,7 @@ my_req.post = function() {
 	var sm_data = new Array();
 	sm_data[sm_data.length] = new Array('from', global.my_url);
 	sm_data[sm_data.length] = new Array('to', arguments[0]);
-	sm_data[sm_data.length] = new Array('data', arguments[1]);
+	sm_data[sm_data.length] = new Array('data', JSON.stringify(arguments[1]));
 	
 	var _args = arguments;
 	var _this = this;
