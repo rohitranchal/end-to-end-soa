@@ -24,7 +24,8 @@ function sm_log(data, callback) {
 }
 
 
-module.exports = function() {
+
+var my_req = function() {
 
 	var sm_data = new Array();
 	sm_data[0] = new Array('from', global.my_url);
@@ -47,5 +48,33 @@ module.exports = function() {
 		}
 
 	});
+};
 
-}
+my_req.post = function() {
+	var sm_data = new Array();
+	sm_data[sm_data.length] = new Array('from', global.my_url);
+	sm_data[sm_data.length] = new Array('to', arguments[0]);
+	sm_data[sm_data.length] = new Array('data', arguments[1]);
+	
+	var _args = arguments;
+	var _this = this;
+	sm_log(sm_data, function(error, response, body) {
+		if(!error && response.statusCode == 200) {
+			var start = new Date().getTime();
+			console.log(_args[1]);
+			_req.post(_args[0], _args[1], _args[2]);
+			var end = new Date().getTime();
+
+			sm_data[sm_data.length] = new Array('start', start);
+			sm_data[sm_data.length] = new Array('end', end);
+			sm_log(sm_data); //We don't care about the result here
+		} else {
+			_args[2](error, response, body);
+			return;
+		}
+
+	});
+};
+
+
+module.exports = my_req;

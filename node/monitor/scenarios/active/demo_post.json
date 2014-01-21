@@ -1,0 +1,8 @@
+{
+	"id" : 4,
+	"access_url" : "http://localhost:6108/get_deal?cc=4330123445678944",
+	"description" : "Travel Agent -> Payment Gateway",
+	"name": "DEMO: Travel Agent: Payment",
+	"services" : [25, 26],
+	"connections" :[[25,26]]
+}

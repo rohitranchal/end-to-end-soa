@@ -34,6 +34,15 @@ node app.js &
 cd -
 echo "[Active] Starting DEMO : DONE"
 
+echo "[Active] Starting DEMO: POST ..."
+cd scenarios/active/demo_post/s1
+node app.js &
+cd -
+cd scenarios/active/demo_post/s2
+node app.js &
+cd -
+echo "[Active] Starting DEMO: POST : DONE"
+
 
 echo "Starting Service Chain ..."
 cd scenarios/1/s1
