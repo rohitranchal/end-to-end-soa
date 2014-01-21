@@ -27,8 +27,8 @@
 		</AnyOf>
 		<AnyOf>
 			<AllOf>
-				<Match MatchId="urn:oasis:names:tc:xacml:1.0:function:string-equal">
-					<AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">localhost:6103</AttributeValue>
+				<Match MatchId="urn:oasis:names:tc:xacml:1.0:function:string-regexp-match">
+					<AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">localhost:610[0-9]+</AttributeValue>
 					<AttributeDesignator
 						AttributeId="http://endtoendsoa.cs.purdue.edu/policy/service_uri"
 						Category="urn:oasis:names:tc:xacml:1.0:subject-category:access-subject"
