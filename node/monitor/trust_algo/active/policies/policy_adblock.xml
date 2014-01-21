@@ -59,7 +59,7 @@
 							Category="urn:oasis:names:tc:xacml:3.0:attribute-category:environment"
 							DataType="http://www.w3.org/2001/XMLSchema#string" MustBePresent="true" />
 					</Apply>
-					<AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">[0-9a-zA-Z]*advertisement[0-9a-zA-Z]*</AttributeValue>
+					<AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">[\s]*advertisement[\s]*</AttributeValue>
 				</Apply>
 			</Apply>
 		</Condition>
