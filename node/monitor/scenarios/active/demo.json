@@ -1,6 +1,6 @@
 {
 	"id" : 2,
-	"access_url" : "http://localhost:4103/get_deal",
+	"access_url" : "http://localhost:6103/get_deal",
 	"description" : "Travel Agent -> Airline and Travel Agent -> Advertiser",
 	"name": "DEMO: Travel Agent",
 	"services" : [20, 21, 22],

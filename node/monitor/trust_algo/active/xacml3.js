@@ -33,58 +33,58 @@ var ac = new AccessController();
 
 
 var trust = function none(from, to, cb) {
-  //Nothing to do!
+	//Nothing to do!
 };
 
 var auth = function(from, to, cb) {
 
-  //Make a copy of req_template
-  var req = JSON.parse(JSON.stringify(req_template));
-  console.log(to);
-  console.log(from);
-  //Update obj with incoming parameters
-  for(var i in req.Request.Attributes) {
-    var attr = req.Request.Attributes[i];
-    var attr_id = attr.Attribute[0].$.AttributeId;
-    var category = attr.$.Category;
-    if(attr_id == 'urn:oasis:names:tc:xacml:1.0:resource:resource-id') {
-        attr.Attribute[0].AttributeValue[0]._=to.host;
-    } else if(attr_id == 'http://endtoendsoa.cs.purdue.edu/policy/service_uri') {
-        attr.Attribute[0].AttributeValue[0]._=from.host;
-    } else if(attr_id == 'urn:oasis:names:tc:xacml:1.0:action:action-id') {
-        attr.Attribute[0].AttributeValue[0]._='READ';
-    } else if(category == 'urn:oasis:names:tc:xacml:3.0:attribute-category:environment') {
-        for(var j in attr.Attribute) {
-          var attr_id1 = attr.Attribute[j].$.AttributeId;
-          if(attr_id1 == 'http://endtoendsoa.cs.purdue.edu/policy/trust_level') {
-              attr.Attribute[j].AttributeValue[0]._=to.trust_level;
-          } else if(attr_id1 == 'http://endtoendsoa.cs.purdue.edu/policy/operation') {
-              attr.Attribute[j].AttributeValue[0]._=to.href;
-          }
-        }
-    }
-  }
+	//Make a copy of req_template
+	var req = JSON.parse(JSON.stringify(req_template));
+	console.log(to);
+	console.log(from);
+	//Update obj with incoming parameters
+	for(var i in req.Request.Attributes) {
+		var attr = req.Request.Attributes[i];
+		var attr_id = attr.Attribute[0].$.AttributeId;
+		var category = attr.$.Category;
+		if(attr_id == 'urn:oasis:names:tc:xacml:1.0:resource:resource-id') {
+			attr.Attribute[0].AttributeValue[0]._=to.host;
+		} else if(attr_id == 'http://endtoendsoa.cs.purdue.edu/policy/service_uri') {
+			attr.Attribute[0].AttributeValue[0]._=from.host;
+		} else if(attr_id == 'urn:oasis:names:tc:xacml:1.0:action:action-id') {
+			attr.Attribute[0].AttributeValue[0]._='READ';
+		} else if(category == 'urn:oasis:names:tc:xacml:3.0:attribute-category:environment') {
+			for(var j in attr.Attribute) {
+				var attr_id1 = attr.Attribute[j].$.AttributeId;
+				if(attr_id1 == 'http://endtoendsoa.cs.purdue.edu/policy/trust_level') {
+					attr.Attribute[j].AttributeValue[0]._=to.trust_level;
+				} else if(attr_id1 == 'http://endtoendsoa.cs.purdue.edu/policy/operation') {
+					attr.Attribute[j].AttributeValue[0]._=to.href;
+				}
+			}
+		}
+	}
 
-  var builder = new xml2js.Builder();
-  var req_xml = builder.buildObject(req);
+	var builder = new xml2js.Builder();
+	var req_xml = builder.buildObject(req);
 
-  //Write policy to a tmp file
-  var tmp_policy_file = '/tmp/' + uuid.v4();
-  fs.writeFileSync(tmp_policy_file, policy_text);
-  console.log(tmp_policy_file);
+	//Write policy to a tmp file
+	var tmp_policy_file = '/tmp/' + uuid.v4();
+	fs.writeFileSync(tmp_policy_file, policy_text);
+	console.log(tmp_policy_file);
 
-  ac.evaluate(tmp_policy_file, req_xml, function(err, result) {
-    if(err) {
-      console.log(err);
-    } else {
-      console.log('Authorization response: ' + result);
-      if(result == 'Permit') {
-        cb(1);
-      } else {
-        cb(0);
-      }
-    }
-  });
+	ac.evaluate(tmp_policy_file, req_xml, function(err, result) {
+		if(err) {
+			console.log(err);
+		} else {
+			console.log('Authorization response: ' + result);
+			if(result == 'Permit') {
+				cb(1);
+			} else {
+				cb(0);
+			}
+		}
+	});
 };
 
 module.exports = {name :'XACML-Policy : Remote Ad Block', alg : trust, authorize : auth, policy : policy_text};
