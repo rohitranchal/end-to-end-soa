@@ -44,6 +44,16 @@ cd -
 echo "[Active] Starting DEMO: POST : DONE"
 
 
+echo "[Active] Starting DEMO: HTTPS ..."
+cd scenarios/active/demo_https/s1
+node app.js &
+cd -
+cd scenarios/active/demo_https/s2
+node app.js &
+cd -
+echo "[Active] Starting DEMO: HTTPS : DONE"
+
+
 echo "Starting Service Chain ..."
 cd scenarios/1/s1
 node app.js &

@@ -41,6 +41,10 @@ var auth = function(from, to, cb) {
 	//Make a copy of req_template
 	var req = JSON.parse(JSON.stringify(req_template));
 
+	if(typeof from.data == 'undefined') {
+		from.data = "";
+	}
+
 	//Update obj with incoming parameters
 	for(var i in req.Request.Attributes) {
 		var attr = req.Request.Attributes[i];

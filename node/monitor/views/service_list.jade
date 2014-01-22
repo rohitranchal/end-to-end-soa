@@ -12,9 +12,13 @@ html(lang="en")
 						div(class="col-md-2")
 							td Service
 						div(class="col-md-2")
+							td Configuration
+						div(class="col-md-2")
 							td Trust Level
 					for entry in entries
 						div(class="row")
+							div(class="col-md-2")
+								div=entry.display_name
 							div(class="col-md-2")
 								div
 									a(href=('./service?id=' + entry.id))=entry.name
