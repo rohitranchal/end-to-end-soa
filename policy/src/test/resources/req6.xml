@@ -23,11 +23,6 @@
 
 	<Attributes
 		Category="urn:oasis:names:tc:xacml:3.0:attribute-category:environment">
-		<Attribute AttributeId="http://endtoendsoa.cs.purdue.edu/policy/trust_level"
-			IncludeInResult="false">
-			<AttributeValue DataType="http://www.w3.org/2001/XMLSchema#integer">10</AttributeValue>
-		</Attribute>
-
 		<Attribute AttributeId="http://endtoendsoa.cs.purdue.edu/policy/transport"
 			IncludeInResult="false">
 			<AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">https</AttributeValue>

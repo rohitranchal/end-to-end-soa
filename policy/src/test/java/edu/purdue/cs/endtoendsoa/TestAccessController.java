@@ -102,16 +102,7 @@ public class TestAccessController extends TestCase {
 		reqPath = getClass().getClassLoader().getResource("req6.1.xml");
 		request = FileUtils.readFileToString(new File(reqPath.getFile()));
 		res = controller.evaluate(policiesPath.getFile(), request);
-		assertEquals("Permit", res);
-		
-		reqPath = getClass().getClassLoader().getResource("req6.2.xml");
-		request = FileUtils.readFileToString(new File(reqPath.getFile()));
-		res = controller.evaluate(policiesPath.getFile(), request);
-		assertEquals("Permit", res);
-		
-		reqPath = getClass().getClassLoader().getResource("req6.3.xml");
-		request = FileUtils.readFileToString(new File(reqPath.getFile()));
-		res = controller.evaluate(policiesPath.getFile(), request);
 		assertEquals("Deny", res);
+
 	}
 }
