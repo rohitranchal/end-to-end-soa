@@ -113,29 +113,35 @@ exports.interaction_list = function(req, res){
 exports.interaction = function(req, res){
 	var from  = req.query.from;
 	var to  = req.query.to;
-	var start  = req.query.start;
-	var end  = req.query.end;
+	var data = req.query.data;
 
-	if(typeof start == 'undefined') {
-		start = null;
+	//Interaction metadata
+	var i_meta = {};
+	if(typeof req.query.start == 'undefined') {
+		i_meta.start_time = null;
+	} else {
+		i_meta.start_time = req.query.start;
 	}
-
-	if(typeof end == 'undefined') {
-		end = null;
+	if(typeof req.query.end == 'undefined') {
+		i_meta.end_time = null;
+	} else {
+		i_meta.end_time = req.query.end;
 	}
 
 	from = url.parse(from);
-	from = from.host;
 	to = url.parse(to);
-	to = to.host;
-	
-	db.get_service_id(from, function(from_id) {
-		db.get_service_id(to, function(to_id) {
-			if(start != null) { //When we get confirmation
-				//Update trust level
-				update_trust_level(from_id, to_id);
-			}
-			db.add_interaction(from_id, to_id, start, end);
+
+
+	db.get_service_id(from.host, function(from_id) {
+		db.get_service_id(to.host, function(to_id) {
+			
+			from.id = from_id;
+			from.data = data; //Setting data if there's any
+			to.id = to_id;
+
+			update_trust_level(from, to, i_meta);
+
+			
 		});	
 	});
 
@@ -143,15 +149,33 @@ exports.interaction = function(req, res){
 };
 
 
-function update_trust_level(from, to) {
+function update_trust_level(from, to, i_meta) {
 	
-	db.get_service_trust_level(from, function(f_tv) {
-		db.get_service_trust_level(to, function(t_tv) {
+	db.get_service_trust_level(from.id, function(f_tv) {
+		db.get_service_trust_level(to.id, function(t_tv) {
 			
-			var f = {id : from, trust_level : f_tv};
-			var t = {id : to, trust_level : t_tv};
+			//We are recording both the attempt of an interaction and 
+			//the actual interaction details.
+			//when the actual interaction happens, i_meta will contain 
+			//a start and an end time
+			if(i_meta.start_time != null) {
+				//Interaction actually happened
+				//Do trust levels update
+				from.trust_level = f_tv;
+				to.trust_level = t_tv;
 
-			trust.update(f, t);
+				trust.update(from, to, function(f_new_tv, t_new_tv) {
+					if(typeof t_new_tv == 'undefined') {
+						t_new_tv = t_tv;
+					}
+					//Add interaction with metadata
+					db.add_interaction(from.id, to.id, i_meta.start_time, i_meta.end_time, 
+						f_tv, t_tv, f_new_tv, t_new_tv);		
+				});
+			} else {
+				db.add_interaction(from.id, to.id);	
+			}
+			
 		});
 	});
 }

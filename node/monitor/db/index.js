@@ -89,16 +89,47 @@ exports.set_service_trust_level = function(id, trust_level) {
 }
 
 
-exports.add_interaction = function(from, to, start, end) {
-	var sql = "INSERT INTO Interaction(from_service, to_service, start, end) VALUES ('" + 
-		from + "','" + to  + "'," +  start  + "," + end + ")";
+exports.add_interaction = function(from, to, start, end, from_pre, to_pre, from_post, to_post) {
+
+	if(typeof start == 'undefined') {
+		start = null;
+	}
+
+	if(typeof end == 'undefined') {
+		end = null;
+	}
+
+	if(typeof from_pre == 'undefined') {
+		from_pre = null;
+	}
+
+	if(typeof to_pre == 'undefined') {
+		to_pre = null;
+	}
+
+	if(typeof from_post == 'undefined') {
+		from_post = null;
+	}
+
+	if(typeof to_post == 'undefined') {
+		to_post = null;
+	}
+
+	var sql = "INSERT INTO Interaction(from_service, to_service, start, end," +
+					"from_service_trust_level_pre, to_service_trust_level_pre, from_service_trust_level_post, " +
+					"to_service_trust_level_post) " +
+				"VALUES ('" + 
+					from + "','" + to  + "'," +  start  + "," + end + "," + 
+					from_pre + "," + to_pre + "," + from_post + "," + to_post + ")";
+	console.log(sql);
 	connection.query(sql, function(err, rows, fields) {
 		if (err) throw err;
 	});
 }
 
 exports.get_interactions = function(cb) {
-	var sql = "SELECT f.name AS from_service, t.name AS to_service, i.start, i.end, i.ts FROM Interaction i INNER JOIN Service f ON f.id = i.from_service INNER JOIN Service t ON t.id = i.to_service;";
+	var sql = "SELECT f.name AS from_service, t.name AS to_service, i.start, i.end, i.ts " +
+			"FROM Interaction i INNER JOIN Service f ON f.id = i.from_service INNER JOIN Service t ON t.id = i.to_service;";
 	connection.query(sql, function(err, rows, fields) {
 		if (err) throw err;
 		cb(rows);

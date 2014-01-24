@@ -19,7 +19,7 @@ for(var i = 0; i < files.length; i++) {
 	}
 }
 
-var default_trust_algo = 4;
+var default_trust_algo = 1;
 var default_active_trust_algo = 5;
 
 exports.set_default_algo = function(algo_id_str) {
@@ -42,9 +42,9 @@ exports.get_default_algo = function(cb) {
 };
 
 //Call cb with the new trust value of 'from'
-exports.update = function(from, to) {
+exports.update = function(from, to, callback) {
 	algorithm = passive_algos[default_trust_algo];
-	algorithm.alg(from, to); //Call
+	algorithm.alg(from, to, callback); //Call
 };
 
 exports.authorize = function(from, to, callback) {
