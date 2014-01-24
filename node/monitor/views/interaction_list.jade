@@ -13,16 +13,23 @@ html(lang="en")
 							strong From
 						div(class="col-md-2")
 							strong To
+						div(class="col-md-1")
+							strong Duration
 						div(class="col-md-2")
-							strong Start
+							strong From Pre-Trust
 						div(class="col-md-2")
-							strong End
-						div(class="col-md-4")
-							strong Timestamp
+							strong To Pre-Trust
+						div(class="col-md-2")
+							strong From Post-Trust
+						div(class="col-md-1")
+							strong To Post-Trust
 					for entry in entries
 						div(class="row")
 							div(class="col-md-2")=entry.from_service
 							div(class="col-md-2")=entry.to_service
-							div(class="col-md-2")=entry.start
-							div(class="col-md-2")=entry.end
-							div(class="col-md-4")=entry.ts
+							div(class="col-md-1")=entry.duration
+							div(class="col-md-2")=entry.from_service_trust_level_pre
+							div(class="col-md-2")=entry.to_service_trust_level_pre
+							div(class="col-md-2")=entry.from_service_trust_level_post
+							div(class="col-md-1")=entry.to_service_trust_level_post
+
