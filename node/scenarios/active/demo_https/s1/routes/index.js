@@ -8,7 +8,7 @@ process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 exports.get_deal = function(req, res){
 	var cc = req.query.cc;
 	//Call s2
-	request('https://' + global.my_host + ':6107/get_price',  { form: { credit_card: cc } }, function (error, response, body) {
+	request('https://' + global.my_host + ':6107/get_price', function (error, response, body) {
 		if (!error && response.statusCode == 200) {
 			res.send('Price is $' + body);
 		} else {

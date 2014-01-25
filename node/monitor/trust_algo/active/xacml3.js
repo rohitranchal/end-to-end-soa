@@ -36,7 +36,7 @@ var trust = function none(from, to, cb) {
 	//Nothing to do!
 };
 
-var auth = function(from, to, cb) {
+var auth = function(from, to, id, cb) {
 
 	//Make a copy of req_template
 	var req = JSON.parse(JSON.stringify(req_template));
@@ -80,9 +80,9 @@ var auth = function(from, to, cb) {
 		} else {
 			console.log('Authorization response: ' + result);
 			if(result == 'Permit') {
-				cb(1);
+				cb(id, 1);
 			} else {
-				cb(0);
+				cb(id, 0);
 			}
 		}
 	});

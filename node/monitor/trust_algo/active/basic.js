@@ -10,11 +10,11 @@ var simple_trust = function simple_trust_update(from, to, cb) {
 	}
 };
 
-var simple_auth = function(from, to, cb) {
+var simple_auth = function(from, to, id, cb) {
 	if(to.trust_level < from.trust_level) {
-		cb(0);
+		cb(id, 0);
 	} else {
-		cb(1);
+		cb(id, 1);
 	}
 };
 

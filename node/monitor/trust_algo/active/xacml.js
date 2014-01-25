@@ -42,7 +42,7 @@ var simple_trust = function simple_trust_update(from, to, cb) {
 	}
 };
 
-var simple_auth = function(from, to, cb) {
+var simple_auth = function(from, to, id, cb) {
 
 	//Make a copy of req_template
 	var req = JSON.parse(JSON.stringify(req_template));
@@ -75,9 +75,9 @@ var simple_auth = function(from, to, cb) {
 			console.log(err);
 		} else {
 			if(result == 'Permit') {
-				cb(1);
+				cb(id, 1);
 			} else {
-				cb(0);
+				cb(id, 0);
 			}
 		}
 	});

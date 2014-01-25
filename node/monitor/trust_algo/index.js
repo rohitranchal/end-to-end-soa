@@ -19,20 +19,43 @@ for(var i = 0; i < files.length; i++) {
 	}
 }
 
-var default_trust_algo = 1;
-var default_active_trust_algo = 5;
+var default_trust_algo = new Array();
+var default_active_trust_algo = new Array(0, 2, 5);
 
-exports.set_default_algo = function(algo_id_str) {
+exports.toggle_trust_algo = function(algo_id_str) {
 	algo_id = algo_id_str.substring(1);
 	if(algo_id_str.indexOf('p') == 0) {
-		//Passive algo
 		if(algo_id >= 0 || algo_id < passive_algos.length) {
-			default_trust_algo = algo_id;
+			//If the algo is in the list
+			var found = false;
+			for(var i = 0; i < default_trust_algo.length; i++) {
+				//remove
+				if(default_trust_algo[i] == algo_id) {
+					found = true;
+					default_trust_algo.splice(i, 1);
+				}
+			}
+			if(!found) {
+				//else add it in
+				default_trust_algo[default_trust_algo.length] = algo_id;	
+			}
 		}
 	} else if(algo_id_str.indexOf('a') == 0) {
 		//Active algo
 		if(algo_id >= 0 || algo_id < active_algos.length) {
-			default_active_trust_algo = algo_id;
+			//If the algo is in the list
+			var found = false;
+			for(var i = 0; i < default_active_trust_algo.length; i++) {
+				//remove
+				if(default_active_trust_algo[i] == algo_id) {
+					found = true;
+					default_active_trust_algo.splice(i, 1);
+				}
+			}
+			if(!found) {
+				//else add it in
+				default_active_trust_algo[default_active_trust_algo.length] = algo_id;	
+			}
 		}
 	}
 };
@@ -43,19 +66,58 @@ exports.get_default_algo = function(cb) {
 
 //Call cb with the new trust value of 'from'
 exports.update = function(from, to, callback) {
-	algorithm = passive_algos[default_trust_algo];
-	algorithm.alg(from, to, callback); //Call
+	for(var i = 0; i < default_trust_algo.length; i++) {
+		//Call each enabled algo
+		algorithm = passive_algos[default_trust_algo[i]];
+		algorithm.alg(from, to, callback); //Call	
+	}
 };
 
 exports.authorize = function(from, to, callback) {
-	algorithm = active_algos[default_active_trust_algo];
+	
+	if(default_active_trust_algo.length == 0) {
+		//If there are no active algos enabled
+		//authorize the interaction
+		callback(1);
+	}
 
-	algorithm.authorize(from, to, callback);
+	var authz_status_vals = new Array(default_active_trust_algo.length);
+	for(var i = 0; i < authz_status_vals.length; i++) {
+		authz_status_vals[i] = "-1";
+	}
+
+	var authz_status = function(algo_id, decision) {
+		if(decision == 0) {
+			callback(0);
+			return;
+		}
+		console.log(algo_id + " : " + decision);
+
+		authz_status_vals[algo_id] = 1;
+		console.log(JSON.stringify(authz_status_vals));
+
+		if(authz_status_vals.indexOf("-1") == -1) {
+			//Every value is set to 1
+			//We are good to go
+			console.log('All set ')
+			callback(1);
+			return;
+		}
+	}
+
+	for(var i = 0; i < default_active_trust_algo.length; i++) {
+		var algo_id = default_active_trust_algo[i];
+		algorithm = active_algos[algo_id];
+		algorithm.authorize(from, to, i, authz_status);
+	}
+
 };
 
 exports.update_block = function(from, to, callback) {
-	algorithm = active_algos[default_active_trust_algo];
-	algorithm.alg(from, to);
+	for(var i = 0; i < default_active_trust_algo.length; i++) {
+		algorithm = active_algos[default_active_trust_algo[i]];
+		algorithm.alg(from, to);
+	}
 };
 
 

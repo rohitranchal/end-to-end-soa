@@ -71,9 +71,9 @@ exports.show_active_authz_policy = function(req, res) {
 	});
 };
 
-exports.set_default_trust_algo = function(req, res) {
+exports.toggle_trust_algo = function(req, res) {
 	var algo_id  = req.body.algo_id;
-	trust.set_default_algo(algo_id);
+	trust.toggle_trust_algo(algo_id);
 	res.send('OK');
 };
 

@@ -34,13 +34,13 @@
 						<Apply FunctionId="urn:oasis:names:tc:xacml:1.0:function:time-one-and-only">
 							<AttributeDesignator AttributeId="urn:oasis:names:tc:xacml:1.0:environment:current-time" Category="urn:oasis:names:tc:xacml:3.0:attribute-category:environment" DataType="http://www.w3.org/2001/XMLSchema#time" MustBePresent="true" />
 						</Apply>
-						<AttributeValue DataType="http://www.w3.org/2001/XMLSchema#time">18:30:00</AttributeValue>
+						<AttributeValue DataType="http://www.w3.org/2001/XMLSchema#time">15:10:00</AttributeValue>
 					</Apply>
 					<Apply FunctionId="urn:oasis:names:tc:xacml:1.0:function:time-less-than-or-equal">
 						<Apply FunctionId="urn:oasis:names:tc:xacml:1.0:function:time-one-and-only">
 							<AttributeDesignator AttributeId="urn:oasis:names:tc:xacml:1.0:environment:current-time" Category="urn:oasis:names:tc:xacml:3.0:attribute-category:environment" DataType="http://www.w3.org/2001/XMLSchema#time" MustBePresent="true" />
 						</Apply>
-						<AttributeValue DataType="http://www.w3.org/2001/XMLSchema#time">18:40:00</AttributeValue>
+						<AttributeValue DataType="http://www.w3.org/2001/XMLSchema#time">15:30:00</AttributeValue>
 					</Apply>
 				</Apply>
 			</Apply>

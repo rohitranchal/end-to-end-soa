@@ -7,6 +7,7 @@ var simple_trust = function simple_trust_update(from, to, cb) {
 		if(typeof cb != 'undefined') {
 			cb(new_trust_level);
 		}
+		from.trust_level = new_trust_level;
 	}
 };
 
