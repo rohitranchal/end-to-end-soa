@@ -1,9 +1,7 @@
 package edu.purdue.cs.soa.service;
 
 import java.rmi.RemoteException;
-import java.util.HashMap;
 import java.util.Iterator;
-import java.util.Map;
 
 import javax.xml.namespace.QName;
 
@@ -11,7 +9,6 @@ import org.apache.axiom.om.OMAbstractFactory;
 import org.apache.axiom.om.OMElement;
 import org.apache.axiom.om.OMFactory;
 import org.apache.axis2.addressing.EndpointReference;
-import org.apache.axis2.client.Options;
 import org.apache.axis2.client.ServiceClient;
 import org.apache.axis2.context.MessageContext;
 
@@ -31,18 +28,10 @@ public class Service
 		
 		EndpointReference epr = new EndpointReference("http://localhost:8083/axis2/services/service");
 		
-//		Options options = new Options();
-//		options.setTo(epr);
-//		options.setProperty("from", "service2");
-		
 		//Create request
 		ServiceClient client = new ServiceClient();
 		client.setTargetEPR(epr);
 		//client.setOptions(options);
-		
-//		Map<String, Object> addrMap = new HashMap<String, Object>();
-//		addrMap.put("from", "service2");
-//		client.getOptions().setProperties(addrMap);
 		
 		client.getOptions().setProperty("from", "http://localhost:8082");
 		
@@ -56,7 +45,6 @@ public class Service
 		if(respIt.hasNext()) {
 			try {
 				respHeader = (OMElement)respIt.next();
-//				System.out.println("^^^^^^^^^^^^^^^^^^" + respHeader.getText());
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

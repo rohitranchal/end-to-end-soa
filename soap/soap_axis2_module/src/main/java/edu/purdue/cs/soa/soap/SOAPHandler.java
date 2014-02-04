@@ -5,13 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.Iterator;
 
-import javax.xml.namespace.QName;
-
-import org.apache.axiom.om.OMElement;
-import org.apache.axiom.om.OMNode;
-import org.apache.axiom.soap.SOAPHeader;
 import org.apache.axis2.AxisFault;
 import org.apache.axis2.context.MessageContext;
 import org.apache.axis2.description.Parameter;
@@ -19,8 +13,6 @@ import org.apache.axis2.engine.Handler;
 import org.apache.axis2.handlers.AbstractHandler;
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.HttpException;
-import org.apache.commons.httpclient.UsernamePasswordCredentials;
-import org.apache.commons.httpclient.auth.AuthScope;
 import org.apache.commons.httpclient.methods.GetMethod;
 
 public class SOAPHandler extends AbstractHandler implements Handler {
@@ -50,32 +42,10 @@ public class SOAPHandler extends AbstractHandler implements Handler {
 			to = to.substring(to.indexOf("http"), to.indexOf("/axis2") );
 			System.out.println("@@@@@@@@@@@@@@@To (soapHandler): " + to);
 
-//			SOAPHeader header = mc.getEnvelope().getHeader();
-//			System.out.println(header);
-
-			
-//			//mc.getOptions().getProperty("from");
-//			
-//			Iterator fromHeaderIt = mc.getEnvelope().getHeader().getChildrenWithName(new QName(
-//					"http://soa.cs.purdue.edu", "FromHeader", "axis2ns1"));
-//			OMElement serviceAddressHeader = (OMElement)fromHeaderIt.next();
-//			from = serviceAddressHeader.getText();
-//			System.out.println("##################[From] " + from);
-//
-//			fromHeaderIt = mc.getEnvelope().getHeader().getChildrenWithName(new QName(
-//					"http://www.w3.org/2005/08/addressing", "To", "wsa"));
-//			serviceAddressHeader = (OMElement)fromHeaderIt.next();
-//			to = serviceAddressHeader.getText();
-//			System.out.println("##################[To] " + to);
-//
 		} catch (Exception e) {
 			//e.printStackTrace();
 			System.out.println("no header!");
 		}
-
-		//extracting the service names
-		//from = "http://localhost:4102";
-		//to = "http://localhost:4104";
 
 		if ((from != null) && (to != null)){
 			String url = "http://localhost:3000/interaction?from=" + from + "&to=" + to;

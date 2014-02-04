@@ -36,8 +36,10 @@ INSERT INTO Service(id, name, display_name, trust_level, host, port, url, params
 (23, 'localhost:6106','Travel Agent', 10.0, 'localhost', 6106, 'http://localhost:6106', '{}'),
 (24, 'localhost:6107','Airline', 10.0, 'localhost', 6107, 'http://localhost:6107', '{}'),
 (25, 'localhost:6108','Travel Agent', 10.0, 'localhost', 6108, 'http://localhost:6108', '{}'),
-(26, 'localhost:6109','Payment Gateway', 10.0, 'localhost', 6109, 'http://localhost:6109', '{}');
-
+(26, 'localhost:6109','Payment Gateway', 10.0, 'localhost', 6109, 'http://localhost:6109', '{}'),
+(27, 'localhost:8081','localhost:8081', 10.0, 'localhost', 8081, 'http://localhost:8081/axis2/services/service', '{}'),
+(28, 'localhost:8082','localhost:8082', 10.0, 'localhost', 8082, 'http://localhost:8082/axis2/services/service', '{}'),
+(29, 'localhost:8083','localhost:8083', 4.0, 'localhost', 8083, 'http://localhost:8083/axis2/services/service', '{}');
 
 DROP TABLE Interaction;
 CREATE TABLE Interaction (

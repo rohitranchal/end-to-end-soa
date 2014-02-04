@@ -17,7 +17,6 @@ public class App {
 	 * 
 	 */
 	public static void main(String[] args) throws Exception {
-		//<ns3:operation xmlns:ns3="http://service.soa.cs.purdue.edu"><ns3:input>S1</ns3:input></ns3:operation>
 		
 		OMFactory omFactory = OMAbstractFactory.getOMFactory();
 		OMElement req = omFactory.createOMElement(new QName("http://service.soa.cs.purdue.edu", "operation"));
@@ -42,7 +41,6 @@ public class App {
 		if(respIt.hasNext()) {
 			try {
 				respHeader = (OMElement)respIt.next();
-//				System.out.println("^^^^^^^^^^^^^^^^^^" + respHeader.getText());
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

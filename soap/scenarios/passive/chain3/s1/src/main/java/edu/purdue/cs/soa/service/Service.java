@@ -27,14 +27,11 @@ public class Service
 		
 		Options options = new Options();
 		options.setTo(epr);
-		//options.setAction("urn:operation");
 		//Create request
 		ServiceClient client = new ServiceClient();
 		//client.engageModule("");
 		client.getOptions().setProperty("from", "http://localhost:8081");
-		
-		//System.out.println(client.get);
-		
+				
 		client.setTargetEPR(epr);
 		OMElement resp = client.sendReceive(req);
 		
@@ -44,14 +41,10 @@ public class Service
 		if(respIt.hasNext()) {
 			try {
 				respHeader = (OMElement)respIt.next();
-//				System.out.println("^^^^^^^^^^^^^^^^^^" + respHeader.getText());
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		}
-		
-//		System.out.println("#################Resp from Service2");
-//		System.out.println(resp);		
+		}	
 
 		return input + respHeader.getText();
 	}
