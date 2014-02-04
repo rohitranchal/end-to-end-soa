@@ -1,0 +1,4 @@
+cd ..
+mvn compile axis2-mar:mar
+cp /Users/mazarmi/Desktop/NGC/dev/services/soap_axis2_module/target/soap_axis2_module-1.0-SNAPSHOT.mar /Users/mazarmi/Desktop/NGC/dev/services/axis2_server/axis2-1.6.2/repository/modules
+sh ../axis2_server/axis2-1.6.2/bin/axis2server.sh

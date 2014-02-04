@@ -1,0 +1,15 @@
+cd soap-service1
+mvn clean install
+cp target/soap-service1-1.0-SNAPSHOT.aar ../axis2_server/axis2-1.6.2/repository/services
+cd ..
+cd soap-service2
+mvn clean install
+cp target/soap-service2-1.0-SNAPSHOT.aar ../axis2_server/axis2-1.6.2/repository/services
+cd ..
+cd soap-service3
+mvn clean install
+cp target/soap-service3-1.0-SNAPSHOT.aar ../axis2_server/axis2-1.6.2/repository/services
+
+
+
+

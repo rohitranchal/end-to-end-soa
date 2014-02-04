@@ -1,0 +1,5 @@
+axis2_server/
+target/
+.project
+.classpath
+.settings/

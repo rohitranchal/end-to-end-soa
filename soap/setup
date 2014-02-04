@@ -1,0 +1,16 @@
+#download and setup axis2
+rm -rf axis2_server
+curl http://mirrors.ibiblio.org/apache//axis/axis2/java/core/1.6.2/axis2-1.6.2-bin.zip -o axis2.zip
+unzip axis2.zip -d axis2_server
+
+#setup for passive/chain3 scenario
+cp -r axis2_server scenarios/passive/chain3/s1/axis2_server
+cp -r axis2_server scenarios/passive/chain3/s2/axis2_server
+cp -r axis2_server scenarios/passive/chain3/s3/axis2_server
+cp scenarios/config/axis2.1.xml scenarios/passive/chain3/s1/axis2_server/axis2-1.6.2/conf/axis2.xml
+cp scenarios/config/axis2.2.xml scenarios/passive/chain3/s2/axis2_server/axis2-1.6.2/conf/axis2.xml
+cp scenarios/config/axis2.3.xml scenarios/passive/chain3/s3/axis2_server/axis2-1.6.2/conf/axis2.xml
+
+
+rm -rf axis2_server
+rm axis2.zip

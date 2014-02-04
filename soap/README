@@ -1,0 +1,7 @@
+
+Steps to run the scenario:
+
+1. Run setup for the first time to download the axis2 and copy it to the service folders
+2. Run deploy to build and deploy the services and axis2 module (monitoring mode)
+    2.1 Run deploy.block to build and deploy the services and axis2 module (block mode) 
+3. Then, Run edu.purdue.cs.soa.client.App in the "client" project.

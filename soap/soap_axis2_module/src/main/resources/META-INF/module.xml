@@ -1,0 +1,10 @@
+<module name="soap_axis2_module" class="edu.purdue.cs.soa.soap.SOAPInterceptorModule">
+
+    <Description>SOAPHandler</Description>
+	    
+    <OutFlow>
+        <handler name="SOAPHandler" class="edu.purdue.cs.soa.soap.SOAPHandler">
+            <order phase="Security" phaseLast="true"/>
+        </handler>        
+    </OutFlow>
+</module>

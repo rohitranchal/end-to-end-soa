@@ -1,0 +1,35 @@
+#!/bin/bash
+
+#build and deploy the axis2 module
+cd soap_axis2_module
+mvn compile axis2-mar:mar
+cp target/soap_axis2_module-1.0-SNAPSHOT.mar ../scenarios/passive/chain3/s1/axis2_server/axis2-1.6.2/repository/modules
+cp target/soap_axis2_module-1.0-SNAPSHOT.mar ../scenarios/passive/chain3/s2/axis2_server/axis2-1.6.2/repository/modules
+cp target/soap_axis2_module-1.0-SNAPSHOT.mar ../scenarios/passive/chain3/s3/axis2_server/axis2-1.6.2/repository/modules
+cd ..
+
+# Call whenever Ctrl-C is invoked to kill the axis2 instances
+control_c()
+{
+    echo -en "Sending termination signal to axis2 instances"
+    jps -l | grep org.apache.axis2.transport.SimpleAxis2Server | cut -d ' ' -f 1 | xargs -n1 kill
+    exit 2
+}
+
+trap control_c SIGINT
+
+#build and deploy all services for chain3 scenario
+cd scenarios/passive/chain3/s1
+mvn clean install
+cp target/soap-service1-1.0-SNAPSHOT.aar axis2_server/axis2-1.6.2/repository/services
+sh axis2_server/axis2-1.6.2/bin/axis2server.sh &
+
+cd ../s2
+mvn clean install
+cp target/soap-service2-1.0-SNAPSHOT.aar axis2_server/axis2-1.6.2/repository/services
+sh axis2_server/axis2-1.6.2/bin/axis2server.sh &
+
+cd ../s3
+mvn clean install
+cp target/soap-service3-1.0-SNAPSHOT.aar axis2_server/axis2-1.6.2/repository/services
+sh axis2_server/axis2-1.6.2/bin/axis2server.sh 
