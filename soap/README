@@ -5,3 +5,5 @@ Steps to run the scenario:
 2. Run deploy to build and deploy the services and axis2 module (monitoring mode)
     2.1 Run deploy.block to build and deploy the services and axis2 module (block mode) 
 3. Then, Run edu.purdue.cs.soa.client.App in the "client" project.
+
+You can see the new logged interactions in the intection list page: http://localhost:3000/interaction_list
