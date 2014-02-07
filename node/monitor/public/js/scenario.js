@@ -2,6 +2,48 @@
 ;(function() {
 	jsPlumb.ready(function() {
 
+		//Slider Initialization
+		$('.slider').each(function() {
+			var val = $(this).attr("value");
+    		$(this).slider({
+    			orientation: "horizontal",
+      			range: "max",
+      			min: 0,
+      			max: 10,
+      			value: val,
+      			step: .001,
+      			slide: function( event, ui ) {
+     				if(ui.value > 8){
+           				$(this).css("background","#00ff00");
+        			}
+        			else if(ui.value > 6){
+        				$(this).css("background", "#ffff00");
+        			}
+        			else if(ui.value > 3){
+        				$(this).css("background", "#d2691e");
+        			}
+        			else{
+         				 $(this).css("background","#ff0000");
+      			  	}
+      			}
+      			
+    		});
+    		if($(this).attr("value") > 8){
+           			$(this).css("background","#00ff00");
+        		}
+        		else if($(this).attr("value") > 6){
+        			$(this).css("background", "#ffff00");
+        		}
+        		else if($(this).attr("value") > 3){
+        			$(this).css("background", "#d2691e");
+        		}
+        		else{
+         			$(this).css("background","#ff0000");
+      			}
+  		});
+
+
+
 		//Invoke service for user
 		$('.try-it').click(function() {
 			//Reder serverside and get the output
@@ -14,10 +56,10 @@
 
 		//Handle update service trust levels
 		$("#btn_update_tl").click(function() {
-			//Get new values
+			//Get new values from the sliders
 			var vals = new Array();
-			$(".form-control").each( function() {
-				vals[vals.length] = {name : this.id, value: $(this).val()};
+			$('.slider').each( function() {
+				vals[vals.length] = {name : this.id, value: $(this).slider("value")};
 			});
 
 			$.post("/update_service_tl", {values : vals}, function (data) {
