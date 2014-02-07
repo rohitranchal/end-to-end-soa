@@ -63,3 +63,16 @@
 }
 
 .top-buffer { margin-top:20px; }
+
+.slider {
+    margin: 2px;
+}
+.ui-slider-horizontal {
+    height: 15px;
+    width: 125px;
+}
+.ui-slider .ui-slider-handle {
+    height: 23px;
+    width: 5px;
+    padding-right: 10px;
+}
