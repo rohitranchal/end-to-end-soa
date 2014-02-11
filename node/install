@@ -27,7 +27,6 @@ cd -
 cd scenarios/active/simple/s1/
 npm install
 cd -
-cp -r heartbeat scenarios/active/simple/s1/node_modules/
 cd scenarios/active/simple/s2/
 npm install
 cd -
@@ -61,6 +60,7 @@ cd scenarios/simple/s1/
 npm install
 cp -r ../../../instr_request ./node_modules/request
 cd -
+cp -r heartbeat scenarios/active/simple/s1/node_modules/
 cd scenarios/simple/s2/
 npm install
 cd -

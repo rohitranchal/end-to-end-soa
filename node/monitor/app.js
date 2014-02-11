@@ -9,9 +9,11 @@ var scenario = require('./routes/scenario');
 var trust = require('./trust_algo');
 var http = require('http');
 var path = require('path');
+var dgram = require('dgram');
 
 var app = express();
 
+var passive_port = 3001;
 var heartbeat_port = 3003;
 
 // all environments
@@ -66,19 +68,31 @@ http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
 });
 
+///////////////////////////////////////////////////////////////////////////////
+//                  Passive Listner
+///////////////////////////////////////////////////////////////////////////////
+var passive_server = dgram.createSocket('udp4');
+
+passive_server.on('listening', function () {
+  var address = passive_server.address();
+  console.log('Heartbeat Listner on ' + address.address + ":" + address.port);
+});
+passive_server.on('message', function (message, remote) {
+  routes.interaction(message.toString());
+});
+passive_server.bind(passive_port, 'localhost');
 
 ///////////////////////////////////////////////////////////////////////////////
 //                  Heartbeat Listner
 ///////////////////////////////////////////////////////////////////////////////
-var dgram = require('dgram');
-var server = dgram.createSocket('udp4');
+var hb_server = dgram.createSocket('udp4');
 
-server.on('listening', function () {
-	var address = server.address();
+hb_server.on('listening', function () {
+	var address = hb_server.address();
 	console.log('Heartbeat Listner on ' + address.address + ":" + address.port);
 });
-server.on('message', function (message, remote) {
+hb_server.on('message', function (message, remote) {
 	routes.store_heartbeat(message.toString());
 });
-server.bind(heartbeat_port, 'localhost');
+hb_server.bind(heartbeat_port, 'localhost');
 

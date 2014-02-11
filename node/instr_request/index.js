@@ -1,33 +1,32 @@
 var request = require('request');
+var dgram = require('dgram');
 
 var monitor = 'http://localhost:3000/interaction'
 var _req = request;
+var client = dgram.createSocket('udp4');
 /*
  * Send given data to the monitor
  */
 function sm_log(data) {
 
-	var msg = '?';
-	for(var i = 0; i < data.length; i++) {
-		if(i > 0) {
-			msg += '&';
+	var msg = new Buffer(JSON.stringify(data));
+
+	client.send(msg, 0, msg.length, 3001, 'localhost', function(err, bytes) {
+		if (err) {
+			throw err;
 		}
-		msg += data[i][0] + '=' + data[i][1];
-	}
-	_req(monitor+msg, function(error, response, body) {
-		console.log('Response from monitor : ' + body);
 	});
 }
 
 
 module.exports = function() {
 
-	var sm_data = new Array();
-	sm_data[0] = new Array('from', global.my_url);
-	sm_data[1] = new Array('to', arguments[0]);
-	
+	var sm_data = {};
+	sm_data.from = global.my_url;
+	sm_data.to = arguments[0];
+
 	sm_log(sm_data);
-	
+
 	//Do interaction
 	//Note that function invocation does not wait for the SM to return a response
 	var start = new Date().getTime();
@@ -37,8 +36,8 @@ module.exports = function() {
 		var end = new Date().getTime();
 		cb(error, response, body); //Fire off the callback
 
-		sm_data[2] = new Array('start', start);
-		sm_data[3] = new Array('end', end);
+		sm_data.start = start;
+		sm_data.end = end;
 		//this is async
 		sm_log(sm_data);
 	};

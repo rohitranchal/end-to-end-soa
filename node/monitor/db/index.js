@@ -121,7 +121,6 @@ exports.add_interaction = function(from, to, start, end, from_pre, to_pre, from_
 				"VALUES ('" +
 					from + "','" + to  + "'," +  start  + "," + end + "," +
 					from_pre + "," + to_pre + "," + from_post + "," + to_post + ")";
-	console.log(sql);
 	connection.query(sql, function(err, rows, fields) {
 		if (err) throw err;
 	});
