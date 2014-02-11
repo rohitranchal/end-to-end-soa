@@ -54,10 +54,10 @@ exports.get_services = function(cb) {
 }
 
 
-exports.get_service_id = function(name, cb) {
-	connection.query("SELECT id FROM Service WHERE name='" + name + "'", function(err, rows, fields) {
+exports.get_service_data = function(name, cb) {
+	connection.query("SELECT id, trust_level, params FROM Service WHERE name='" + name + "'", function(err, rows, fields) {
 		if (err) throw err;
-		cb(rows[0].id);
+		cb(rows[0].id, rows[0].trust_level, rows[0].params);
 	});
 }
 

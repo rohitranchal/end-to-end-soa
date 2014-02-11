@@ -143,12 +143,17 @@ exports.interaction = function(msg){
 	from = url.parse(from);
 	to = url.parse(to);
 
-	db.get_service_id(from.host, function(from_id) {
-		db.get_service_id(to.host, function(to_id) {
+	db.get_service_data(from.host, function(from_id, from_tl, from_params) {
+		db.get_service_data(to.host, function(to_id, to_tl, to_params) {
 
 			from.id = from_id;
 			from.data = data; //Setting data if there's any
 			to.id = to_id;
+
+			from.trust_level = from_tl;
+			to.trust_level = to_tl;
+			from.params = JSON.parse(from_params);
+			to.params = JSON.parse(to_params);
 
 			update_trust_level(from, to, i_meta);
 
@@ -158,34 +163,25 @@ exports.interaction = function(msg){
 
 
 function update_trust_level(from, to, i_meta) {
-
-	db.get_service_trust_level(from.id, function(f_tv) {
-		db.get_service_trust_level(to.id, function(t_tv) {
-
-			//We are recording both the attempt of an interaction and
-			//the actual interaction details.
-			//when the actual interaction happens, i_meta will contain
-			//a start and an end time
-			if(i_meta.start_time != null) {
-				//Interaction actually happened
-				//Do trust levels update
-				from.trust_level = f_tv;
-				to.trust_level = t_tv;
-
-				trust.update(from, to, function(f_new_tv, t_new_tv) {
-					if(typeof t_new_tv == 'undefined') {
-						t_new_tv = t_tv;
-					}
-					//Add interaction with metadata
-					db.add_interaction(from.id, to.id, i_meta.start_time, i_meta.end_time,
-						f_tv, t_tv, f_new_tv, t_new_tv);
-				});
-			} else {
-				db.add_interaction(from.id, to.id);
+	//We are recording both the attempt of an interaction and
+	//the actual interaction details.
+	//when the actual interaction happens, i_meta will contain
+	//a start and an end time
+	if(i_meta.start_time != null) {
+		//Interaction actually happened
+		//Do trust levels update
+		trust.update(from, to, function(f_new_tv, t_new_tv) {
+			if(typeof t_new_tv == 'undefined') {
+				t_new_tv = to.trust_level;
+				f_new_tv = from.trust_level;
 			}
-
+			//Add interaction with metadata
+			db.add_interaction(from.id, to.id, i_meta.start_time, i_meta.end_time,
+				from.trust_level, to.trust_level , f_new_tv, t_new_tv);
 		});
-	});
+	} else {
+		db.add_interaction(from.id, to.id);
+	}
 }
 
 exports.interaction_block = function(req, res){
@@ -210,21 +206,26 @@ exports.interaction_block = function(req, res){
 	to = url.parse(to);
 	// to = to.host;
 
-	db.get_service_id(from.host, function(from_id) {
-		db.get_service_id(to.host, function(to_id) {
+	db.get_service_data(from.host, function(from_id, from_tl, from_params) {
+		db.get_service_data(to.host, function(to_id, to_tl, to_params) {
 			from.id = from_id;
 			from.data = data; //Setting data if there's any
 			to.id = to_id;
 
+			from.trust_level = from_tl;
+			to.trust_level = to_tl;
+			from.params = JSON.parse(from_params);
+			to.params = JSON.parse(to_params);
+
 			if(start != null) { //When we get confirmation
 				//Update trust level
-				update_trust_level_block(from, to);
+				trust.update_block(from, to);
 				//Reaching here means access was permitted
 				res.send('OK');
 			} else {
 				console.log('authorize ...')
 				//This is before the actual invocation
-				authorize_access(from, to, function(status) {
+				trust.authorize(from, to, function(status) {
 					if(typeof status.data == 'undefined') {
 						res.send(status.code);
 					} else {
@@ -236,29 +237,4 @@ exports.interaction_block = function(req, res){
 		});
 	});
 };
-
-function authorize_access(from, to, callback) {
-	db.get_service_trust_level(from.id, function(f_tv) {
-		db.get_service_trust_level(to.id, function(t_tv) {
-
-			from.trust_level = f_tv;
-			to.trust_level = t_tv;
-
-			trust.authorize(from, to, callback);
-		});
-	});
-}
-
-function update_trust_level_block(from, to) {
-
-	db.get_service_trust_level(from.id, function(f_tv) {
-		db.get_service_trust_level(to.id, function(t_tv) {
-
-			from.trust_level = f_tv;
-			to.trust_level = t_tv;
-
-			trust.update_block(from, to);
-		});
-	});
-}
 
