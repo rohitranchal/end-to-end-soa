@@ -1,7 +1,12 @@
 var fs = require('fs');
+var hb = require('heartbeat');
+
 
 global.my_port = 4101;
 global.my_host = 'localhost';
+
+//Start heartbeat
+hb();
 
 //Override hostname
 fs.readFile('../../host', 'utf8', function (err,data) {
@@ -58,5 +63,5 @@ app.get('/', ind);
 app.get('/get_deal', get_deal);
 
 http.createServer(app).listen(app.get('port'), function(){
-  console.log('Express server listening on port ' + app.get('port'));
+	console.log('Express server listening on port ' + app.get('port'));
 });

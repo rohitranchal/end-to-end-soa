@@ -12,6 +12,8 @@ var path = require('path');
 
 var app = express();
 
+var heartbeat_port = 3003;
+
 // all environments
 app.set('port', process.env.PORT || 3000);
 app.set('views', path.join(__dirname, 'views'));
@@ -58,6 +60,25 @@ app.get('/interaction_block', routes.interaction_block);
 app.get('/interaction', routes.interaction);
 app.get('/interaction_list', routes.interaction_list);
 
+app.post('/hb', routes.store_heartbeat);
+
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
 });
+
+
+///////////////////////////////////////////////////////////////////////////////
+//                  Heartbeat Listner
+///////////////////////////////////////////////////////////////////////////////
+var dgram = require('dgram');
+var server = dgram.createSocket('udp4');
+
+server.on('listening', function () {
+	var address = server.address();
+	console.log('Heartbeat Listner on ' + address.address + ":" + address.port);
+});
+server.on('message', function (message, remote) {
+	routes.store_heartbeat(message.toString());
+});
+server.bind(heartbeat_port, 'localhost');
+

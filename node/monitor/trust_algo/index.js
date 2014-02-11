@@ -20,7 +20,7 @@ for(var i = 0; i < files.length; i++) {
 }
 
 var default_trust_algo = new Array();
-var default_active_trust_algo = new Array(0, 2, 5);
+var default_active_trust_algo = new Array();
 
 exports.toggle_trust_algo = function(algo_id_str) {
 	algo_id = algo_id_str.substring(1);

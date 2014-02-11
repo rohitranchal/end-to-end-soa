@@ -27,6 +27,7 @@ cd -
 cd scenarios/active/simple/s1/
 npm install
 cd -
+cp -r heartbeat scenarios/active/simple/s1/node_modules/
 cd scenarios/active/simple/s2/
 npm install
 cd -
