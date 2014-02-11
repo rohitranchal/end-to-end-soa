@@ -75,7 +75,7 @@ var passive_server = dgram.createSocket('udp4');
 
 passive_server.on('listening', function () {
   var address = passive_server.address();
-  console.log('Heartbeat Listner on ' + address.address + ":" + address.port);
+  console.log('Passive Listner on ' + address.address + ":" + address.port);
 });
 passive_server.on('message', function (message, remote) {
   routes.interaction(message.toString());

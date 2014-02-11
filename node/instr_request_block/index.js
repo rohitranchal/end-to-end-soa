@@ -17,6 +17,7 @@ function sm_log(data, callback) {
 	console.log('calling :' + monitor+msg);
 
 	_req(monitor+msg, function(error, response, body) {
+		console.log('Resp: ' + body);
 		if(typeof callback != 'undefined') {
 			callback(error, response, body);	
 		}

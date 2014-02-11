@@ -222,12 +222,13 @@ exports.interaction_block = function(req, res){
 				//Reaching here means access was permitted
 				res.send('OK');
 			} else {
+				console.log('authorize ...')
 				//This is before the actual invocation
 				authorize_access(from, to, function(status) {
-					if(status == 1) {
-						res.send('OK');
+					if(typeof status.data == 'undefined') {
+						res.send(status.code);
 					} else {
-						res.send(403);
+						res.send(status.code, status.data);
 					}
 				});
 			}

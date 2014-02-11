@@ -78,9 +78,9 @@ var auth = function(from, to, id, cb) {
 		} else {
 			console.log('Authorization response: ' + result);
 			if(result == 'Permit') {
-				cb(id, 1);
+				cb(id, {code : 200});
 			} else {
-				cb(id, 0);
+				cb(id, {code : 403});
 			}
 		}
 	});

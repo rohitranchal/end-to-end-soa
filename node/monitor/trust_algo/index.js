@@ -78,7 +78,8 @@ exports.authorize = function(from, to, callback) {
 	if(default_active_trust_algo.length == 0) {
 		//If there are no active algos enabled
 		//authorize the interaction
-		callback(1);
+		console.log('nothing to check');
+		callback({code : 200});
 	}
 
 	var authz_status_vals = new Array(default_active_trust_algo.length);
@@ -87,8 +88,8 @@ exports.authorize = function(from, to, callback) {
 	}
 
 	var authz_status = function(algo_id, decision) {
-		if(decision == 0) {
-			callback(0);
+		if(decision.code != 200) {
+			callback(decision);
 			return;
 		}
 		console.log(algo_id + " : " + decision);
@@ -100,7 +101,7 @@ exports.authorize = function(from, to, callback) {
 			//Every value is set to 1
 			//We are good to go
 			console.log('All set ')
-			callback(1);
+			callback({code: 200});
 			return;
 		}
 	}

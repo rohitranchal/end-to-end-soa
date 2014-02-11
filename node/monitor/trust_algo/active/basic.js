@@ -12,9 +12,9 @@ var simple_trust = function simple_trust_update(from, to, cb) {
 
 var simple_auth = function(from, to, id, cb) {
 	if(to.trust_level < from.trust_level) {
-		cb(id, 0);
+		cb(id, {code : 403});
 	} else {
-		cb(id, 1);
+		cb(id, {code : 200});
 	}
 };
 

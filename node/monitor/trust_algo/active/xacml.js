@@ -75,9 +75,9 @@ var simple_auth = function(from, to, id, cb) {
 			console.log(err);
 		} else {
 			if(result == 'Permit') {
-				cb(id, 1);
+				cb(id, {code : 200});
 			} else {
-				cb(id, 0);
+				cb(id, {code : 403});
 			}
 		}
 	});
