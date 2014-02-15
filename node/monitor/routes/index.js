@@ -226,6 +226,16 @@ exports.interaction_block = function(req, res){
 				console.log('authorize ...')
 				//This is before the actual invocation
 				trust.authorize(from, to, function(status) {
+
+					// Cannot use this because it redirects before logging and req.apply
+					// Checking if headers exist, for e.g. redirect location
+					// if(typeof status.headers != 'undefined') {
+					// 	for(var item in status.headers) {
+					// 		var header = status.headers[item];
+					// 		res.setHeader(header.name, header.value);
+					// 	}
+					// }
+
 					if(typeof status.data == 'undefined') {
 						res.send(status.code);
 					} else {
@@ -233,6 +243,7 @@ exports.interaction_block = function(req, res){
 					}
 				});
 			}
+			console.log('from: ' + from_id + ' to: ' + to_id + ' start: ' + start);
 			db.add_interaction(from_id, to_id, start, end);
 		});
 	});

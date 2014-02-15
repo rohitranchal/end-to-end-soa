@@ -1,0 +1,8 @@
+{
+	"id" : 5,
+	"access_url" : "http://localhost:6110/get_deal",
+	"description" : "s1 -> s2 and s1 -> s3",
+	"name": "DEMO: Service Redirect",
+	"services" : [30, 31, 32],
+	"connections" :[[30, 31], [30, 32]]
+}

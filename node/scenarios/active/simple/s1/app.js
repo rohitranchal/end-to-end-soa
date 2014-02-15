@@ -49,7 +49,7 @@ var get_deal = function(req, res){
 			// console.log("STATUS: " + response.statusCode);
 			res.send('Internal Error: request to http://' + global.my_host + ':6102/get_price blocked!');
 		}
-	});	
+	});
 };
 
 var ind = function(req, res){

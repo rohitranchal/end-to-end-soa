@@ -15,7 +15,7 @@ exports.get_deal = function(req, res){
 			console.log(error);
 			res.send('Internal Error: Blocked by Service Monitor : status code :' + response.statusCode);
 		}
-	});	
+	});
 };
 
 exports.index = function(req, res){

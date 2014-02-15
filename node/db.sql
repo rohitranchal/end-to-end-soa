@@ -39,7 +39,12 @@ INSERT INTO Service(id, name, display_name, trust_level, host, port, url, params
 (26, 'localhost:6109','Payment Gateway', 10.0, 'localhost', 6109, 'http://localhost:6109', '{}'),
 (27, 'localhost:8081','localhost:8081', 10.0, 'localhost', 8081, 'http://localhost:8081/axis2/services/service', '{}'),
 (28, 'localhost:8082','localhost:8082', 10.0, 'localhost', 8082, 'http://localhost:8082/axis2/services/service', '{}'),
-(29, 'localhost:8083','localhost:8083', 4.0, 'localhost', 8083, 'http://localhost:8083/axis2/services/service', '{}');
+(29, 'localhost:8083','localhost:8083', 4.0, 'localhost', 8083, 'http://localhost:8083/axis2/services/service', '{}'),
+(30, 'localhost:6110','localhost:6110', 10.0, 'localhost', 6110, 'http://localhost:6110', '{}'),
+(31, 'localhost:6111','localhost:6111', 10.0, 'localhost', 6111, 'http://localhost:6111', '{"redirect":"http://localhost:6112/get_price", "status":"dead"}'),
+(32, 'localhost:6112','localhost:6112', 10.0, 'localhost', 6112, 'http://localhost:6112', '{"Status":"Backup service"}');
+
+
 
 DROP TABLE Interaction;
 CREATE TABLE Interaction (

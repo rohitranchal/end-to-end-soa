@@ -37,7 +37,7 @@ exports.toggle_trust_algo = function(algo_id_str) {
 			}
 			if(!found) {
 				//else add it in
-				default_trust_algo[default_trust_algo.length] = algo_id;	
+				default_trust_algo[default_trust_algo.length] = algo_id;
 			}
 		}
 	} else if(algo_id_str.indexOf('a') == 0) {
@@ -54,7 +54,7 @@ exports.toggle_trust_algo = function(algo_id_str) {
 			}
 			if(!found) {
 				//else add it in
-				default_active_trust_algo[default_active_trust_algo.length] = algo_id;	
+				default_active_trust_algo[default_active_trust_algo.length] = algo_id;
 			}
 		}
 	}
@@ -69,12 +69,12 @@ exports.update = function(from, to, callback) {
 	for(var i = 0; i < default_trust_algo.length; i++) {
 		//Call each enabled algo
 		algorithm = passive_algos[default_trust_algo[i]];
-		algorithm.alg(from, to, callback); //Call	
+		algorithm.alg(from, to, callback); //Call
 	}
 };
 
 exports.authorize = function(from, to, callback) {
-	
+
 	if(default_active_trust_algo.length == 0) {
 		//If there are no active algos enabled
 		//authorize the interaction
@@ -92,16 +92,15 @@ exports.authorize = function(from, to, callback) {
 			callback(decision);
 			return;
 		}
-		console.log(algo_id + " : " + decision);
 
 		authz_status_vals[algo_id] = 1;
-		console.log(JSON.stringify(authz_status_vals));
 
 		if(authz_status_vals.indexOf("-1") == -1) {
 			//Every value is set to 1
 			//We are good to go
 			console.log('All set ')
-			callback({code: 200});
+			//callback({code: 200});
+			callback(decision);
 			return;
 		}
 	}

@@ -53,6 +53,17 @@ node app.js &
 cd -
 echo "[Active] Starting DEMO: HTTPS : DONE"
 
+echo "[Active] Starting DEMO: REDIRECT ..."
+cd scenarios/active/demo_redirect/s1
+node app.js &
+cd -
+cd scenarios/active/demo_redirect/s2
+node app.js &
+cd -
+cd scenarios/active/demo_redirect/s3
+node app.js &
+cd -
+echo "[Active] Starting DEMO: REDIRECT : DONE"
 
 echo "Starting Service Chain ..."
 cd scenarios/1/s1
