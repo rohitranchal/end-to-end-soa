@@ -8,10 +8,10 @@
     		$(this).slider({
     			orientation: "horizontal",
       			range: "max",
-      			min: 0,
+      			min: 1,
       			max: 10,
       			value: val,
-      			step: .001,
+      			step: 1,
       			slide: function( event, ui ) {
      				if(ui.value > 8){
            				$(this).css("background","#00ff00");
