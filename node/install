@@ -62,7 +62,7 @@ cd -
 cd scenarios/active/demo_redirect/s2/
 npm install
 cd -
-cd scenarios/active/demo_redirect/s2/
+cd scenarios/active/demo_redirect/s3/
 npm install
 cd -
 
