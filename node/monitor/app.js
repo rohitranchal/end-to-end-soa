@@ -57,12 +57,13 @@ app.post('/toggle_trust_algo', routes.toggle_trust_algo);
 app.get('/show_active_authz_policy', routes.show_active_authz_policy)
 app.post('/try_it', routes.try_it);
 
+app.post('/stop_service', routes.stop_service);
+app.post('/start_service', routes.start_service);
+
 //Monitor functionality related
 app.get('/interaction_block', routes.interaction_block);
 app.get('/interaction', routes.interaction);
 app.get('/interaction_list', routes.interaction_list);
-
-app.post('/hb', routes.store_heartbeat);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));

@@ -92,7 +92,16 @@ exports.try_it = function(req, res) {
 	request(req.body.link, function (error, response, body) {
 		res.send(body)
 	});
-}
+};
+
+exports.stop_service = function(req, res) {
+	//TODO
+};
+
+exports.start_service = function(req, res) {
+	//TODO
+};
+
 
 exports.add_service_show = function(req, res){
 	res.render('add_service_show', {});
