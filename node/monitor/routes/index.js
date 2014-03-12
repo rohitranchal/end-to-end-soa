@@ -39,6 +39,11 @@ exports.store_heartbeat = function(msg) {
 	db.add_stat(stats.from, JSON.stringify(stats.data));
 };
 
+exports.hb_stats = function(req, res) {
+	db.get_all_hb_items(function(rows) {
+		res.render('hb_stats', {entries : rows});
+	});
+};
 
 ///////////////////////////////////////////////////////////////////////////////
 ////////////TRUST RELATED

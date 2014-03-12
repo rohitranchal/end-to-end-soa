@@ -143,3 +143,11 @@ exports.add_stat = function(service, data) {
 		if (err) throw err;
 	});
 }
+
+exports.get_all_hb_items = function(cb) {
+	var sql = "SELECT id, ts, service FROM Heartbeat_Data";
+	connection.query(sql, function(err, rows, fields) {
+		if (err) throw err;
+		cb(rows);
+	});	
+}

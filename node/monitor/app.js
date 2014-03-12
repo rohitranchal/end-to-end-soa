@@ -64,6 +64,7 @@ app.post('/start_service', routes.start_service);
 app.get('/interaction_block', routes.interaction_block);
 app.get('/interaction', routes.interaction);
 app.get('/interaction_list', routes.interaction_list);
+app.get('/hb_stats', routes.hb_stats);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));

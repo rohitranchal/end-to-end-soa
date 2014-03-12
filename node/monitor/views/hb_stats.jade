@@ -1,0 +1,11 @@
+html(lang="en")
+	include header
+	body
+		include nav
+		table(class="table table-striped table-bordered")
+			for entry in entries
+				tr
+					td=entry.id
+					td=entry.ts
+					td=entry.service
+					
