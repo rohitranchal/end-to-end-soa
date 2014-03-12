@@ -45,6 +45,14 @@ exports.hb_stats = function(req, res) {
 	});
 };
 
+exports.hb_stat_data = function(req, res) {
+	db.get_hb_item_data(req.query.id, function(data) {
+		// res.render('hb_item', {entry : data});
+		res.send(data);
+	});
+};
+
+
 ///////////////////////////////////////////////////////////////////////////////
 ////////////TRUST RELATED
 ///////////////////////////////////////////////////////////////////////////////

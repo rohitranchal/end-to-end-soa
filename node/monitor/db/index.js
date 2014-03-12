@@ -151,3 +151,11 @@ exports.get_all_hb_items = function(cb) {
 		cb(rows);
 	});	
 }
+
+exports.get_hb_item_data = function(id, cb) {
+	var sql = "SELECT * FROM Heartbeat_Data WHERE id=" + id;
+	connection.query(sql, function(err, rows, fields) {
+		if (err) throw err;
+		cb(rows);
+	});	
+}
