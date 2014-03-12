@@ -35,9 +35,8 @@ exports.update_service_params = function(req, res) {
 
 
 exports.store_heartbeat = function(msg) {
-	//console.log(msg);
-
-	//TODO: Store
+	var stats = JSON.parse(msg);
+	db.add_stat(stats.from, JSON.stringify(stats.data));
 };
 
 

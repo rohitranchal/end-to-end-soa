@@ -134,3 +134,12 @@ exports.get_interactions = function(cb) {
 		cb(rows);
 	});
 }
+
+exports.add_stat = function(service, data) {
+
+	var sql = "INSERT INTO Heartbeat_Data(service, data) " +
+				"VALUES ('" + service + "','" + data  + "')";
+	connection.query(sql, function(err, rows, fields) {
+		if (err) throw err;
+	});
+}

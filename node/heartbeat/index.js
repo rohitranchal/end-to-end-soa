@@ -7,11 +7,26 @@ var client = dgram.createSocket('udp4');
 module.exports = function() {
 	setInterval(function() {
 
-		//TODO Mode data
-		var stats = process.memoryUsage();
+		var stats = {};
+		stats.from = global.my_host + ':' + global.my_port;
 
-		var ts = new Date().getTime();
-
+		//data
+		stats.data = {};
+		stats.data.ts = new Date().getTime();
+		stats.data.process = {};
+		stats.data.process.memoryUsage = process.memoryUsage();
+		stats.data.process.pid = process.pid;
+		stats.data.process.platform = process.platform;
+		stats.data.process.title = process.title;
+		stats.data.process.arch = process.arch;
+		stats.data.process.config = process.config;
+		stats.data.process.env = process.env;
+		stats.data.process.uptime = process.uptime();
+		stats.data.process.hrtime = process.hrtime();
+		stats.data.process.execPath = process.execPath;
+		stats.data.process.execArgv = process.execArgv;
+		stats.data.process.argv = process.argv;
+		
 		var message = new Buffer(JSON.stringify(stats));
 		
 		client.send(message, 0, message.length, 3003, 'localhost', function(err, bytes) {
@@ -19,6 +34,7 @@ module.exports = function() {
 				throw err;	
 			}
 		});
+
 
 	}, hb_interval);
 };

@@ -1,7 +1,11 @@
 var fs = require('fs');
+var hb = require('heartbeat');
 
 global.my_port = 4102;
 global.my_host = 'localhost';
+
+//Start heartbeat
+hb();
 
 //Override hostname
 fs.readFile('../../host', 'utf8', function (err,data) {
