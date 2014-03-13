@@ -9,7 +9,7 @@ CREATE TABLE Service (
 	url VARCHAR(2048),
 	params TEXT,
 	status INT,
-	source_path VARCHAR(2048),
+	source_path VARCHAR(2048)
 );
 
 INSERT INTO Service(id, name, display_name, trust_level, host, port, url, params, status, source_path) VALUES
