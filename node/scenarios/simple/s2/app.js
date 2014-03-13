@@ -1,5 +1,5 @@
 var fs = require('fs');
-var hb = require('heartbeat');
+var hb = require('../../../heartbeat');
 
 global.my_port = 4102;
 global.my_host = 'localhost';

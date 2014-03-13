@@ -1,6 +1,5 @@
 var fs = require('fs');
-var hb = require('heartbeat');
-
+var hb = require('../../../heartbeat');
 
 global.my_port = 4101;
 global.my_host = 'localhost';
@@ -50,7 +49,7 @@ var get_deal = function(req, res){
 			body =  parseInt(body) + 3000;
 			res.send('Price is : ' + body);
 		}
-	});	
+	});
 };
 
 var ind = function(req, res){
