@@ -116,8 +116,12 @@ exports.toggle_service = function(req, res) {
 
 		if (svc_status == -1) {
 			var exec = require('child_process').exec;
-			chld_proc = exec(svc_exec, function callback(error, stdout, stderr){
-				console.log(stdout);
+			chld_proc = exec(svc_exec);
+			chld_proc.stdout.on('data', function (data) {
+			  console.log(data);
+			});
+			chld_proc.stderr.on('data', function (data) {
+			  console.log(data);
 			});
 			db.set_service_status(svc_id, chld_proc.pid);
 			res.redirect('/service_list');
