@@ -4,121 +4,121 @@ node app.js &
 cd -
 echo "Starting Service Monitor : DONE"
 
-echo "Starting Simple Proxy ..."
-cd scenarios/simple/s1
-node app.js &
-cd -
-cd scenarios/simple/s2
-node app.js &
-cd -
-echo "Starting Simple Proxy : DONE"
-
-echo "[Active] Starting Simple Proxy ..."
-cd scenarios/active/simple/s1
-node app.js &
-cd -
-cd scenarios/active/simple/s2
-node app.js &
-cd -
-echo "[Active] Starting Simple Proxy : DONE"
-
-echo "[Active] Starting DEMO ..."
-cd scenarios/active/demo/s1
-node app.js &
-cd -
-cd scenarios/active/demo/s2
-node app.js &
-cd -
-cd scenarios/active/demo/s3
-node app.js &
-cd -
-echo "[Active] Starting DEMO : DONE"
-
-echo "[Active] Starting DEMO: POST ..."
-cd scenarios/active/demo_post/s1
-node app.js &
-cd -
-cd scenarios/active/demo_post/s2
-node app.js &
-cd -
-echo "[Active] Starting DEMO: POST : DONE"
-
-
-echo "[Active] Starting DEMO: HTTPS ..."
-cd scenarios/active/demo_https/s1
-node app.js &
-cd -
-cd scenarios/active/demo_https/s2
-node app.js &
-cd -
-echo "[Active] Starting DEMO: HTTPS : DONE"
-
-echo "[Active] Starting DEMO: REDIRECT ..."
-cd scenarios/active/demo_redirect/s1
-node app.js &
-cd -
-cd scenarios/active/demo_redirect/s2
-node app.js &
-cd -
-cd scenarios/active/demo_redirect/s3
-node app.js &
-cd -
-echo "[Active] Starting DEMO: REDIRECT : DONE"
-
-echo "Starting Service Chain ..."
-cd scenarios/1/s1
-node app.js &
-cd -
-cd scenarios/1/s2
-node app.js &
-cd -
-cd scenarios/1/s3
-node app.js &
-cd -
-echo "Starting Service Chain : DONE"
-
-echo "Starting Service Facade ..."
-cd scenarios/2/s1
-node app.js &
-cd -
-cd scenarios/2/s2
-node app.js &
-cd -
-cd scenarios/2/s3
-node app.js &
-cd -
-echo "Starting Service Facade : DONE"
-
-
-echo "Starting 8 Service Chain ..."
-cd scenarios/3/s1
-node app.js &
-cd -
-cd scenarios/3/s2
-node app.js &
-cd -
-cd scenarios/3/s3
-node app.js &
-cd -
-cd scenarios/3/s4
-node app.js &
-cd -
-cd scenarios/3/s5
-node app.js &
-cd -
-cd scenarios/3/s6
-node app.js &
-cd -
-cd scenarios/3/s7
-node app.js &
-cd -
-cd scenarios/3/s8
-node app.js &
-cd -
-echo "Starting 8 Service Chain : DONE"
-
-cd scenarios/4/s1
-node app.js &
-cd -
-
-echo "System Started!"
+#echo "Starting Simple Proxy ..."
+#cd scenarios/simple/s1
+#node app.js &
+#cd -
+#cd scenarios/simple/s2
+#node app.js &
+#cd -
+#echo "Starting Simple Proxy : DONE"
+#
+#echo "[Active] Starting Simple Proxy ..."
+#cd scenarios/active/simple/s1
+#node app.js &
+#cd -
+#cd scenarios/active/simple/s2
+#node app.js &
+#cd -
+#echo "[Active] Starting Simple Proxy : DONE"
+#
+#echo "[Active] Starting DEMO ..."
+#cd scenarios/active/demo/s1
+#node app.js &
+#cd -
+#cd scenarios/active/demo/s2
+#node app.js &
+#cd -
+#cd scenarios/active/demo/s3
+#node app.js &
+#cd -
+#echo "[Active] Starting DEMO : DONE"
+#
+#echo "[Active] Starting DEMO: POST ..."
+#cd scenarios/active/demo_post/s1
+#node app.js &
+#cd -
+#cd scenarios/active/demo_post/s2
+#node app.js &
+#cd -
+#echo "[Active] Starting DEMO: POST : DONE"
+#
+#
+#echo "[Active] Starting DEMO: HTTPS ..."
+#cd scenarios/active/demo_https/s1
+#node app.js &
+#cd -
+#cd scenarios/active/demo_https/s2
+#node app.js &
+#cd -
+#echo "[Active] Starting DEMO: HTTPS : DONE"
+#
+#echo "[Active] Starting DEMO: REDIRECT ..."
+#cd scenarios/active/demo_redirect/s1
+#node app.js &
+#cd -
+#cd scenarios/active/demo_redirect/s2
+#node app.js &
+#cd -
+#cd scenarios/active/demo_redirect/s3
+#node app.js &
+#cd -
+#echo "[Active] Starting DEMO: REDIRECT : DONE"
+#
+#echo "Starting Service Chain ..."
+#cd scenarios/1/s1
+#node app.js &
+#cd -
+#cd scenarios/1/s2
+#node app.js &
+#cd -
+#cd scenarios/1/s3
+#node app.js &
+#cd -
+#echo "Starting Service Chain : DONE"
+#
+#echo "Starting Service Facade ..."
+#cd scenarios/2/s1
+#node app.js &
+#cd -
+#cd scenarios/2/s2
+#node app.js &
+#cd -
+#cd scenarios/2/s3
+#node app.js &
+#cd -
+#echo "Starting Service Facade : DONE"
+#
+#
+#echo "Starting 8 Service Chain ..."
+#cd scenarios/3/s1
+#node app.js &
+#cd -
+#cd scenarios/3/s2
+#node app.js &
+#cd -
+#cd scenarios/3/s3
+#node app.js &
+#cd -
+#cd scenarios/3/s4
+#node app.js &
+#cd -
+#cd scenarios/3/s5
+#node app.js &
+#cd -
+#cd scenarios/3/s6
+#node app.js &
+#cd -
+#cd scenarios/3/s7
+#node app.js &
+#cd -
+#cd scenarios/3/s8
+#node app.js &
+#cd -
+#echo "Starting 8 Service Chain : DONE"
+#
+#cd scenarios/4/s1
+#node app.js &
+#cd -
+#
+#echo "System Started!"

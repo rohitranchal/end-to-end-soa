@@ -3,6 +3,8 @@ var trust = require('../trust_algo');
 url = require('url');
 request = require('request');
 
+var start_service;
+
 exports.index = function(req, res){
 	// res.render('index');
 	res.redirect('/scenario_list');
@@ -32,7 +34,6 @@ exports.update_service_params = function(req, res) {
 		res.send('OK');
 	});
 };
-
 
 exports.store_heartbeat = function(msg) {
 	var stats = JSON.parse(msg);
@@ -106,14 +107,31 @@ exports.try_it = function(req, res) {
 	});
 };
 
-exports.stop_service = function(req, res) {
-	//TODO
-};
+exports.toggle_service = function(req, res) {
+	var svc_id = req.body.service_id;
 
-exports.start_service = function(req, res) {
-	//TODO
-};
+	db.get_service(svc_id, function(val){
+		var svc_status = val['status'];
+		var svc_exec = 'node ../' + val['source_path'] + '/app.js';
 
+		if (svc_status == -1) {
+			var exec = require('child_process').exec;
+			chld_proc = exec(svc_exec, function callback(error, stdout, stderr){
+				console.log(stdout);
+			});
+			db.set_service_status(svc_id, chld_proc.pid);
+			res.redirect('/service_list');
+		} else {
+			try {
+				process.kill(svc_status);
+			} catch(e) {
+				console.error(e + ' Exception: Killing process with pid: ' + svc_status);
+			}
+			db.set_service_status(svc_id, -1);
+			res.redirect('/service_list');
+		}
+	});
+};
 
 exports.add_service_show = function(req, res){
 	res.render('add_service_show', {});

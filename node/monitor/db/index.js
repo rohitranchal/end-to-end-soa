@@ -88,6 +88,11 @@ exports.set_service_trust_level = function(id, trust_level) {
 	});
 }
 
+exports.set_service_status = function(id, status_val) {
+	connection.query("UPDATE Service SET status= " + status_val + " WHERE id=" + id, function(err, rows, fields) {
+		if (err) throw err;
+	});
+}
 
 exports.add_interaction = function(from, to, start, end, from_pre, to_pre, from_post, to_post) {
 
@@ -149,7 +154,7 @@ exports.get_all_hb_items = function(cb) {
 	connection.query(sql, function(err, rows, fields) {
 		if (err) throw err;
 		cb(rows);
-	});	
+	});
 }
 
 exports.get_hb_item_data = function(id, cb) {
@@ -157,5 +162,5 @@ exports.get_hb_item_data = function(id, cb) {
 	connection.query(sql, function(err, rows, fields) {
 		if (err) throw err;
 		cb(rows);
-	});	
+	});
 }

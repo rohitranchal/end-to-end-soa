@@ -1,5 +1,7 @@
 html(lang="en")
 	include header
+	link(rel="stylesheet", href="./css/service_list.css")
+	script(src="./js/service_list.js")
 	body
 		include nav
 
@@ -10,13 +12,21 @@ html(lang="en")
 				div(class="panel-body")
 					div(class="row")
 						div(class="col-md-2")
+							td ID
+						div(class="col-md-2")
 							td Service
 						div(class="col-md-2")
 							td Configuration
 						div(class="col-md-2")
 							td Trust Level
+						div(class="col-md-2")
+								td Status
+						div(class="col-md-2")
+							td Start/Stop
 					for entry in entries
-						div(class="row")
+						div(class="row top-buffer")
+							div(class="col-md-2")
+								div=entry.id
 							div(class="col-md-2")
 								div=entry.display_name
 							div(class="col-md-2")
@@ -24,3 +34,8 @@ html(lang="en")
 									a(href=('./service?id=' + entry.id))=entry.name
 							div(class="col-md-2")
 								div=entry.trust_level
+							div(class="col-md-2")
+									div(id=entry.id, class="svc_data")=entry.status
+							div(class="col-md-2")
+								div
+									button(id="svc_" + entry.id, class="btn btn-success btn-sm") Start
