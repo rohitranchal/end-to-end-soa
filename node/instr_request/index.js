@@ -1,7 +1,15 @@
 var request = require('request');
 var dgram = require('dgram');
 
-var monitor = 'http://localhost:3000/interaction'
+
+var monitor_addr = 'localhost';
+if( typeof process.env.SVC_MONITOR_ADDR == 'string') {
+	monitor_addr = process.env.SVC_MONITOR_ADDR;
+	console.log('Found : ' + monitor_addr);
+}
+
+
+var monitor = 'http://' + monitor_addr + ':3000/interaction'
 var _req = request;
 var client = dgram.createSocket('udp4');
 /*

@@ -1,6 +1,14 @@
 var request = require('request');
 
-var monitor = 'http://localhost:3000/interaction_block'
+
+var monitor_addr = 'localhost';
+if( typeof process.env.SVC_MONITOR_ADDR == 'string') {
+	monitor_addr = process.env.SVC_MONITOR_ADDR;
+	console.log('Found : ' + monitor_addr);
+}
+
+
+var monitor = 'http://' + monitor_addr + ':3000/interaction_block'
 var _req = request;
 /*
  * Send given data to the monitor

@@ -4,6 +4,13 @@ var dgram = require('dgram');
 var hb_interval = 3000;
 var client = dgram.createSocket('udp4');
 
+var monitor_addr = 'localhost';
+if( typeof process.env.SVC_MONITOR_ADDR == 'string') {
+	monitor_addr = process.env.SVC_MONITOR_ADDR;
+	console.log('Found : ' + monitor_addr);
+}
+
+
 module.exports = function() {
 	setInterval(function() {
 
@@ -29,7 +36,7 @@ module.exports = function() {
 		
 		var message = new Buffer(JSON.stringify(stats));
 		
-		client.send(message, 0, message.length, 3003, 'localhost', function(err, bytes) {
+		client.send(message, 0, message.length, 3003, monitor_addr, function(err, bytes) {
 			if (err) {
 				throw err;	
 			}
