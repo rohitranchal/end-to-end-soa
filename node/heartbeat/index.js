@@ -7,7 +7,6 @@ var client = dgram.createSocket('udp4');
 var monitor_addr = 'localhost';
 if( typeof process.env.SVC_MONITOR_ADDR == 'string') {
 	monitor_addr = process.env.SVC_MONITOR_ADDR;
-	console.log('Found : ' + monitor_addr);
 }
 
 

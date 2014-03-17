@@ -149,10 +149,10 @@ exports.add_stat = function(service, data) {
 	});
 }
 
-exports.add_inflow_data = function(service, data) {
+exports.add_inflow_data = function(service, request_ts, data) {
 
-	var sql = "INSERT INTO Inflow_Data(service, data) " +
-				"VALUES ('" + service + "','" + data  + "')";
+	var sql = "INSERT INTO Inflow_Data(service, request_ts, data) " +
+				"VALUES ('" + service + "','" + request_ts + "','"+ data  + "')";
 	connection.query(sql, function(err, rows, fields) {
 		if (err) throw err;
 	});
@@ -177,6 +177,18 @@ exports.get_hb_item_data = function(id, cb) {
 
 exports.get_hb_service_data = function(service, cb) {
 	var sql = "SELECT * FROM Heartbeat_Data WHERE service='" + service + "'";
+	connection.query(sql, function(err, rows, fields) {
+		if (err) throw err;
+		cb(rows);
+	});
+}
+
+exports.inflow_service_req_rates = function(service, cb) {
+	var sql = "SELECT request_ts DIV 1000 as second, COUNT(*) as count" +
+				" FROM Inflow_Data " +
+				" WHERE service='" + service + "'" +
+				" GROUP BY request_ts DIV 1000 " +
+				" ORDER BY request_ts DIV 1000 DESC LIMIT 20";
 	connection.query(sql, function(err, rows, fields) {
 		if (err) throw err;
 		cb(rows);

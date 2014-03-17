@@ -42,7 +42,8 @@ exports.store_heartbeat = function(msg) {
 
 exports.store_inflow_data = function(msg) {
 	var stats = JSON.parse(msg);
-	db.add_inflow_data(stats.from, JSON.stringify(stats.data));
+
+	db.add_inflow_data(stats.from, stats.data.ts, JSON.stringify(stats.data));
 };
 
 
@@ -64,6 +65,12 @@ exports.hb_stats_service_view = function(req, res) {
 
 exports.hb_stats_service_data = function(req, res) {
 	db.get_hb_service_data(req.query.service, function(data) {
+		res.send(data);
+	});
+};
+
+exports.inflow_service_req_rates = function(req, res) {
+	db.inflow_service_req_rates(req.query.service, function(data) {
 		res.send(data);
 	});
 };

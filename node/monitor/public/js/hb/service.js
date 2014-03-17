@@ -25,5 +25,22 @@ $( document ).ready(function() {
 			title: 'Heap Memory Usage: Total'
 		});
 	});
+
+
+	$.get('/inflow_service_req_rates?service=' + $('#service').text(), function (data) {
+
+		//Chart arrays
+		var rates = new Array();
+
+		//populate chart data
+		for(var i = 0; i < data.length; i++) {
+			rates[i] = data[i].count;
+		}
+
+		//Render chart
+		var mem_plot = $.jqplot ('req_rate', [rates], {
+			title: 'Requests Per Second'
+		});
+	});
 	
 });

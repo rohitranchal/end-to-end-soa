@@ -70,6 +70,7 @@ app.get('/hb_stats', routes.hb_stats);
 app.get('/hb_stat_data', routes.hb_stat_data);
 app.get('/hb_stats_service_view', routes.hb_stats_service_view);
 app.get('/hb_stats_service_data', routes.hb_stats_service_data);
+app.get('/inflow_service_req_rates', routes.inflow_service_req_rates);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
