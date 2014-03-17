@@ -30,11 +30,11 @@ $( document ).ready(function() {
 	$.get('/inflow_service_req_rates?service=' + $('#service').text(), function (data) {
 
 		//Chart arrays
-		var rates = new Array();
+		var rates = new Array(20);
 
 		//populate chart data
 		for(var i = 0; i < data.length; i++) {
-			rates[i] = data[i].count;
+			rates[19-i] = data[i].count;
 		}
 
 		//Render chart
