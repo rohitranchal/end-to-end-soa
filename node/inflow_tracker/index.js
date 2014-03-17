@@ -9,7 +9,9 @@ module.exports = function(request, response, next) {
 	
 	//data
 	stats.data = {};
+	stats.data.ts = new Date().getTime();
 	stats.data.url = request.url;
+	stats.data.headers = request.headers;
 	var message = new Buffer(JSON.stringify(stats));
 	//TODO
 

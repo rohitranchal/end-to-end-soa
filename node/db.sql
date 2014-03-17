@@ -67,3 +67,12 @@ CREATE TABLE Heartbeat_Data (
 	data TEXT
 );
 
+
+DROP TABLE Inflow_Data;
+CREATE TABLE Inflow_Data (
+	id INT AUTO_INCREMENT PRIMARY KEY,
+	ts TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+	service VARCHAR(2028),
+	data TEXT
+);
+

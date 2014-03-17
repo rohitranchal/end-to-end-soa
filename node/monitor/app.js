@@ -114,8 +114,7 @@ inflow_data_server.on('listening', function () {
 	console.log('Inflow Tracker Listener on port : ' + address.port);
 });
 inflow_data_server.on('message', function (message, remote) {
-	console.log(message.toString());
-	//TODO
+	routes.store_inflow_data(message.toString());
 });
 inflow_data_server.bind(inflow_tracker_port, 'localhost');
 

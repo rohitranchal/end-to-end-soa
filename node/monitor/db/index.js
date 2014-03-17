@@ -149,6 +149,16 @@ exports.add_stat = function(service, data) {
 	});
 }
 
+exports.add_inflow_data = function(service, data) {
+
+	var sql = "INSERT INTO Inflow_Data(service, data) " +
+				"VALUES ('" + service + "','" + data  + "')";
+	connection.query(sql, function(err, rows, fields) {
+		if (err) throw err;
+	});
+}
+
+
 exports.get_all_hb_items = function(cb) {
 	var sql = "SELECT id, ts, service FROM Heartbeat_Data";
 	connection.query(sql, function(err, rows, fields) {

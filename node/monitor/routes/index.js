@@ -40,6 +40,12 @@ exports.store_heartbeat = function(msg) {
 	db.add_stat(stats.from, JSON.stringify(stats.data));
 };
 
+exports.store_inflow_data = function(msg) {
+	var stats = JSON.parse(msg);
+	db.add_inflow_data(stats.from, JSON.stringify(stats.data));
+};
+
+
 exports.hb_stats = function(req, res) {
 	db.get_all_hb_items(function(rows) {
 		res.render('hb/stats', {entries : rows});
