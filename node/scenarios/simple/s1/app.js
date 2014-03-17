@@ -4,13 +4,16 @@ var hb = require('../../../heartbeat');
 global.my_port = 4101;
 global.my_host = 'localhost';
 
+//Override hostname
+if(fs.existsSync('host')) {
+	fs.readSync('host', 'utf8', function (err,data) {
+		global.my_host = data;
+	});
+}
+
 //Start heartbeat
 hb();
 
-//Override hostname
-fs.readFile('../../host', 'utf8', function (err,data) {
-	global.my_host = data;
-});
 
 var express = require('express');
 var http = require('http');
