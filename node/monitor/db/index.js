@@ -164,3 +164,11 @@ exports.get_hb_item_data = function(id, cb) {
 		cb(rows);
 	});
 }
+
+exports.get_hb_service_data = function(service, cb) {
+	var sql = "SELECT * FROM Heartbeat_Data WHERE service='" + service + "'";
+	connection.query(sql, function(err, rows, fields) {
+		if (err) throw err;
+		cb(rows);
+	});
+}

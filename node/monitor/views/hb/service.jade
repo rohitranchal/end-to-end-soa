@@ -1,0 +1,28 @@
+html(lang="en")
+	include ../header
+	script(src="./js/hb/service.js")
+	script(src="./jqplot/jquery.jqplot.min.js")
+	script(src="./jqplot/plugins/jqplot.canvasTextRenderer.min.js")
+	script(src="./jqplot/plugins/jqplot.canvasAxisLabelRenderer.min.js")
+	link(rel="stylesheet", href="./jqplot/jquery.jqplot.min.css")
+	body
+		include ../nav
+		div(id="service", style="visibility:hidden;")=service
+		div(class="container")
+			div(class="panel panel-default text-center")
+				h2=service
+			div(class="panel panel-default")
+				div(class="panel-head text-center")
+					h3 General
+				div(class="panel-body")
+					div(id="uptime")
+			div(class="panel panel-default")
+				div(class="panel-head text-center")
+					h3 Memory
+				div(class="panel-body")
+					div(class="row")
+						div(id="mem" style="height:300px; width:500px;")
+					div(class="row")
+						div(id="mem_used" style="height:300px; width:500px;")
+					div(class="row")
+						div(id="mem_total" style="height:300px; width:500px;")

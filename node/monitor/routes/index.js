@@ -42,17 +42,25 @@ exports.store_heartbeat = function(msg) {
 
 exports.hb_stats = function(req, res) {
 	db.get_all_hb_items(function(rows) {
-		res.render('hb_stats', {entries : rows});
+		res.render('hb/stats', {entries : rows});
 	});
 };
 
 exports.hb_stat_data = function(req, res) {
 	db.get_hb_item_data(req.query.id, function(data) {
-		// res.render('hb_item', {entry : data});
 		res.send(data);
 	});
 };
 
+exports.hb_stats_service_view = function(req, res) {
+	res.render('hb/service', {service : req.query.service});
+};
+
+exports.hb_stats_service_data = function(req, res) {
+	db.get_hb_service_data(req.query.service, function(data) {
+		res.send(data);
+	});
+};
 
 ///////////////////////////////////////////////////////////////////////////////
 ////////////TRUST RELATED

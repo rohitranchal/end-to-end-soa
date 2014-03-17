@@ -11,7 +11,7 @@ html(lang="en")
 			div(class="panel panel-default")
 				div(class="panel-body")
 					div(class="row")
-						div(class="col-md-2")
+						div(class="col-md-1")
 							td ID
 						div(class="col-md-2")
 							td Service
@@ -23,9 +23,11 @@ html(lang="en")
 								td Status
 						div(class="col-md-2")
 							td Start/Stop
+						div(class="col-md-1")
+							td Stats
 					for entry in entries
 						div(class="row top-buffer")
-							div(class="col-md-2")
+							div(class="col-md-1")
 								div=entry.id
 							div(class="col-md-2")
 								div=entry.display_name
@@ -39,3 +41,6 @@ html(lang="en")
 							div(class="col-md-2")
 								div
 									button(id="svc_" + entry.id, class="btn btn-success btn-sm") Start
+							div(class="col-md-1")
+									div
+										a(href=('./hb_stats_service_view?service=' + entry.name)) Stats
