@@ -15,6 +15,7 @@ var app = express();
 
 var passive_port = 3001;
 var heartbeat_port = 3003;
+var inflow_tracker_port = 3004;
 
 // all environments
 app.set('port', process.env.PORT || 3000);
@@ -31,6 +32,8 @@ app.use(express.json());
 app.use(express.urlencoded());
 app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));
+
+
 
 // development only
 if ('development' == app.get('env')) {
@@ -99,4 +102,20 @@ hb_server.on('message', function (message, remote) {
 	routes.store_heartbeat(message.toString());
 });
 hb_server.bind(heartbeat_port, 'localhost');
+
+
+///////////////////////////////////////////////////////////////////////////////
+//                  Inflow Tracker Listner
+///////////////////////////////////////////////////////////////////////////////
+var inflow_data_server = dgram.createSocket('udp4');
+
+inflow_data_server.on('listening', function () {
+	var address = inflow_data_server.address();
+	console.log('Inflow Tracker Listener on port : ' + address.port);
+});
+inflow_data_server.on('message', function (message, remote) {
+	console.log(message.toString());
+	//TODO
+});
+inflow_data_server.bind(inflow_tracker_port, 'localhost');
 

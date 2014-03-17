@@ -1,5 +1,6 @@
 var fs = require('fs');
 var hb = require('../../../heartbeat');
+var inflow_tracker = require('../../../inflow_tracker');
 
 global.my_port = 4102;
 global.my_host = 'localhost';
@@ -32,6 +33,7 @@ app.use(express.urlencoded());
 app.use(express.methodOverride());
 app.use(express.cookieParser('your secret here'));
 app.use(express.session());
+app.use(inflow_tracker);
 app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));
 
