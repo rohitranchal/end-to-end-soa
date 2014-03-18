@@ -4,7 +4,6 @@ $( document ).ready(function() {
 	$('.svc_data').each(function() {
 		var status_val = $(this).text();
 		if(status_val != -1) {
-			console.log(this.id);
 			$('#svc_' + this.id).text('Stop');
 			$('#svc_' + this.id).removeClass('btn-primary').addClass('btn-danger');
 		}
