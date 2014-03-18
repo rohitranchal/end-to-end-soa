@@ -24,7 +24,7 @@ html(lang="en")
 								for service in services
 									div(class="w", id="service" + service.id)=service.display_name
 										div(style="color:red")
-											strong=service.trust_level 
+											strong=service.trust_level
 										div(class="ep")
 			div(class="col-md-4")
 				div(class="panel panel-default")
@@ -43,10 +43,17 @@ html(lang="en")
 						div(class="input-group")
 							for service in services
 								div(class="row top-buffer")
-									div(class="col-md-6")=service.display_name
-									div(class="col-md-6")
+									div(id=service.status, class="col-md-2 svc_status")=service.status
+									div(id=service.status + "_" + service.id, class="col-md-5 svc_name")=service.display_name
+									div(class="col-md-5")
 										div(class="slider", id=service.id value=service.trust_level)
 							div(class="row top-buffer")
-								div(class="col-md-6")
-								div(class="col-md-6")
-									button(id="btn_update_tl", class="btn btn-default") Update
+								center
+									div(class="col-md-6")
+										div
+											button(id="btn_toggle_svc", class="btn btn-danger svc_toggle") Stop
+									div(class="col-md-6")
+										button(id="btn_update_tl", class="btn btn-default") Update
+
+
+
