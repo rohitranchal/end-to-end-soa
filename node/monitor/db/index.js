@@ -53,7 +53,6 @@ exports.get_services = function(cb) {
 	});
 }
 
-
 exports.get_service_data = function(name, cb) {
 	connection.query("SELECT id, trust_level, params FROM Service WHERE name='" + name + "'", function(err, rows, fields) {
 		if (err) throw err;

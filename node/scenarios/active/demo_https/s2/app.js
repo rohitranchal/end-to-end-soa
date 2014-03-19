@@ -5,9 +5,11 @@ global.my_port = 6107;
 global.my_host = 'localhost';
 
 //Override hostname
-fs.readFile('../../../host', 'utf8', function (err,data) {
-	global.my_host = data;
-});
+if(fs.existsSync('host')) {
+  fs.readSync('host', 'utf8', function (err,data) {
+    global.my_host = data;
+  });
+}
 
 var private_key = fs.readFileSync('./keys/privatekey.pem').toString();
 var certificate = fs.readFileSync('./keys/certificate.pem').toString();

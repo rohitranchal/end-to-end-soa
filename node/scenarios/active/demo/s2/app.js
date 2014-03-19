@@ -4,9 +4,11 @@ global.my_port = 6104;
 global.my_host = 'localhost';
 
 //Override hostname
-fs.readFile('../../../host', 'utf8', function (err,data) {
-	global.my_host = data;
-});
+if(fs.existsSync('host')) {
+  fs.readSync('host', 'utf8', function (err,data) {
+    global.my_host = data;
+  });
+}
 
 var express = require('express');
 var routes = require('./routes');
