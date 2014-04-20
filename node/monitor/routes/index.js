@@ -237,7 +237,6 @@ function update_trust_level(from, to, i_meta) {
 		trust.update(from, to, function(f_new_tv, t_new_tv) {
 			if(typeof t_new_tv == 'undefined') {
 				t_new_tv = to.trust_level;
-				f_new_tv = from.trust_level;
 			}
 			//Add interaction with metadata
 			db.add_interaction(from.id, to.id, i_meta.start_time, i_meta.end_time,
