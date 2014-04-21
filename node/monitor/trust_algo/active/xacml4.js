@@ -70,13 +70,10 @@ var auth = function(from, to, id, cb) {
 
 	var builder = new xml2js.Builder();
 	var req_xml = builder.buildObject(req);
-
-	console.log(req_xml);
 	
 	//Write policy to a tmp file
 	var tmp_policy_file = '/tmp/' + uuid.v4();
 	fs.writeFileSync(tmp_policy_file, policy_text);
-	console.log(tmp_policy_file);
 
 	ac.evaluate(tmp_policy_file, req_xml, function(err, result) {
 		if(err) {
