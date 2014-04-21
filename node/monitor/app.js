@@ -86,9 +86,10 @@ passive_server.on('listening', function () {
   console.log('Passive Listener on port : ' + address.port);
 });
 passive_server.on('message', function (message, remote) {
+	console.log(message.toString());
   routes.interaction(message.toString());
 });
-passive_server.bind(passive_port, 'localhost');
+passive_server.bind(passive_port, '0.0.0.0');
 
 ///////////////////////////////////////////////////////////////////////////////
 //                  Heartbeat Listner
@@ -102,7 +103,7 @@ hb_server.on('listening', function () {
 hb_server.on('message', function (message, remote) {
 	routes.store_heartbeat(message.toString());
 });
-hb_server.bind(heartbeat_port, 'localhost');
+hb_server.bind(heartbeat_port, '0.0.0.0');
 
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -117,5 +118,5 @@ inflow_data_server.on('listening', function () {
 inflow_data_server.on('message', function (message, remote) {
 	routes.store_inflow_data(message.toString());
 });
-inflow_data_server.bind(inflow_tracker_port, 'localhost');
+inflow_data_server.bind(inflow_tracker_port, '0.0.0.0');
 
