@@ -23,7 +23,10 @@ var path = require('path');
 var app = express();
 
 global.eval_interaction = function(target, start, end, restuls) {
-	restuls(0.5, 1);
+	var feedback = {};
+	feedback.satisfaction = 0.5;
+	feedback.weight = 1;
+	restuls(feedback);
 };
 
 var request = require('request');
