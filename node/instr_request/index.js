@@ -45,8 +45,14 @@ module.exports = function() {
 
 		sm_data.start = start;
 		sm_data.end = end;
-		//this is async
-		sm_log(sm_data);
+		global.eval_interaction(sm_data.to, start, end, function(statis, weight) {
+			sm_data.statis = statis;
+			sm_data.weight = weight;
+			console.log(sm_data);
+			//this is async
+			sm_log(sm_data);	
+		});
+		
 	};
 
 	arguments[1] = profiling_cb;

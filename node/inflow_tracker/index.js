@@ -17,6 +17,13 @@ module.exports = function(request, response, next) {
 	stats.data.ts = new Date().getTime();
 	stats.data.url = request.url;
 	stats.data.headers = request.headers;
+	stats.data.cookies = request.cookies;
+	stats.data.from = request.ip;
+	stats.data.ips = request.ips;
+	stats.data.xhr = request.xhr;
+	stats.data.protocol = request.protocol;
+	
+
 	var message = new Buffer(JSON.stringify(stats));
 	//TODO
 

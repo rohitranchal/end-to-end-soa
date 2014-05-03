@@ -22,6 +22,10 @@ var path = require('path');
 
 var app = express();
 
+global.eval_interaction = function(target, start, end, restuls) {
+	restuls(0.5, 1);
+};
+
 var request = require('request');
 global.my_url = 'http://' + global.my_host + ':' + global.my_port;
 
