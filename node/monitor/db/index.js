@@ -1,4 +1,5 @@
 var mysql      = require('mysql');
+var uuid			 = require('node-uuid');
 var connection = mysql.createConnection({
 	host     : 'localhost',
 	user     : 'root',
@@ -93,7 +94,15 @@ exports.set_service_status = function(id, status_val) {
 	});
 }
 
-exports.add_interaction = function(from, to, start, end, from_pre, to_pre, from_post, to_post) {
+exports.add_interaction = function(from, to, start, end, data, feedback, cb) {
+
+	if(typeof from == 'undefined') {
+		from = null;
+	}
+
+	if(typeof to == 'undefined') {
+		to = null;
+	}
 
 	if(typeof start == 'undefined') {
 		start = null;
@@ -103,30 +112,30 @@ exports.add_interaction = function(from, to, start, end, from_pre, to_pre, from_
 		end = null;
 	}
 
-	if(typeof from_pre == 'undefined') {
-		from_pre = null;
+	if(typeof data == 'undefined') {
+		data = null;
 	}
 
-	if(typeof to_pre == 'undefined') {
-		to_pre = null;
+	if(typeof feedback == 'undefined') {
+		feedback = null;
 	}
 
-	if(typeof from_post == 'undefined') {
-		from_post = null;
-	}
+	var interaction_id = uuid.v4();
 
-	if(typeof to_post == 'undefined') {
-		to_post = null;
-	}
-
-	var sql = "INSERT INTO Interaction(from_service, to_service, start, end," +
-					"from_service_trust_level_pre, to_service_trust_level_pre, from_service_trust_level_post, " +
-					"to_service_trust_level_post) " +
+	var sql = "INSERT INTO Interaction(id, from_service, to_service, start, end," +
+					"data, feedback) " +
 				"VALUES ('" +
-					from + "','" + to  + "'," +  start  + "," + end + "," +
-					from_pre + "," + to_pre + "," + from_post + "," + to_post + ")";
+					interaction_id + "','" + from + "','" + to  + "'," +  start  + "," + end + ",'" +
+					data + "','" + feedback + "')";
+	console.log("\n\n\n" + sql + "\n\n\n");
 	connection.query(sql, function(err, rows, fields) {
-		if (err) throw err;
+		if (err) {
+			throw err;
+		} else {
+
+			// get interaction id here
+			cb(interaction_id);
+		}
 	});
 }
 
@@ -148,10 +157,10 @@ exports.add_stat = function(service, data) {
 	});
 }
 
-exports.add_inflow_data = function(service, request_ts, data) {
+exports.add_inflow_data = function(service, request_ts, from_ip, protocol, data) {
 
-	var sql = "INSERT INTO Inflow_Data(service, request_ts, data) " +
-				"VALUES ('" + service + "','" + request_ts + "','"+ data  + "')";
+	var sql = "INSERT INTO Inflow_Data(service, request_ts, from_ip, protocol, data) " +
+				"VALUES ('" + service + "','" + request_ts + "','" + from_ip + "','" + protocol + "','" + data  + "')";
 	connection.query(sql, function(err, rows, fields) {
 		if (err) throw err;
 	});

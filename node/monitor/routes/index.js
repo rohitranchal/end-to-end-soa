@@ -43,7 +43,7 @@ exports.store_heartbeat = function(msg) {
 exports.store_inflow_data = function(msg) {
 	var stats = JSON.parse(msg);
 
-	db.add_inflow_data(stats.from, stats.data.ts, JSON.stringify(stats.data));
+	db.add_inflow_data(stats.from, stats.data.ts, stats.data.from, stats.data.protocol, JSON.stringify(stats.data));
 };
 
 
@@ -189,7 +189,8 @@ exports.interaction = function(msg){
 	msg = JSON.parse(msg);
 	var from  = msg.from;
 	var to  = msg.to;
-	var data = msg.data;
+	var data = JSON.stringify(msg.data);
+	var feedback = JSON.stringify(msg.service_feedback);
 
 	//Interaction metadata
 	var i_meta = {};
@@ -214,37 +215,20 @@ exports.interaction = function(msg){
 			from.data = data; //Setting data if there's any
 			to.id = to_id;
 
-			from.trust_level = from_tl;
-			to.trust_level = to_tl;
-			from.params = JSON.parse(from_params);
-			to.params = JSON.parse(to_params);
-
-			update_trust_level(from, to, i_meta);
-
+			//Add interaction
+			db.add_interaction(from.id, to.id, i_meta.start_time, i_meta.end_time, data, feedback, function(interaction_id) {
+				update_trust_level(from, to, i_meta, interaction_id);
+			});
 		});
 	});
 };
 
 
 function update_trust_level(from, to, i_meta) {
-	//We are recording both the attempt of an interaction and
-	//the actual interaction details.
-	//when the actual interaction happens, i_meta will contain
-	//a start and an end time
-	if(i_meta.start_time != null) {
-		//Interaction actually happened
-		//Do trust levels update
-		trust.update(from, to, function(f_new_tv, t_new_tv) {
-			if(typeof t_new_tv == 'undefined') {
-				t_new_tv = to.trust_level;
-			}
-			//Add interaction with metadata
-			db.add_interaction(from.id, to.id, i_meta.start_time, i_meta.end_time,
-				from.trust_level, to.trust_level , f_new_tv, t_new_tv);
-		});
-	} else {
-		db.add_interaction(from.id, to.id);
-	}
+	// trust.update(from, to, function(f_new_tv, t_new_tv) {
+	// 	if(typeof t_new_tv == 'undefined') {
+	// 		t_new_tv = to.trust_level;
+	// 	}
 }
 
 exports.interaction_block = function(req, res){
@@ -253,6 +237,7 @@ exports.interaction_block = function(req, res){
 	var start  = req.query.start;
 	var end  = req.query.end;
 	var data = req.query.data;
+	var feedback = req.query.feedback;
 
 	if(typeof start == 'undefined') {
 		start = null;
@@ -281,8 +266,7 @@ exports.interaction_block = function(req, res){
 			to.params = JSON.parse(to_params);
 
 			if(start != null) { //When we get confirmation
-				//Update trust level
-				trust.update_block(from, to);
+
 				//Reaching here means access was permitted
 				res.send('OK');
 			} else {
@@ -307,7 +291,12 @@ exports.interaction_block = function(req, res){
 				});
 			}
 			console.log('from: ' + from_id + ' to: ' + to_id + ' start: ' + start);
-			db.add_interaction(from_id, to_id, start, end);
+			db.add_interaction(from_id, to_id, start, end, data, feedback, function(interaction_id) {
+
+				//Update trust level
+				//trust.update_block(from, to, interaction_id);
+				update_trust_level(from, to, interaction_id);
+			});
 		});
 	});
 };

@@ -42,7 +42,7 @@ INSERT INTO Service(id, name, display_name, trust_level, host, port, url, params
 
 DROP TABLE Interaction;
 CREATE TABLE Interaction (
-  id INT AUTO_INCREMENT PRIMARY KEY,
+  id VARCHAR(512) PRIMARY KEY,
   from_service INT,
   to_service INT,
   start BIGINT,
