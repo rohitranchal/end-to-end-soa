@@ -29,7 +29,7 @@ global.eval_interaction = function(target, start, end, restuls) {
 	restuls(feedback);
 };
 
-var request = require('request');
+var request = require('../../../instr_request');
 global.my_url = 'http://' + global.my_host + ':' + global.my_port;
 
 // all environments
