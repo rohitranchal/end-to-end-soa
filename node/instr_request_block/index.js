@@ -59,7 +59,7 @@ var my_req = function() {
 
 				//Obtain service feedback
 				global.eval_interaction(sm_data.to, start, end, function(service_feedback) {
-					sm_data.service_feedback = service_feedback;
+					sm_data[sm_data.length] = new Array('service_feedback', JSON.stringify(service_feedback));
 
 					console.log(sm_data);
 
@@ -102,7 +102,7 @@ my_req.post = function() {
 
 				//Obtain service feedback
 				global.eval_interaction(sm_data.to, start, end, function(service_feedback) {
-					sm_data.service_feedback = service_feedback;
+					sm_data[sm_data.length] = new Array('service_feedback', JSON.stringify(service_feedback));
 
 					console.log(sm_data);
 
