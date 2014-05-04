@@ -20,6 +20,14 @@ var app = express();
 var request = require('../../../../instr_request_block');
 global.my_url = 'http://' + global.my_host + ':' + global.my_port;
 
+global.eval_interaction = function(target, start, end, restuls) {
+	var feedback = {};
+	feedback.satisfaction = 0.5;
+	feedback.weight = 1;
+	restuls(feedback);
+};
+
+
 // all environments
 app.set('port', process.env.PORT || global.my_port);
 app.set('views', path.join(__dirname, 'views'));

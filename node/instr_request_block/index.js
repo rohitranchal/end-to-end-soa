@@ -9,10 +9,10 @@ if( typeof process.env.SVC_MONITOR_ADDR == 'string') {
 
 var monitor = 'http://' + monitor_addr + ':3000/interaction_block'
 var _req = request;
+
 /*
  * Send given data to the monitor
  */
-
 function sm_log(data, callback) {
 
 	var msg = '?';
@@ -53,7 +53,25 @@ var my_req = function() {
 			sm_data[2] = new Array('start', start);
 			sm_data[3] = new Array('end', end);
 			console.log('log data: ' + JSON.stringify(sm_data));
-			sm_log(sm_data); //We don't care about the result here
+
+			//If the service provides any feedback about the interaction
+			if (typeof global.eval_interaction !== 'undefined') {
+
+				//Obtain service feedback
+				global.eval_interaction(sm_data.to, start, end, function(service_feedback) {
+					sm_data.service_feedback = service_feedback;
+
+					console.log(sm_data);
+
+					//this is async
+					sm_log(sm_data);
+				});
+			} else {
+
+				//No service feedback about interaction
+				sm_log(sm_data);
+			}
+
 		} else {
 			_args[1](error, response, body);
 			return;
@@ -78,7 +96,25 @@ my_req.post = function() {
 
 			sm_data[sm_data.length] = new Array('start', start);
 			sm_data[sm_data.length] = new Array('end', end);
-			sm_log(sm_data); //We don't care about the result here
+
+			//If the service provides any feedback about the interaction
+			if (typeof global.eval_interaction !== 'undefined') {
+
+				//Obtain service feedback
+				global.eval_interaction(sm_data.to, start, end, function(service_feedback) {
+					sm_data.service_feedback = service_feedback;
+
+					console.log(sm_data);
+
+					//this is async
+					sm_log(sm_data);
+				});
+			} else {
+
+				//No service feedback about interaction
+				sm_log(sm_data);
+			}
+
 		} else {
 			_args[2](error, response, body);
 			return;
