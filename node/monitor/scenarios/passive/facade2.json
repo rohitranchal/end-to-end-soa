@@ -1,8 +1,0 @@
-{
-	"id" : 5,
-	"access_url" : "http://localhost:4117/get_deal",
-	"description" : "s1 -> s2, s1 -> s3, s1 -> s4 ...",
-	"name": "Facade 2",
-	"services" : [17, 2, 4, 5, 8, 16],
-	"connections" :[[17, 2] , [17, 4], [17, 5], [17, 8], [17, 16]]
-}
