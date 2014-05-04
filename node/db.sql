@@ -35,36 +35,33 @@ INSERT INTO Service(id, name, display_name, trust_level, host, port, url, params
 (32, 'localhost:6112','localhost:6112', 10.0, 'localhost', 6112, 'http://localhost:6112', '{"Status":"Backup service"}', -1, 'scenarios/active/demo_redirect/s3');
 
 
-
 DROP TABLE Interaction;
 CREATE TABLE Interaction (
-	id INT AUTO_INCREMENT PRIMARY KEY,
-	from_service INT,
-	to_service INT,
-	from_service_trust_level_pre FLOAT,
-	to_service_trust_level_pre FLOAT,
-	from_service_trust_level_post FLOAT,
-	to_service_trust_level_post FLOAT,
-	start BIGINT,
-	end BIGINT,
-	ts TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  from_service INT,
+  to_service INT,
+  start BIGINT,
+  end BIGINT,
+  data TEXT,
+  feedback TEXT,
+  ts TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 DROP TABLE Heartbeat_Data;
 CREATE TABLE Heartbeat_Data (
-	id INT AUTO_INCREMENT PRIMARY KEY,
-	ts TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-	service VARCHAR(2028),
-	data TEXT
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  ts TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  service VARCHAR(2048),
+  data TEXT
 );
-
 
 DROP TABLE Inflow_Data;
 CREATE TABLE Inflow_Data (
-	id INT AUTO_INCREMENT PRIMARY KEY,
-	ts TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-	request_ts LONG,
-	service VARCHAR(2028),
-	data TEXT
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  ts TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  request_ts LONG,
+  service VARCHAR(2048),
+  from_ip VARCHAR(2048),
+  protocol VARCHAR(1024),
+  data TEXT
 );
-
