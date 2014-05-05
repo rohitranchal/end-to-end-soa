@@ -7,7 +7,7 @@ CREATE TABLE Service (
 	id INT AUTO_INCREMENT PRIMARY KEY,
 	name VARCHAR(2048),
 	display_name VARCHAR(2048),
-	trust_level FLOAT,
+	grade FLOAT,
 	host VARCHAR(2048),
 	port INT,
 	url VARCHAR(2048),
@@ -16,7 +16,7 @@ CREATE TABLE Service (
 	source_path VARCHAR(2048)
 );
 
-INSERT INTO Service(id, name, display_name, trust_level, host, port, url, params, status, source_path) VALUES
+INSERT INTO Service(id, name, display_name, grade, host, port, url, params, status, source_path) VALUES
 (1, 'localhost:4101','localhost:4101', 10.0, 'localhost', 4101, 'http://localhost:4101', '{}', -1, 'scenarios/simple/s1'),
 (2, 'localhost:4102','localhost:4102', 5.0, 'localhost', 4102, 'http://localhost:4102', '{}', -1, 'scenarios/simple/s2'),
 (3, 'localhost:4103','localhost:4103', 10.0, 'localhost', 4103, 'http://localhost:4103', '{}', -1, 'scenarios/1/s1'),

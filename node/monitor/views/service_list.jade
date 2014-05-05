@@ -18,7 +18,7 @@ html(lang="en")
 						div(class="col-md-2")
 							td Configuration
 						div(class="col-md-2")
-							td Trust Level
+							td Grade
 						div(class="col-md-2")
 								td Status
 						div(class="col-md-2")
@@ -35,7 +35,7 @@ html(lang="en")
 								div
 									a(href=('./service?id=' + entry.id))=entry.name
 							div(class="col-md-2")
-								div=entry.trust_level
+								div=entry.grade
 							div(class="col-md-2")
 									div(id=entry.id, class="svc_data")=entry.status
 							div(class="col-md-2")
