@@ -41,52 +41,52 @@ INSERT INTO Service(id, name, display_name, trust_level, host, port, url, params
 
 DROP TABLE IF EXISTS Service_Trust;
 CREATE TABLE Service_Trust (
-  service_id INT NOT NULL,
-  trust_module VARCHAR(512) NOT NULL,
-  trust_level FLOAT,
-  last_updated TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY(service_id, trust_module)
+	service_id INT NOT NULL,
+	trust_module VARCHAR(512) NOT NULL,
+	trust_level FLOAT,
+	last_updated TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+	PRIMARY KEY(service_id, trust_module)
 );
 
 DROP TABLE IF EXISTS Interaction;
 CREATE TABLE Interaction (
-  id VARCHAR(512) PRIMARY KEY,
-  from_service INT,
-  to_service INT,
-  start BIGINT,
-  end BIGINT,
-  data TEXT,
-  feedback TEXT,
-  ts TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+	id VARCHAR(512) PRIMARY KEY,
+	from_service INT,
+	to_service INT,
+	start BIGINT,
+	end BIGINT,
+	data TEXT,
+	feedback TEXT,
+	ts TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 DROP TABLE IF EXISTS Interaction_Trust;
 CREATE TABLE Interaction_Trust (
-  interaction_id VARCHAR(512) NOT NULL,
-  trust_module VARCHAR(512) NOT NULL,
-  from_pre FLOAT,
-  from_post FLOAT,
-  to_pre FLOAT,
-  to_post FLOAT,
-  ts TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+	interaction_id VARCHAR(512) NOT NULL,
+	trust_module VARCHAR(512) NOT NULL,
+	from_pre FLOAT,
+	from_post FLOAT,
+	to_pre FLOAT,
+	to_post FLOAT,
+	ts TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 
 DROP TABLE IF EXISTS Heartbeat_Data;
 CREATE TABLE Heartbeat_Data (
-  id INT AUTO_INCREMENT PRIMARY KEY,
-  ts TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  service VARCHAR(2048),
-  data TEXT
+	id INT AUTO_INCREMENT PRIMARY KEY,
+	ts TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+	service VARCHAR(2048),
+	data TEXT
 );
 
 DROP TABLE IF EXISTS  Inflow_Data;
 CREATE TABLE Inflow_Data (
-  id INT AUTO_INCREMENT PRIMARY KEY,
-  ts TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  request_ts LONG,
-  service VARCHAR(2048),
-  from_ip VARCHAR(2048),
-  protocol VARCHAR(1024),
-  data TEXT
+	id INT AUTO_INCREMENT PRIMARY KEY,
+	ts TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+	request_ts LONG,
+	service VARCHAR(2048),
+	from_ip VARCHAR(2048),
+	protocol VARCHAR(1024),
+	data TEXT
 );

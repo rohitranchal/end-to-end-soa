@@ -39,5 +39,3 @@ var moving_avg_trust = function moving_avg_trust_update(interaction_id) {
 };
 
 module.exports = {name : module_name, alg : moving_avg_trust};
-
-
