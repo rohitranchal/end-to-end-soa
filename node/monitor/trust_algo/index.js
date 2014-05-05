@@ -64,12 +64,15 @@ exports.get_default_algo = function(cb) {
 	cb(default_trust_algo);
 };
 
-//Call cb with the new trust value of 'from'
-exports.update = function(from, to, callback) {
+
+/*
+Update registered trust algorithms with the given interaction 
+*/
+exports.update = function(interaction_id) {
 	for(var i = 0; i < default_trust_algo.length; i++) {
 		//Call each enabled algo
 		algorithm = passive_algos[default_trust_algo[i]];
-		algorithm.alg(from, to, callback); //Call
+		algorithm.alg(interaction_id); //Call
 	}
 };
 
@@ -111,13 +114,6 @@ exports.authorize = function(from, to, callback) {
 		algorithm.authorize(from, to, i, authz_status);
 	}
 
-};
-
-exports.update_block = function(from, to, callback) {
-	for(var i = 0; i < default_active_trust_algo.length; i++) {
-		algorithm = active_algos[default_active_trust_algo[i]];
-		algorithm.alg(from, to);
-	}
 };
 
 

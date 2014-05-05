@@ -3,7 +3,6 @@ CREATE DATABASE IF NOT EXISTS soa_trust;
 USE soa_trust;
 
 DROP TABLE IF EXISTS Service;
-
 CREATE TABLE Service (
 	id INT AUTO_INCREMENT PRIMARY KEY,
 	name VARCHAR(2048),
@@ -40,7 +39,16 @@ INSERT INTO Service(id, name, display_name, trust_level, host, port, url, params
 (32, 'localhost:6112','localhost:6112', 10.0, 'localhost', 6112, 'http://localhost:6112', '{"Status":"Backup service"}', -1, 'scenarios/active/demo_redirect/s3');
 
 
-DROP TABLE Interaction;
+DROP TABLE IF EXISTS Service_Trust;
+CREATE TABLE Service_Trust (
+  service_id INT NOT NULL,
+  trust_module VARCHAR(512) NOT NULL,
+  trust_level FLOAT,
+  last_updated TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY(service_id, trust_module)
+);
+
+DROP TABLE IF EXISTS Interaction;
 CREATE TABLE Interaction (
   id VARCHAR(512) PRIMARY KEY,
   from_service INT,
@@ -52,7 +60,19 @@ CREATE TABLE Interaction (
   ts TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
-DROP TABLE Heartbeat_Data;
+DROP TABLE IF EXISTS Interaction_Trust;
+CREATE TABLE Interaction_Trust (
+  interaction_id VARCHAR(512) NOT NULL,
+  trust_module VARCHAR(512) NOT NULL,
+  from_pre FLOAT,
+  from_post FLOAT,
+  to_pre FLOAT,
+  to_post FLOAT,
+  ts TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+
+DROP TABLE IF EXISTS Heartbeat_Data;
 CREATE TABLE Heartbeat_Data (
   id INT AUTO_INCREMENT PRIMARY KEY,
   ts TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -60,7 +80,7 @@ CREATE TABLE Heartbeat_Data (
   data TEXT
 );
 
-DROP TABLE Inflow_Data;
+DROP TABLE IF EXISTS  Inflow_Data;
 CREATE TABLE Inflow_Data (
   id INT AUTO_INCREMENT PRIMARY KEY,
   ts TIMESTAMP DEFAULT CURRENT_TIMESTAMP,

@@ -54,18 +54,13 @@ exports.get_services = function(cb) {
 	});
 }
 
-exports.get_service_data = function(name, cb) {
-	connection.query("SELECT id, trust_level, params FROM Service WHERE name='" + name + "'", function(err, rows, fields) {
+exports.get_service_id = function(name, cb) {
+	connection.query("SELECT id FROM Service WHERE name='" + name + "'", function(err, rows, fields) {
 		if (err) throw err;
-		cb(rows[0].id, rows[0].trust_level, rows[0].params);
+		cb(rows[0].id);
 	});
 }
 
-exports.reset_trust_levels = function(value) {
-	connection.query("UPDATE Service SET trust_level = " + value, function(err, rows, fields) {
-		if (err) throw err;
-	});
-}
 
 exports.update_service_params = function(sid, val, done) {
 	var sql = "UPDATE Service SET params ='" + val + "' WHERE id=" + sid;
@@ -75,13 +70,35 @@ exports.update_service_params = function(sid, val, done) {
 	});
 }
 
+exports.get_service_trust_level_for_module = function(id, trust_module, cb) {
+	connection.query("SELECT trust_level FROM Service_Trust WHERE service_id=" + id + " AND trust_module = '" + trust_module + "'", function(err, rows, fields) {
+		if (err) throw err;
+		if(rows.length == 0) {
+			cb(-1);
+		} else {
+			cb(rows[0]);
+		}
+	});
+}
+
+exports.set_service_trust_level_for_module = function(id, trust_module, trust_level) {
+	var sql = "INSERT INTO Service_Trust(service_id, trust_module, trust_level, last_updated) " +
+				"VALUES (" + id + " ,'" + trust_module + "', " + trust_level + " , NOW()) " + 
+				"ON DUPLICATE KEY UPDATE trust_level=" + trust_level + ", last_updated=NOW()";
+
+	connection.query(sql, function(err, rows, fields) {
+		if (err) throw err;
+	});
+}
+
+//TODO: Update the following to describe a service grade from the point of view of the monitor
 exports.get_service_trust_level = function(id, cb) {
 	connection.query("SELECT trust_level FROM Service WHERE id=" + id, function(err, rows, fields) {
 		if (err) throw err;
 		cb(rows[0].trust_level);
 	});
 }
-
+//TODO: Update the following to describe a service grade from the point of view of the monitor
 exports.set_service_trust_level = function(id, trust_level) {
 	connection.query("UPDATE Service SET trust_level= " + trust_level + " WHERE id=" + id, function(err, rows, fields) {
 		if (err) throw err;
@@ -90,6 +107,17 @@ exports.set_service_trust_level = function(id, trust_level) {
 
 exports.set_service_status = function(id, status_val) {
 	connection.query("UPDATE Service SET status= " + status_val + " WHERE id=" + id, function(err, rows, fields) {
+		if (err) throw err;
+	});
+}
+
+
+exports.set_interaction_trust_level_for_module = function(interaction_id, trust_module, from_pre, from_post, to_pre, to_post) {
+	var sql = "INSERT INTO Interaction_Trust(interaction_id, trust_module, from_pre, from_post, to_pre, to_post) " +
+				"VALUES ('" + interaction_id + "' ,'" + trust_module + "', " + from_pre + 
+					" , " + from_post + " , " + to_pre  + " , " + to_post+ ") ";
+
+	connection.query(sql, function(err, rows, fields) {
 		if (err) throw err;
 	});
 }
@@ -127,7 +155,7 @@ exports.add_interaction = function(from, to, start, end, data, feedback, cb) {
 				"VALUES ('" +
 					interaction_id + "','" + from + "','" + to  + "'," +  start  + "," + end + ",'" +
 					data + "','" + feedback + "')";
-	console.log("\n\n\n" + sql + "\n\n\n");
+
 	connection.query(sql, function(err, rows, fields) {
 		if (err) {
 			throw err;
@@ -136,6 +164,17 @@ exports.add_interaction = function(from, to, start, end, data, feedback, cb) {
 			// get interaction id here
 			cb(interaction_id);
 		}
+	});
+}
+
+/*
+ * Return interaction record details for the given id
+ */
+exports.get_interaction_data = function(interaction_id, cb) {
+	var sql =  "SELECT * FROM Interaction WHERE id = '" + interaction_id + "'";
+	connection.query(sql, function(err, rows, fields) {
+		if (err) throw err;
+		cb(rows[0]);
 	});
 }
 

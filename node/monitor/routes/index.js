@@ -208,8 +208,8 @@ exports.interaction = function(msg){
 	from = url.parse(from);
 	to = url.parse(to);
 
-	db.get_service_data(from.host, function(from_id, from_tl, from_params) {
-		db.get_service_data(to.host, function(to_id, to_tl, to_params) {
+	db.get_service_id(from.host, function(from_id) {
+		db.get_service_id(to.host, function(to_id) {
 
 			from.id = from_id;
 			from.data = data; //Setting data if there's any
@@ -217,19 +217,13 @@ exports.interaction = function(msg){
 
 			//Add interaction
 			db.add_interaction(from.id, to.id, i_meta.start_time, i_meta.end_time, data, feedback, function(interaction_id) {
-				update_trust_level(from, to, i_meta, interaction_id);
+
+				//Update trust levels
+				trust.update(interaction_id);
 			});
 		});
 	});
 };
-
-
-function update_trust_level(from, to, i_meta) {
-	// trust.update(from, to, function(f_new_tv, t_new_tv) {
-	// 	if(typeof t_new_tv == 'undefined') {
-	// 		t_new_tv = to.trust_level;
-	// 	}
-}
 
 exports.interaction_block = function(req, res){
 	var from  = req.query.from;
@@ -254,16 +248,11 @@ exports.interaction_block = function(req, res){
 	to = url.parse(to);
 	// to = to.host;
 
-	db.get_service_data(from.host, function(from_id, from_tl, from_params) {
-		db.get_service_data(to.host, function(to_id, to_tl, to_params) {
+	db.get_service_id(from.host, function(from_id) {
+		db.get_service_id(to.host, function(to_id) {
 			from.id = from_id;
 			from.data = data; //Setting data if there's any
 			to.id = to_id;
-
-			from.trust_level = from_tl;
-			to.trust_level = to_tl;
-			from.params = JSON.parse(from_params);
-			to.params = JSON.parse(to_params);
 
 			if(start != null) { //When we get confirmation
 
@@ -294,8 +283,7 @@ exports.interaction_block = function(req, res){
 			db.add_interaction(from_id, to_id, start, end, data, feedback, function(interaction_id) {
 
 				//Update trust level
-				//trust.update_block(from, to, interaction_id);
-				update_trust_level(from, to, interaction_id);
+				trust.update(interaction_id);
 			});
 		});
 	});
