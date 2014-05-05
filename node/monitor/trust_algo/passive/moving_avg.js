@@ -8,6 +8,10 @@ var moving_avg_trust = function moving_avg_trust_update(interaction_id) {
 	//Get from and to service IDs from the interaction table
 	db.get_interaction_data(interaction_id, function(interaction_data) {
 
+		if(interaction_data.start == null) {
+			return;
+		}
+
 		db.get_service_trust_level_for_module(interaction_data.from_service, module_name, function(from_trust){
 
 			db.get_service_trust_level_for_module(interaction_data.to_service, module_name, function(to_trust){
