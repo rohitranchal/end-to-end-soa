@@ -53,8 +53,6 @@ module.exports = function() {
 			global.eval_interaction(sm_data.to, start, end, function(service_feedback) {
 				sm_data.service_feedback = service_feedback;
 
-				console.log(sm_data);
-
 				//this is async
 				sm_log(sm_data);
 			});
