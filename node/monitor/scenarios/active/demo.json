@@ -1,8 +1,17 @@
 {
-	"id" : 2,
-	"access_url" : "http://localhost:6103/get_deal",
-	"description" : "Travel Agent -> Airline and Travel Agent -> Advertiser",
-	"name": "DEMO: Travel Agent",
-	"services" : [20, 21, 22],
-	"connections" :[[20,21] , [20, 22]]
+	"id" : 6,
+	"access_url" : "http://localhost:4109/get_deal",
+	"description" : "Composition of 6 services which demonstrates two types of failures.",
+	"name": "Demo Scenario",
+	"services" : [9, 10, 11, 12, 13, 14, 15],
+	"connections" :[[9,10] ,[9, 11] ,[9, 12] ,[10, 13] ,[11, 13], [12, 13], [13, 14]],
+	"pos" : [{"id":9, "x" : -400, "y" : 200}, 
+			{"id": 10 , "x" : 0, "y" : 0}, 
+			{"id": 11 , "x" : 0, "y" : 200}, 
+			{"id": 12 , "x" : 0, "y" : 400}, 
+			{"id": 13 , "x" : 400, "y" : 200}, 
+			{"id": 14 , "x" : 800, "y" : 200}, 
+			{"id": 15 , "x" : 400, "y" : 400}],
+	"attacks" : [{"name" : "Insider Reconfigure Transport", "invoke" : "http://localhost:4111/attack_transport"},
+				{"name" : "DOS Attack Overload Service", "invoke" : "http://localhost:4113/attack_transport"}]
 }
