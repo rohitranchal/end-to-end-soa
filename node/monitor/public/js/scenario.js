@@ -160,40 +160,51 @@
 
 			var s_id = $('#scenario_id').text();
 			var s_type = $('#scenario_type').text();
+
 			$.getJSON( "/scenario_topology?type=" + s_type + "&s_id=" + s_id, function( data ) {
+
+				//If the topology definition provides position information
+				if(typeof data.pos != 'undefined') {
+					for(var i = 0; i < data.pos.length; i++) {
+						var pos = data.pos[i];
+						$('#service' + pos.id).css({
+							left : pos.x,
+							top : pos.y
+						});
+					}
+				} else {
+
+					//Generate Positions
+					var left = 0;
+					var top = 0;
+					var count = 0;
+					$(".w").each(function(i) {
+						$(this).css({
+							left: left,
+							top: top
+						});
+
+						if(count%2 > 0) {
+							left += 150;
+							top += 150;
+						} else {
+							left += 300;
+						}
+						count++;
+
+						if(left > 500) {
+							left = 0;
+						}
+					});
+
+				}
+
+				//Create connections
 				for(var i = 0; i < data.connections.length; i++) {
 					var conn = data.connections[i];
 					instance.connect({ source:'service' + conn[0],
 										target:'service' + conn[1]});
 				}
-
-			});
-
-
-
-			//Positions
-			var left = 0;
-			var top = 0;
-			var count = 0;
-			$(".w").each(function(i) {
-				$(this).css({
-					left: left,
-					top: top
-				});
-
-				if(count%2 > 0) {
-					left += 150;
-					top += 150;
-				} else {
-					left += 300;
-				}
-				count++;
-
-				if(left > 500) {
-					left = 0;
-				}
-
-
 			});
 
 		});
