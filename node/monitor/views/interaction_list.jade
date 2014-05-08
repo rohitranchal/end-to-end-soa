@@ -9,27 +9,19 @@ html(lang="en")
 			div(class="panel panel-default")
 				div(class="panel-body")
 					div(class="row")
-						div(class="col-md-2")
+						div(class="col-md-3")
 							strong From
-						div(class="col-md-2")
+						div(class="col-md-3")
 							strong To
-						div(class="col-md-1")
+						div(class="col-md-3")
 							strong Duration
-						div(class="col-md-2")
-							strong From Pre-Trust
-						div(class="col-md-2")
-							strong To Pre-Trust
-						div(class="col-md-2")
-							strong From Post-Trust
-						div(class="col-md-1")
-							strong To Post-Trust
+						div(class="col-md-3")
+							strong Feedback
 					for entry in entries
 						div(class="row")
-							div(class="col-md-2")=entry.from_service
-							div(class="col-md-2")=entry.to_service
-							div(class="col-md-1")=entry.duration
-							div(class="col-md-2")=entry.from_service_trust_level_pre
-							div(class="col-md-2")=entry.to_service_trust_level_pre
-							div(class="col-md-2")=entry.from_service_trust_level_post
-							div(class="col-md-1")=entry.to_service_trust_level_post
+							div(class="col-md-3")=entry.from_service
+							div(class="col-md-3")=entry.to_service
+							div(class="col-md-3")=entry.duration
+							div(class="col-md-3")
+								pre=entry.feedback
 

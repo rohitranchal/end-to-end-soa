@@ -83,7 +83,7 @@ exports.get_service_trust_level_for_module = function(id, trust_module, cb) {
 
 exports.set_service_trust_level_for_module = function(id, trust_module, trust_level) {
 	var sql = "INSERT INTO Service_Trust(service_id, trust_module, trust_level, last_updated) " +
-				"VALUES (" + id + " ,'" + trust_module + "', " + trust_level + " , NOW()) " + 
+				"VALUES (" + id + " ,'" + trust_module + "', " + trust_level + " , NOW()) " +
 				"ON DUPLICATE KEY UPDATE trust_level=" + trust_level + ", last_updated=NOW()";
 
 	connection.query(sql, function(err, rows, fields) {
@@ -114,7 +114,7 @@ exports.set_service_status = function(id, status_val) {
 
 exports.set_interaction_trust_level_for_module = function(interaction_id, trust_module, from_pre, from_post, to_pre, to_post) {
 	var sql = "INSERT INTO Interaction_Trust(interaction_id, trust_module, from_pre, from_post, to_pre, to_post) " +
-				"VALUES ('" + interaction_id + "' ,'" + trust_module + "', " + from_pre + 
+				"VALUES ('" + interaction_id + "' ,'" + trust_module + "', " + from_pre +
 					" , " + from_post + " , " + to_pre  + " , " + to_post+ ") ";
 
 	connection.query(sql, function(err, rows, fields) {
@@ -179,8 +179,7 @@ exports.get_interaction_data = function(interaction_id, cb) {
 }
 
 exports.get_interactions = function(cb) {
-	var sql = "SELECT f.name AS from_service, t.name AS to_service, i.start, i.end, (i.end - i.start) AS duration, i.ts, i.to_service_trust_level_post, i.from_service_trust_level_pre , i.to_service_trust_level_pre , i.from_service_trust_level_post , i.to_service_trust_level_post " +
-			"FROM Interaction i INNER JOIN Service f ON f.id = i.from_service INNER JOIN Service t ON t.id = i.to_service;";
+	var sql = "SELECT f.name AS from_service, t.name AS to_service, i.start, i.end, (i.end - i.start) AS duration, i.ts, i.data, i.feedback " + "FROM Interaction i INNER JOIN Service f ON f.id = i.from_service INNER JOIN Service t ON t.id = i.to_service;";
 	connection.query(sql, function(err, rows, fields) {
 		if (err) throw err;
 		cb(rows);
