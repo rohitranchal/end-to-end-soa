@@ -32,7 +32,7 @@ INSERT INTO Service(id, name, display_name, grade, host, port, url, params, stat
 (12, 'localhost:4112', 'S4', 10.0, 'localhost', 4112, 'http://localhost:4112', '{}', -1, 'scenarios/active/demo/s4'),
 (13, 'localhost:4113', 'S5', 10.0, 'localhost', 4113, 'http://localhost:4113', '{}', -1, 'scenarios/active/demo/s5'),
 (14, 'localhost:4114', 'S6', 10.0, 'localhost', 4114, 'http://localhost:4114', '{}', -1, 'scenarios/active/demo/s6'),
-(15, 'localhost:4115', 'S7', 10.0, 'localhost', 4115, 'http://localhost:4115', '{}', -1, 'scenarios/active/demo/s7'),
+(15, 'localhost:4115', "S5'", 10.0, 'localhost', 4115, 'http://localhost:4115', '{}', -1, 'scenarios/active/demo/s7'),
 
 (18, 'localhost:6101','localhost:6101', 10.0, 'localhost', 6101, 'http://localhost:6101', '{}', -1, 'scenarios/active/simple/s1'),
 (19, 'localhost:6102','localhost:6102', 10.0, 'localhost', 6102, 'http://localhost:6102', '{"load":20}', -1, 'scenarios/active/simple/s2'),

@@ -2,47 +2,8 @@
 ;(function() {
 	jsPlumb.ready(function() {
 
-		//Slider Initialization
-		$('.slider').each(function() {
-			var val = $(this).attr("value");
-				$(this).slider({
-					orientation: "horizontal",
-						range: "max",
-						min: 1,
-						max: 10,
-						value: val,
-						step: 1,
-						slide: function( event, ui ) {
-						if(ui.value > 8){
-									$(this).css("background","#00ff00");
-							}
-							else if(ui.value > 6){
-								$(this).css("background", "#ffff00");
-							}
-							else if(ui.value > 3){
-								$(this).css("background", "#d2691e");
-							}
-							else{
-								 $(this).css("background","#ff0000");
-								}
-						}
-				});
-
-				if($(this).attr("value") > 8){
-								$(this).css("background","#00ff00");
-						}
-						else if($(this).attr("value") > 6){
-							$(this).css("background", "#ffff00");
-						}
-						else if($(this).attr("value") > 3){
-							$(this).css("background", "#d2691e");
-						}
-						else{
-							$(this).css("background","#ff0000");
-						}
-			});
-
-
+		//TODO: Revise this and remove the hidden section
+		$('#scenario_config').hide();
 
 		//Invoke service for user
 		$('.try-it').click(function() {
@@ -97,20 +58,6 @@
 			}
 		});
 
-		//Handle update service trust levels
-		$("#btn_update_tl").click(function() {
-			//Get new values from the sliders
-			var vals = new Array();
-			$('.slider').each( function() {
-				vals[vals.length] = {name : this.id, value: $(this).slider("value")};
-			});
-
-			$.post("/update_service_tl", {values : vals}, function (data) {
-				location.reload();
-			});
-
-		});
-
 
 		// setup some defaults for jsPlumb.
 		var instance = jsPlumb.getInstance({
@@ -145,7 +92,7 @@
 				filter:".ep",       // only supported by jquery
 				anchor:"Continuous",
 				connector:["Straight"],
-				connectorStyle:{ strokeStyle:"#5c96bc", lineWidth:2, outlineColor:"transparent", outlineWidth:4 },
+				connectorStyle:{ strokeStyle:"#6E6E6E", lineWidth:2, outlineColor:"transparent", outlineWidth:4 },
 				maxConnections:6,
 				onMaxConnections:function(info, e) {
 					alert("Maximum connections (" + info.maxConnections + ") reached");
@@ -162,6 +109,21 @@
 			var s_type = $('#scenario_type').text();
 
 			$.getJSON( "/scenario_topology?type=" + s_type + "&s_id=" + s_id, function( data ) {
+
+				//Default service states
+				for(var i = 0; i < data.services.length; i++) {
+					var service = data.services[i];
+					$('#service' + service).addClass('svc_live');
+				}
+
+				//Override service states
+				if(typeof data.status != 'undefined') {
+					for(var i = 0; i < data.status.length; i++) {
+						var svc_status = data.status[i];
+						$('#service' + svc_status.service).removeClass('svc_live');
+						$('#service' + svc_status.service).addClass(svc_status.status);
+					}
+				}
 
 				//If the topology definition provides position information
 				if(typeof data.pos != 'undefined') {
@@ -203,8 +165,22 @@
 				for(var i = 0; i < data.connections.length; i++) {
 					var conn = data.connections[i];
 					instance.connect({ source:'service' + conn[0],
-										target:'service' + conn[1]});
+										target:'service' + conn[1],
+										paintStyle:{ strokeStyle:"red", lineWidth:10 }});
 				}
+
+				//Populate actions
+				if(typeof data.actions != 'undefined') {
+					var action_html = "";
+					for(var i = 0; i < data.actions.length; i++) {
+						var action = data.actions[i];
+						action_html += "<div class='panel'><a target='_blank' href='" + action.invoke_url + "'><button class='btn svc_toggle btn-default'><img height='50px' src='images/" + action.type + ".png'/>" + action.name + "</button></a></div>";
+					}
+					$('#scenario-actions').html(action_html);
+				}
+
+
+
 			});
 
 		});

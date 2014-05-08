@@ -14,11 +14,10 @@ html(lang="en")
 		div(class="col-md-12")
 			div(class="panel panel-default text-center")
 				h3=name
-		div(class="col-md-12")
+		div(class="col-md-10")
 			div(class="panel panel-default")
 				div(class="panel-heading text-center")
 					h4=access_url 
-					button(class="btn btn-primary try-it", data-link=access_url) Try It
 				div(class="panel-body")
 					div(id="main")
 						div(id="scenario-container", class="scenario-container")
@@ -26,7 +25,29 @@ html(lang="en")
 								div(class="w", id="service" + service.id)=service.display_name
 									div(id="service_data_" + service.id)
 									div(class="ep")
-		div(class="col-md-4")
+		div(class="col-md-2")
+			div(class="panel panel-default")
+				div(class="panel-heading text-center")
+					h4 Scenario
+				div(class="panel-body")
+					div
+						div(class="col-md-6")
+							button(id="btn_toggle_svc", class="btn btn-danger svc_toggle") Stop 
+						div(class="col-md-6")
+							button(class="btn btn-primary try-it", data-link=access_url) Try It
+		div(class="col-md-2")
+			div(class="panel panel-default")
+				div(class="panel-heading text-center")
+					h4 Actions
+				div(class="panel-body")
+					div(id="scenario-actions")
+		div(class="col-md-2")
+			div(class="panel panel-default")
+				div(class="panel-heading text-center")
+					h4 Interaction Authorization
+				div(class="panel-body")
+					div(id="int-authz-policies")
+		div(class="col-md-4" id="scenario_config")
 			div(class="panel panel-default")
 				div(class="panel-heading text-center")
 					h4 Scenario Configuration
@@ -38,11 +59,5 @@ html(lang="en")
 								div(id=service.status + "_" + service.id, class="col-md-5 svc_name")=service.display_name
 								div(class="col-md-5")
 									div(class="slider", id=service.id value=service.grade)
-						div(class="row top-buffer")
-							center
-								div(class="col-md-6")
-									div
-										button(id="btn_toggle_svc", class="btn btn-danger svc_toggle") Stop
-								div(class="col-md-6")
-									button(id="btn_update_tl", class="btn btn-default") Update
+
 
