@@ -60,8 +60,4 @@ var client_feedback_trust = function client_feedback_trust_update(interaction_id
 	});
 };
 
-update_to_trust() {
-
-}
-
 module.exports = {name : module_name, alg : client_feedback_trust};
