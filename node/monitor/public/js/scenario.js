@@ -174,7 +174,7 @@
 					var action_html = "";
 					for(var i = 0; i < data.actions.length; i++) {
 						var action = data.actions[i];
-						action_html += "<div class='panel'><a target='_blank' href='" + action.invoke_url + "'><button class='btn svc_toggle btn-default'><img height='50px' src='images/" + action.type + ".png'/>" + action.name + "</button></a></div>";
+						action_html += "<div class='panel' data-url='" + action.invoke_url + "'><button class='btn svc_toggle btn-default'><img height='50px' src='images/" + action.type + ".png'/>" + action.name + "</button></div>";
 					}
 					$('#scenario-actions').html(action_html);
 				}

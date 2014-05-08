@@ -11,8 +11,11 @@ var path = require('path');
 
 var app = express();
 
+global.my_host = 'localhost';
+global.my_port = 4110;
+
 // all environments
-app.set('port', process.env.PORT || 3000);
+app.set('port', process.env.PORT || global.my_port);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 app.use(express.favicon());
