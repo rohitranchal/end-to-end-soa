@@ -22,11 +22,11 @@ var path = require('path');
 
 var app = express();
 
-global.eval_interaction = function(target, start, end, restuls) {
+global.eval_interaction = function(target, start, end, results) {
 	var feedback = {};
 	feedback.satisfaction = 0.5;
 	feedback.weight = 1;
-	restuls(feedback);
+	results(feedback);
 };
 
 var request = require('../../../instr_request');
