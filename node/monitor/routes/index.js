@@ -173,7 +173,7 @@ exports.add_service_process = function(req, res){
 
 
 exports.interaction_list = function(req, res){
-	db.get_interactions(function(val){
+	db.get_interactions(function(val) {
 		res.render('interaction_list', { entries : val  });
 	});
 };
