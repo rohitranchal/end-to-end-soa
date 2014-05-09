@@ -22,10 +22,10 @@ function sm_log(data, callback) {
 		}
 		msg += data[i][0] + '=' + data[i][1];
 	}
-	console.log('calling :' + monitor+msg);
+	// console.log('calling :' + monitor+msg);
 
 	_req(monitor+msg, function(error, response, body) {
-		console.log('Resp: ' + body);
+		// console.log('Resp: ' + body);
 		if(typeof callback != 'undefined') {
 			callback(error, response, body);
 		}
@@ -52,7 +52,7 @@ var my_req = function() {
 
 			sm_data[2] = new Array('start', start);
 			sm_data[3] = new Array('end', end);
-			console.log('log data: ' + JSON.stringify(sm_data));
+			// console.log('log data: ' + JSON.stringify(sm_data));
 
 			//If the service provides any feedback about the interaction
 			if (typeof global.eval_interaction !== 'undefined') {
