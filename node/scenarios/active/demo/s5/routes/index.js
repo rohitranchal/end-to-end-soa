@@ -7,6 +7,7 @@ exports.index = function(req, res) {
 		request('http://' + global.my_host + ':4114/', function (error, response, body) {
 			if (!error && response.statusCode == 200) {
 				var val = JSON.parse(body);
+				val.price += 100;
 				res.send(JSON.stringify(val));
 			} else {
 				console.log(error);
@@ -16,7 +17,9 @@ exports.index = function(req, res) {
 
 };
 
-
+/*
+ * Mechanism to simulate a service delay due to a DoS attack
+ */
 exports.dos_attack = function(req, res) {
 	global.delay += 1000;
 	res.send('Service delay: ' + global.delay);

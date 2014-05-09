@@ -11,6 +11,7 @@ var path = require('path');
 var app = express();
 
 global.my_port = 4112;
+global.my_host = 'localhost';
 
 // all environments
 app.set('port', process.env.PORT || global.my_port);
