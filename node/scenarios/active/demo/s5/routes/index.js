@@ -1,8 +1,24 @@
+var request = require('../../../../../instr_request_block');
+global.delay = 0;
 
-/*
- * GET home page.
- */
+exports.index = function(req, res) {
 
-exports.index = function(req, res){
-  res.render('index', { title: 'Express' });
+		global.my_url = 'http://' + global.my_host + ':' + global.my_port;
+		request('http://' + global.my_host + ':4114/', function (error, response, body) {
+			if (!error && response.statusCode == 200) {
+				var val = JSON.parse(body);
+				res.send(JSON.stringify(val));
+			} else {
+				console.log(error);
+				res.send('Internal Error: Blocked by Service Monitor : status code :' + response.statusCode);
+			}
+		});
+
 };
+
+
+exports.dos_attack = function(req, res) {
+	global.delay += 1000;
+	res.send('Service delay: ' + global.delay);
+};
+

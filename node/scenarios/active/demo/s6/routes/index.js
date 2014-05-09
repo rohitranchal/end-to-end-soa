@@ -1,8 +1,4 @@
-
-/*
- * GET home page.
- */
-
 exports.index = function(req, res){
-  res.render('index', { title: 'Express' });
+	var values = {'price' : 350};
+	res.send(JSON.stringify(values));
 };
