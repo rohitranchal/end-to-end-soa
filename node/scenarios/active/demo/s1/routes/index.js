@@ -10,7 +10,7 @@ exports.index = function(req, res){
 				var s3 = JSON.parse(body2);
 				var s4 = JSON.parse(body3);
 
-				var r = {'item1' : s2.price, 'item2' : s3.price, 'item3' : s4.price};
+				var r = {'Taxi' : s2.price, 'Hotel' : s3.price, 'Air Line' : s4.price};
 				res.send(r);
 			});
 		});

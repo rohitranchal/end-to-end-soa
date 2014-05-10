@@ -6,7 +6,7 @@ exports.index = function(req, res) {
 		request('http://' + global.my_host + ':4113/', function (error, response, body) {
 			if (!error && response.statusCode == 200) {
 				var val = JSON.parse(body);
-				val.price += 200;
+				val.price += 1000;
 				res.send(JSON.stringify(val));
 			} else {
 				console.log(error);

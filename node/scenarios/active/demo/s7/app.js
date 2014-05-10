@@ -5,13 +5,13 @@
 
 var express = require('express');
 var routes = require('./routes');
-var user = require('./routes/user');
 var http = require('http');
 var path = require('path');
 
 var app = express();
 
 global.my_port = 4115;
+global.my_host = 'localhost';
 
 // all environments
 app.set('port', process.env.PORT || global.my_port);

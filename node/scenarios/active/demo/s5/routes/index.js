@@ -25,3 +25,12 @@ exports.dos_attack = function(req, res) {
 	res.send('Service delay: ' + global.delay);
 };
 
+
+
+/*
+ * Special casese some services and serves them faster!
+ */
+exports.insider_attack = function(req, res) {
+	//TODO
+};
+
