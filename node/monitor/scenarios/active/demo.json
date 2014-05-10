@@ -4,7 +4,7 @@
 	"description" : "Composition of 6 services which demonstrates two types of failures.",
 	"name": "Demo Scenario",
 	"services" : [9, 10, 11, 12, 13, 14, 15],
-	"connections" :[[9,10] ,[9, 11] ,[9, 12] ,[10, 13] ,[11, 13], [12, 13], [13, 14]],
+	"connections" :[[9,10] ,[9, 11] ,[9, 12] ,[10, 13] ,[11, 13], [12, 13], [13, 14], [15, 14]],
 	"pos" : [{"id":9, "x" : -300, "y" : 200}, 
 			{"id": 10 , "x" : 100, "y" : 0}, 
 			{"id": 11 , "x" : 100, "y" : 200}, 
