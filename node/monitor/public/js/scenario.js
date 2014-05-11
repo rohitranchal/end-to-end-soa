@@ -174,12 +174,17 @@
 					var action_html = "";
 					for(var i = 0; i < data.actions.length; i++) {
 						var action = data.actions[i];
-						action_html += "<div class='panel' data-url='" + action.invoke_url + "'><button class='btn svc_toggle btn-default'><img height='50px' src='images/" + action.type + ".png'/>" + action.name + "</button></div>";
+						action_html += "<div class='panel'><button data-url='" + action.invoke_url + "' class='btn svc_act btn-default'><img height='50px' src='images/" + action.type + ".png'/>" + action.name + "</button></div>";
 					}
 					$('#scenario-actions').html(action_html);
 				}
 
-
+				$('.svc_act').click(function() {
+					$.post('/svc_action', {link : $(this).data('url')}, function( data ) {
+						alert(data);
+						location.reload();
+					});
+				});
 
 			});
 

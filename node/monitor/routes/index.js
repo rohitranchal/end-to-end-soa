@@ -128,6 +128,12 @@ exports.try_it = function(req, res) {
 	});
 };
 
+exports.svc_action = function(req, res) {
+	request(req.body.link, function (error, response, body) {
+		res.send(body)
+	});
+};
+
 exports.toggle_service = function(req, res) {
 	var svc_id = req.body.service_id;
 

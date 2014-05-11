@@ -59,6 +59,7 @@ app.get('/get_default_trust_algo', routes.get_default_trust_algo);
 app.post('/toggle_trust_algo', routes.toggle_trust_algo);
 app.get('/show_active_authz_policy', routes.show_active_authz_policy)
 app.post('/try_it', routes.try_it);
+app.post('/svc_action', routes.svc_action);
 
 app.post('/toggle_service', routes.toggle_service);
 
