@@ -81,7 +81,6 @@ exports.authorize = function(from, to, callback) {
 	if(default_active_trust_algo.length == 0) {
 		//If there are no active algos enabled
 		//authorize the interaction
-		console.log('nothing to check');
 		callback({code : 200});
 	}
 
@@ -101,7 +100,6 @@ exports.authorize = function(from, to, callback) {
 		if(authz_status_vals.indexOf("-1") == -1) {
 			//Every value is set to 1
 			//We are good to go
-			console.log('All set ')
 			//callback({code: 200});
 			callback(decision);
 			return;

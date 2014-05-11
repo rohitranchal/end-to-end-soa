@@ -189,8 +189,6 @@ exports.interaction_list = function(req, res){
 ///////////////////////////////////////////////////////////////////////////////
 exports.interaction = function(msg){
 
-	console.log(msg);
-
 	//convert msg to JSON
 	msg = JSON.parse(msg);
 	var from  = msg.from;
@@ -265,7 +263,7 @@ exports.interaction_block = function(req, res){
 				//Reaching here means access was permitted
 				res.send('OK');
 			} else {
-				console.log('authorize ...')
+
 				//This is before the actual invocation
 				trust.authorize(from, to, function(status) {
 
@@ -285,7 +283,7 @@ exports.interaction_block = function(req, res){
 					}
 				});
 			}
-			console.log('from: ' + from_id + ' to: ' + to_id + ' start: ' + start);
+
 			db.add_interaction(from_id, to_id, start, end, data, feedback, function(interaction_id) {
 
 				//Update trust level

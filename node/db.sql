@@ -33,6 +33,7 @@ INSERT INTO Service(id, name, display_name, grade, host, port, url, params, stat
 (13, 'localhost:4113', 'Payment Gateway', 10.0, 'localhost', 4113, 'http://localhost:4113', '{}', -1, 'scenarios/active/demo/s5'),
 (14, 'localhost:4114', 'Bank', 10.0, 'localhost', 4114, 'http://localhost:4114', '{}', -1, 'scenarios/active/demo/s6'),
 (15, 'localhost:4115', "Payment Gateway[Backup]", 10.0, 'localhost', 4115, 'http://localhost:4115', '{}', -1, 'scenarios/active/demo/s7'),
+(16, 'localhost:5113', 'Payment Gateway (HTTP)', 10.0, 'localhost', 5113, 'http://localhost:5113', '{}', -1, 'scenarios/active/demo/s5'),
 
 (18, 'localhost:6101','localhost:6101', 10.0, 'localhost', 6101, 'http://localhost:6101', '{}', -1, 'scenarios/active/simple/s1'),
 (19, 'localhost:6102','localhost:6102', 10.0, 'localhost', 6102, 'http://localhost:6102', '{"load":20}', -1, 'scenarios/active/simple/s2'),
