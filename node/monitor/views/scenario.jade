@@ -22,7 +22,7 @@ html(lang="en")
 					div(id="main")
 						div(id="scenario-container", class="scenario-container")
 							for service in services
-								div(class="w", id="service" + service.id)=service.display_name
+								div(class="w", id="service" + service.id, data-port=service.status)=service.display_name
 									div(id="service_data_" + service.id)
 									div(class="ep")
 		div(class="col-md-2")
@@ -32,9 +32,9 @@ html(lang="en")
 				div(class="panel-body")
 					div
 						div(class="col-md-6")
-							button(id="btn_toggle_svc", class="btn btn-danger svc_toggle") Stop 
+							button(id="btn_toggle_svc", class="btn btn-danger svc_toggle") Stop Services 
 						div(class="col-md-6")
-							button(class="btn btn-primary try-it", data-link=access_url) Try It
+							button(class="btn btn-primary try-it", data-link=access_url) Make Request
 		div(class="col-md-2")
 			div(class="panel panel-default")
 				div(class="panel-heading text-center")

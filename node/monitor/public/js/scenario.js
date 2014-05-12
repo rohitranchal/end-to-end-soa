@@ -18,7 +18,7 @@
 		//Decide service toggle button display
 		$('.svc_status').each(function() {
 			if (this.id == -1) {
-				$('#btn_toggle_svc').text('Start');
+				$('#btn_toggle_svc').text('Start Services');
 				$('#btn_toggle_svc').removeClass('btn-danger').addClass('btn-default');
 			}
 		});
@@ -113,14 +113,18 @@
 				//Default service states
 				for(var i = 0; i < data.services.length; i++) {
 					var service = data.services[i];
-					$('#service' + service).addClass('svc_live');
+					if($('#service' + service).data('port') == -1) {
+						$('#service' + service).addClass('svc_stopped');
+					} else {
+						$('#service' + service).addClass('svc_live');
+					}
 				}
 
 				//Override service states
 				if(typeof data.status != 'undefined') {
 					for(var i = 0; i < data.status.length; i++) {
 						var svc_status = data.status[i];
-						$('#service' + svc_status.service).removeClass('svc_live');
+						// $('#service' + svc_status.service).removeClass('svc_live');
 						$('#service' + svc_status.service).addClass(svc_status.status);
 					}
 				}

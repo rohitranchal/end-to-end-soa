@@ -11,8 +11,13 @@
 }
 
 .svc_live {
-	border:4px solid #21610B;
+	border:4px solid #04B404;
 }
+
+.svc_stopped {
+	border:4px solid #000000;
+}
+
 
 .svc_failed {
 	border:4px dashed #21610B;
@@ -23,7 +28,7 @@
 }
 
 .svc_backup {
-	border:4px dashed #BDBDBD;
+	border-style: dashed;
 }
 
 .w {
