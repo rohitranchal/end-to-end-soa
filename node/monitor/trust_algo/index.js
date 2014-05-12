@@ -70,6 +70,17 @@ exports.get_default_active_algo_list = function(cb) {
 	cb(algos);
 };
 
+exports.get_default_trust_algo_list = function(cb) {
+	var algos = new Array();
+	for(var i = 0; i < default_trust_algo.length; i++) {
+		var a_id = default_trust_algo[i];
+		var a_name = passive_algos[a_id].name;
+		algos[i] = {'id' : a_id, 'name' : a_name};
+	}
+	cb(algos);
+};
+
+
 
 /*
 Update registered trust algorithms with the given interaction 

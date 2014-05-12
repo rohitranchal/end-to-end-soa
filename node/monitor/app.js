@@ -56,6 +56,7 @@ app.post('/update_service_tl', routes.set_trust_levels);
 app.get('/reset_trust_values', routes.trust_values_reset);
 app.get('/trust_algo_list', routes.trust_algo_list);
 app.get('/get_int_authz_algo_list', routes.get_default_active_trust_algo_list);
+app.get('/get_trust_algo_list', routes.get_default_trust_algo_list);
 app.post('/toggle_trust_algo', routes.toggle_trust_algo);
 app.get('/show_active_authz_policy', routes.show_active_authz_policy)
 app.post('/try_it', routes.try_it);

@@ -106,6 +106,15 @@ exports.get_default_active_trust_algo_list = function(req, res) {
 	});
 };
 
+
+exports.get_default_trust_algo_list = function(req, res) {
+	trust.get_default_trust_algo_list(function(algos) {
+		console.log(algos);
+		res.send(algos);
+	});
+};
+
+
 exports.show_active_authz_policy = function(req, res) {
 	trust.get_authz_oplicy(req.query.id, function(val) {
 		res.render('authz_policy', val)

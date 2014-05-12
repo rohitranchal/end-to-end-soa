@@ -205,4 +205,14 @@
 		$('#int-authz-policies').html(algos_html);
 	});
 
+	//Get the list of trust management algos
+	$.get('/get_trust_algo_list', function(algos) {
+
+		var algos_html = '';
+		for(var i = 0; i < algos.length; i++) {
+			algos_html += "<div class='panel'>" + algos[i].name + '</div>';
+		}
+		$('#trust-mgmt-policies').html(algos_html);
+	});
+
 })();
