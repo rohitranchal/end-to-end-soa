@@ -60,8 +60,14 @@ exports.toggle_trust_algo = function(algo_id_str) {
 	}
 };
 
-exports.get_default_algo = function(cb) {
-	cb(default_trust_algo);
+exports.get_default_active_algo_list = function(cb) {
+	var algos = new Array();
+	for(var i = 0; i < default_active_trust_algo.length; i++) {
+		var a_id = default_active_trust_algo[i];
+		var a_name = active_algos[a_id].name;
+		algos[i] = {'id' : a_id, 'name' : a_name};
+	}
+	cb(algos);
 };
 
 
@@ -134,6 +140,7 @@ exports.algo_list = function(cb) {
 
 	algos = {p_algos : p_a, p_default : default_trust_algo,
 			a_algos : a_a, a_default : default_active_trust_algo};
+
 	cb(algos); //Return list
 };
 

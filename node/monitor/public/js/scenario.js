@@ -190,4 +190,15 @@
 
 		});
 	});
+
+	//Get the list of interaction authorization algos
+	$.get('/get_int_authz_algo_list', function(algos) {
+
+		var algos_html = '';
+		for(var i = 0; i < algos.length; i++) {
+			algos_html += "<div class='panel'>" + algos[i].name + '</div>';
+		}
+		$('#int-authz-policies').html(algos_html);
+	});
+
 })();

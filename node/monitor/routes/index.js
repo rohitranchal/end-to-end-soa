@@ -100,9 +100,9 @@ exports.trust_algo_list = function(req, res) {
 	});
 };
 
-exports.get_default_trust_algo = function(req, res) {
-	trust.get_default_algo(function(algo_id) {
-		res.send(algo_id);
+exports.get_default_active_trust_algo_list = function(req, res) {
+	trust.get_default_active_algo_list(function(algos) {
+		res.send(algos);
 	});
 };
 
