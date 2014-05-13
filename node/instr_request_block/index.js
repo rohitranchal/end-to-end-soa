@@ -47,29 +47,38 @@ var my_req = function() {
 				sm_data[1] = new Array('to', body);
 			}
 			var start = new Date().getTime();
-			_req.apply(_this, _args);
-			var end = new Date().getTime();
 
-			sm_data[2] = new Array('start', start);
-			sm_data[3] = new Array('end', end);
-			// console.log('log data: ' + JSON.stringify(sm_data));
+			//Backup original callback
+			var cb = _args[1];
 
-			//If the service provides any feedback about the interaction
-			if (typeof global.eval_interaction !== 'undefined') {
+			var profiling_cb = function (error, response, body) {
+				var end = new Date().getTime();
+				cb(error, response, body);
 
-				//Obtain service feedback
-				global.eval_interaction(sm_data.to, start, end, function(service_feedback) {
-					sm_data[sm_data.length] = new Array('service_feedback', JSON.stringify(service_feedback));
+				sm_data[2] = new Array('start', start);
+				sm_data[3] = new Array('end', end);
 
-					//this is async
+				console.log(sm_data);
+
+				//If the service provides any feedback about the interaction
+				if (typeof global.eval_interaction !== 'undefined') {
+
+					//Obtain service feedback
+					global.eval_interaction(sm_data.to, start, end, function(service_feedback) {
+						sm_data[sm_data.length] = new Array('service_feedback', JSON.stringify(service_feedback));
+
+						//this is async
+						sm_log(sm_data);
+					});
+				} else {
+
+					//No service feedback about interaction
 					sm_log(sm_data);
-				});
-			} else {
+				}
+			};
 
-				//No service feedback about interaction
-				sm_log(sm_data);
-			}
-
+			_args[1] = profiling_cb;
+			_req.apply(this, _args);
 		} else {
 			_args[1](error, response, body);
 			return;
