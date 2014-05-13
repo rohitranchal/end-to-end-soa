@@ -53,7 +53,6 @@ app.get('/add_service_show', routes.add_service_show);
 
 
 app.post('/update_service_tl', routes.set_trust_levels);
-app.get('/reset_trust_values', routes.trust_values_reset);
 app.get('/trust_algo_list', routes.trust_algo_list);
 app.get('/get_int_authz_algo_list', routes.get_default_active_trust_algo_list);
 app.get('/get_trust_algo_list', routes.get_default_trust_algo_list);

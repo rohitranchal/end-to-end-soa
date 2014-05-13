@@ -89,10 +89,6 @@ exports.set_trust_levels = function(req, res) {
 	res.send('OK');
 };
 
-exports.trust_values_reset = function(req, res) {
-	trust.reset();
-	res.send('OK');
-};
 
 exports.trust_algo_list = function(req, res) {
 	trust.algo_list(function(list) {
@@ -109,7 +105,6 @@ exports.get_default_active_trust_algo_list = function(req, res) {
 
 exports.get_default_trust_algo_list = function(req, res) {
 	trust.get_default_trust_algo_list(function(algos) {
-		console.log(algos);
 		res.send(algos);
 	});
 };
