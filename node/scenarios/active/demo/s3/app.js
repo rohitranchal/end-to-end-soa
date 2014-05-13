@@ -13,6 +13,32 @@ var app = express();
 global.my_port = 4111;
 global.my_host = 'localhost';
 
+//Evaluate interactions
+global.eval_interaction = function(target, start, end, results) {
+	var feedback = {};
+	var time = end - start;
+
+	if(time < 100) {
+
+		//If less than 100ms
+		feedback.satisfaction = 1;
+
+	} else if(time > 100 & time < 1000) {
+
+		//If within 100ms and 1s
+		feedback.satisfaction = 0.7
+
+	} else {
+
+		//If more than 1s
+		feedback.satisfaction = 0.2
+
+	}
+
+	feedback.weight = 1;
+
+	results(feedback);
+};
 
 // all environments
 app.set('port', process.env.PORT || global.my_port);
