@@ -11,12 +11,39 @@ var app = express();
 global.my_port = 4113;
 global.my_host = 'localhost';
 
+//Evaluate interactions
+global.eval_interaction = function(target, start, end, results) {
+  var feedback = {};
+  var time = end - start;
+
+  if(time < 100) {
+
+    //If less than 100ms
+    feedback.satisfaction = 1;
+
+  } else if(time > 100 & time < 1000) {
+
+    //If within 100ms and 1s
+    feedback.satisfaction = 0.5
+
+  } else {
+
+    //If more than 1s
+    feedback.satisfaction = 0.1
+
+  }
+
+  feedback.weight = 1;
+
+  results(feedback);
+};
+
 var req_delay = function(request, response, next) {
-	
+
 	//Delay request by the set number of miliseconds
 	console.log(global.my_host + ":" + global.my_port + " > delay: " + global.delay)
 	setTimeout(function() {
-		next();	
+		next();
 	},global.delay);
 };
 
@@ -46,7 +73,7 @@ http.createServer(app).listen(app.get('port') + 1000, function(){
   console.log('Express server listening on port ' + (app.get('port') + 1000));
 });
 
-//To be able to start from the monitor 
+//To be able to start from the monitor
 var key_path_prefix = '../scenarios/active/demo/s5/';
 
 var private_key = fs.readFileSync(key_path_prefix + './keys/privatekey.pem').toString();
