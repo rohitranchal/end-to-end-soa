@@ -93,17 +93,11 @@ exports.set_service_trust_level_for_module = function(id, trust_module, trust_le
 }
 
 //TODO: Update the following to describe a service grade from the point of view of the monitor
-exports.get_service_trust_level = function(id, cb) {
-	connection.query("SELECT trust_level FROM Service WHERE id=" + id, function(err, rows, fields) {
-		if (err) throw err;
-		cb(rows[0].trust_level);
-	});
-}
-//TODO: Update the following to describe a service grade from the point of view of the monitor
 exports.set_service_trust_level = function(id, trust_level) {
-	connection.query("UPDATE Service SET trust_level= " + trust_level + " WHERE id=" + id, function(err, rows, fields) {
-		if (err) throw err;
-	});
+	//TODO Check and remove
+	// connection.query("UPDATE Service SET trust_level= " + trust_level + " WHERE id=" + id, function(err, rows, fields) {
+	// 	if (err) throw err;
+	// });
 }
 
 exports.set_service_status = function(id, status_val) {

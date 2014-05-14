@@ -58,8 +58,6 @@ var my_req = function() {
 				sm_data[2] = new Array('start', start);
 				sm_data[3] = new Array('end', end);
 
-				console.log(sm_data);
-
 				//If the service provides any feedback about the interaction
 				if (typeof global.eval_interaction !== 'undefined') {
 

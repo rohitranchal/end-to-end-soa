@@ -78,17 +78,6 @@ exports.inflow_service_req_rates = function(req, res) {
 ///////////////////////////////////////////////////////////////////////////////
 ////////////TRUST RELATED
 ///////////////////////////////////////////////////////////////////////////////
-exports.set_trust_levels = function(req, res) {
-	//Get the list of services
-	var values = req.body.values;
-	for(var i = 0; i < values.length; i++) {
-		console.log(values[i]);
-		db.set_service_trust_level(values[i].name, values[i].value);
-	}
-
-	res.send('OK');
-};
-
 
 exports.trust_algo_list = function(req, res) {
 	trust.algo_list(function(list) {
