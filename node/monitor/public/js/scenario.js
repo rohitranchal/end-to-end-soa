@@ -212,8 +212,8 @@ $( document ).ready(function() {
 
 	//Preiodically refresh trust values
 	setInterval(function() {
-		$('#trust-mgmt-policies').hide()
-		$('#trust-mgmt-policies').html('')
+		// $('#trust-mgmt-policies').hide()
+		// $('#trust-mgmt-policies').html('')
 		var s_id = $('#scenario_id').text();
 		var s_type = $('#scenario_type').text();
 		$.get('/get_scenario_trust_levels?type=' + s_type + '&s_id=' + s_id, function(algos) {
@@ -232,10 +232,10 @@ $( document ).ready(function() {
 				algos_html += "</table>";
 				algos_html += "</div>";
 			}
-			$('#trust-mgmt-policies').html(algos_html).fadeIn('fast');;
+			$('#trust-mgmt-policies').html(algos_html);
 			console.log('updated');
 		});
-	}, 5000);
+	}, 3000);
 
 
 });
