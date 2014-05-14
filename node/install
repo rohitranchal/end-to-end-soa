@@ -41,6 +41,29 @@ cd -
 cd scenarios/active/demo/s3/
 npm install
 cd -
+cd scenarios/active/demo/s4/
+npm install
+cd -
+cd scenarios/active/demo/s5/
+npm install
+cd -
+cd scenarios/active/demo/s6/
+npm install
+cd -
+cd scenarios/active/demo/s7/
+npm install
+cd -
+
+
+cd scenarios/active/demo_airline/s1/
+npm install
+cd -
+cd scenarios/active/demo_airline/s2/
+npm install
+cd -
+cd scenarios/active/demo_airline/s3/
+npm install
+cd -
 
 cd scenarios/active/demo_post/s1/
 npm install
@@ -66,61 +89,32 @@ cd scenarios/active/demo_redirect/s3/
 npm install
 cd -
 
-cd scenarios/simple/s1/
+cd scenarios/passive/simple/s1/
 npm install
 cp -r ../../../instr_request ./node_modules/request
 cd -
 cp -r heartbeat scenarios/simple/s1/node_modules/
-cd scenarios/simple/s2/
+cd scenarios/passive/simple/s2/
 npm install
 cd -
 
-cd scenarios/1/s1/
+cd scenarios/passive/1/s1/
 npm install
 cd -
-cd scenarios/1/s2/
+cd scenarios/passive/1/s2/
 npm install
 cd -
-cd scenarios/1/s3/
-npm install
-cd -
-
-cd scenarios/2/s1/
-npm install
-cd -
-cd scenarios/2/s2/
-npm install
-cd -
-cd scenarios/2/s3/
+cd scenarios/passive/1/s3/
 npm install
 cd -
 
-
-cd scenarios/3/s1/
+cd scenarios/passive/2/s1/
 npm install
 cd -
-cd scenarios/3/s2/
+cd scenarios/passive/2/s2/
 npm install
 cd -
-cd scenarios/3/s3/
-npm install
-cd -
-cd scenarios/3/s4/
-npm install
-cd -
-cd scenarios/3/s5/
-npm install
-cd -
-cd scenarios/3/s6/
-npm install
-cd -
-cd scenarios/3/s7/
-npm install
-cd -
-cd scenarios/3/s8/
+cd scenarios/passive/2/s3/
 npm install
 cd -
 
-cd scenarios/4/s1/
-npm install
-cd -
