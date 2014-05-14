@@ -232,7 +232,6 @@ $( document ).ready(function() {
 				algos_html += "<tr><th>Service</th><th>Trust Level</th></tr>";
 				for(var j = 0; j < services.length; j++) {
 					algos_html += "<tr><td>" + services[j].display_name + "</td><td>" + services[j].trust_level + "</td></tr>";
-					// $('#service_trust_' + services[j].id).append('<div class=\'row\'><div class=\'col-md-8 pull-left svc_content_tl\'>' + tm_name + '</div><div class=\'col-md-4\'>' + services[j].trust_level + '</div></div>');
 					$('#service_trust_' + services[j].id).append('<tr class=\'svc_content_tl\'><td>' + tm_name + '</td><td>' + services[j].trust_level + '</td></tr>');
 				}
 				algos_html += "</table>";
