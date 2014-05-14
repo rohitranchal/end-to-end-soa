@@ -227,6 +227,7 @@ $( document ).ready(function() {
 				algos_html += "<tr><th>Service</th><th>Trust Level</th></tr>";
 				for(var j = 0; j < services.length; j++) {
 					algos_html += "<tr><td>" + services[j].display_name + "</td><td>" + services[j].trust_level + "</td></tr>";
+					$('#service_trust_' + services[j].id).html('<div class=\'svc_content_tl\'>' + tm_name + ': ' + services[j].trust_level + '</div>');
 				}
 				algos_html += "</table>";
 				algos_html += "</div>";
