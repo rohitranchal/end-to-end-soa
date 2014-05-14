@@ -97,6 +97,12 @@ exports.get_scenario_trust_levels = function(req, res) {
 	if(scn != null) {
 		//Get the trust levels
 		trust.get_default_trust_algo_list(function(algos) {
+
+			//If nothing is enabled
+			if(algos.length == 0) {
+				res.send(new Array());
+			}
+
 			for(var i = 0; i < algos.length; i++) {
 				var tmp_res = {};
 				tmp_res.trust_module = algos[i].name;
