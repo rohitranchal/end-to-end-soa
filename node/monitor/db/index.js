@@ -82,6 +82,18 @@ exports.get_service_trust_level_for_module = function(id, trust_module, cb) {
 	});
 }
 
+//Returns trust levels for multiple services
+exports.get_services_trust_level_for_module = function(ids, trust_module, cb) {
+	connection.query("SELECT service_id, trust_level FROM Service_Trust WHERE service_id IN (" + ids.join() + ") AND trust_module = '" + trust_module + "'", function(err, rows, fields) {
+		if (err) throw err;
+		if(rows.length == 0) {
+			cb(-1);
+		} else {
+			cb(rows);
+		}
+	});
+}
+
 exports.set_service_trust_level_for_module = function(id, trust_module, trust_level) {
 	var sql = "INSERT INTO Service_Trust(service_id, trust_module, trust_level, last_updated) " +
 				"VALUES (" + id + " ,'" + trust_module + "', " + trust_level + " , NOW()) " +

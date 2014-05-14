@@ -1,5 +1,6 @@
 var db = require('../db');
 var fs = require('fs');
+var trust = require('../trust_algo');
 
 console.log('Loading scenarios ... ');
 var files = fs.readdirSync('./scenarios/passive/');
@@ -73,12 +74,52 @@ exports.show = function(req, res){
 	
 };
 
+//Return the trust levels of currently enabled trust modules
+exports.get_scenario_trust_levels = function(req, res) {
+	var s_id = req.query.s_id;
+	var type = req.query.type;
+
+	var tmp_scenarios = active_scenarios;
+	if(type == 'passive') {
+		tmp_scenarios = scenarios;
+	}
+
+	var scn = null;
+	for(var i = 0; i < tmp_scenarios.length; i++) {
+		if(tmp_scenarios[i].id == s_id) {
+
+			//Found the scenario
+			scn = tmp_scenarios[i];
+		}
+	}
+
+	var results = new Array();
+	if(scn != null) {
+		//Get the trust levels
+		trust.get_default_trust_algo_list(function(algos) {
+			for(var i = 0; i < algos.length; i++) {
+				var tmp_res = {};
+				tmp_res.trust_module = algos[i].name;
+
+				db.get_services_trust_level_for_module(scn.services, algos[i].name, function(values) {
+					tmp_res.services = values;
+					results[results.length] = tmp_res;
+
+					//Make sure we have all results before we send
+					if(results.length == algos.length) {
+						res.send(results);
+					}
+				});
+			}
+		});
+	}
+}
+
 //Return scenario topology to the scenario viewer.
 exports.get_topology = function(req, res) {
 	var s_id = req.query.s_id;
 	var type = req.query.type;
 
-	//Linear search through the availalbe scenarios
 	if(type == 'passive') {
 		for(var i = 0; i < scenarios.length; i++) {
 			if(scenarios[i].id == s_id) {

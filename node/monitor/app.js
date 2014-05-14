@@ -50,7 +50,7 @@ app.get('/service', routes.service);
 app.post('/update_service_params', routes.update_service_params);
 app.post('/add_service_process', routes.add_service_process);
 app.get('/add_service_show', routes.add_service_show);
-
+app.get('/get_scenario_trust_levels', scenario.get_scenario_trust_levels);
 
 app.get('/trust_algo_list', routes.trust_algo_list);
 app.get('/get_int_authz_algo_list', routes.get_default_active_trust_algo_list);
