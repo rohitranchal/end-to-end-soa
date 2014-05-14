@@ -104,12 +104,10 @@ exports.get_scenario_trust_levels = function(req, res) {
 			}
 
 			for(var i = 0; i < algos.length; i++) {
-				var tmp_res = {};
-				tmp_res.trust_module = algos[i].name;
 
-				db.get_services_trust_level_for_module(scn.services, algos[i].name, function(values) {
-					tmp_res.services = values;
-					results[results.length] = tmp_res;
+				db.get_services_trust_level_for_module(scn.services, algos[i].name, function(module_name, values) {
+
+					results[results.length] = {'trust_module' : module_name, 'services' : values};
 
 					//Make sure we have all results before we send
 					if(results.length == algos.length) {

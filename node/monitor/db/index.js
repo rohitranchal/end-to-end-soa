@@ -87,9 +87,9 @@ exports.get_services_trust_level_for_module = function(ids, trust_module, cb) {
 	connection.query("SELECT service_id, trust_level FROM Service_Trust WHERE service_id IN (" + ids.join() + ") AND trust_module = '" + trust_module + "'", function(err, rows, fields) {
 		if (err) throw err;
 		if(rows.length == 0) {
-			cb(-1);
+			cb(trust_module, -1);
 		} else {
-			cb(rows);
+			cb(trust_module,  rows);
 		}
 	});
 }

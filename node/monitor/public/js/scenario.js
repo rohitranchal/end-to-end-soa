@@ -194,6 +194,12 @@
 		});
 	});
 
+
+})();
+
+
+$( document ).ready(function() {
+
 	//Get the list of interaction authorization algos
 	$.get('/get_int_authz_algo_list', function(algos) {
 
@@ -204,14 +210,16 @@
 		$('#int-authz-policies').html(algos_html);
 	});
 
-	//Get the list of trust management algos
-	$.get('/get_trust_algo_list', function(algos) {
-
+	var s_id = $('#scenario_id').text();
+	var s_type = $('#scenario_type').text();
+	$.get('/get_scenario_trust_levels?type=' + s_type + '&s_id=' + s_id, function(algos) {
+		console.log(algos);
 		var algos_html = '';
 		for(var i = 0; i < algos.length; i++) {
-			algos_html += "<div class='panel'>" + algos[i].name + '</div>';
+			algos_html += "<div class='panel'><pre>" + JSON.stringify(algos[i])  + '</pre></div>';
 		}
 		$('#trust-mgmt-policies').html(algos_html);
 	});
 
-})();
+
+});
