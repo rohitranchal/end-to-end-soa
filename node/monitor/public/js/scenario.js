@@ -226,7 +226,7 @@ $( document ).ready(function() {
 				algos_html += "<table class='table table-striped'>";
 				algos_html += "<tr><th>Service</th><th>Trust Level</th></tr>";
 				for(var j = 0; j < services.length; j++) {
-					algos_html += "<tr><td>" + services[j].service_id + "</td><td>" + services[j].trust_level + "</td></tr>";
+					algos_html += "<tr><td>" + services[j].display_name + "</td><td>" + services[j].trust_level + "</td></tr>";
 				}
 				algos_html += "</table>";
 				algos_html += "</div>";
