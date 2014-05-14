@@ -11,7 +11,6 @@
 			$.post("/try_it", {link : $(this).data('link')}, function (data) {
 				alert(data);
 				// location.replace('/scenario?type=' + $('#scenario_type').text() + '&s_id=' + $('#scenario_id').text() + '&test=abc');
-				location.reload();
 			});
 		});
 
@@ -187,7 +186,6 @@
 				$('.svc_act').click(function() {
 					$.post('/svc_action', {link : $(this).data('url')}, function( data ) {
 						alert(data);
-						location.reload();
 					});
 				});
 

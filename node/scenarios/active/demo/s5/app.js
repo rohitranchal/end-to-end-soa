@@ -18,18 +18,18 @@ global.eval_interaction = function(target, start, end, results) {
 
   if(time < 100) {
 
-    //If less than 100ms
-    feedback.satisfaction = 1;
+	//If less than 100ms
+	feedback.satisfaction = 1;
 
   } else if(time > 100 & time < 1000) {
 
-    //If within 100ms and 1s
-    feedback.satisfaction = 0.5
+	//If within 100ms and 1s
+	feedback.satisfaction = 0.5
 
   } else {
 
-    //If more than 1s
-    feedback.satisfaction = 0.1
+	//If more than 1s
+	feedback.satisfaction = 0.1
 
   }
 
@@ -40,11 +40,20 @@ global.eval_interaction = function(target, start, end, results) {
 
 var req_delay = function(request, response, next) {
 
-	//Delay request by the set number of miliseconds
-	console.log(global.my_host + ":" + global.my_port + " > delay: " + global.delay)
-	setTimeout(function() {
+	if(request.url == '/dos_attack') {
+
+		//Do not delay attack simulation requests
 		next();
-	},global.delay);
+
+	} else {
+
+		//Delay request by the set number of miliseconds
+		console.log(global.my_host + ":" + global.my_port + " > delay: " + global.delay)
+		setTimeout(function() {
+			next();
+		},global.delay);
+
+	}
 };
 
 
