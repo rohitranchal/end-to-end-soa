@@ -210,16 +210,31 @@ $( document ).ready(function() {
 		$('#int-authz-policies').html(algos_html);
 	});
 
-	var s_id = $('#scenario_id').text();
-	var s_type = $('#scenario_type').text();
-	$.get('/get_scenario_trust_levels?type=' + s_type + '&s_id=' + s_id, function(algos) {
-		console.log(algos);
-		var algos_html = '';
-		for(var i = 0; i < algos.length; i++) {
-			algos_html += "<div class='panel'><pre>" + JSON.stringify(algos[i])  + '</pre></div>';
-		}
-		$('#trust-mgmt-policies').html(algos_html);
-	});
+	//Preiodically refresh trust values
+	setInterval(function() {
+		$('#trust-mgmt-policies').hide()
+		$('#trust-mgmt-policies').html('')
+		var s_id = $('#scenario_id').text();
+		var s_type = $('#scenario_type').text();
+		$.get('/get_scenario_trust_levels?type=' + s_type + '&s_id=' + s_id, function(algos) {
+			var algos_html = '';
+			for(var i = 0; i < algos.length; i++) {
+				var tm_name = algos[i].trust_module;
+				var services = algos[i].services;
+				algos_html += "<div class='panel col-md-4'>";
+				algos_html += "<h4>" + tm_name + "</h4>";
+				algos_html += "<table class='table table-striped'>";
+				algos_html += "<tr><th>Service</th><th>Trust Level</th></tr>";
+				for(var j = 0; j < services.length; j++) {
+					algos_html += "<tr><td>" + services[j].service_id + "</td><td>" + services[j].trust_level + "</td></tr>";
+				}
+				algos_html += "</table>";
+				algos_html += "</div>";
+			}
+			$('#trust-mgmt-policies').html(algos_html).fadeIn('fast');;
+			console.log('updated');
+		});
+	}, 5000);
 
 
 });
