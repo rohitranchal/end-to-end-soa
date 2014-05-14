@@ -117,6 +117,7 @@
 						$('#service' + service).addClass('svc_stopped');
 					} else {
 						$('#service' + service).addClass('svc_live');
+						$('#service_data_' + service).html('<div class=\'svc_content\'> Port:' + $('#service' + service).data('port') + '</div>');
 					}
 				}
 
