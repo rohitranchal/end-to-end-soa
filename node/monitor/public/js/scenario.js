@@ -218,16 +218,22 @@ $( document ).ready(function() {
 		var s_type = $('#scenario_type').text();
 		$.get('/get_scenario_trust_levels?type=' + s_type + '&s_id=' + s_id, function(algos) {
 			var algos_html = '';
+
+			$('.service_trust_data').each(function() {
+				$(this).html('');
+			});
+
 			for(var i = 0; i < algos.length; i++) {
 				var tm_name = algos[i].trust_module;
 				var services = algos[i].services;
 				algos_html += "<div class='panel col-md-4'>";
 				algos_html += "<h4>" + tm_name + "</h4>";
-				algos_html += "<table class='table table-striped'>";
+				algos_html += "<table class='table table-striped table-bordered'>";
 				algos_html += "<tr><th>Service</th><th>Trust Level</th></tr>";
 				for(var j = 0; j < services.length; j++) {
 					algos_html += "<tr><td>" + services[j].display_name + "</td><td>" + services[j].trust_level + "</td></tr>";
-					$('#service_trust_' + services[j].id).html('<div class=\'svc_content_tl\'>' + tm_name + ': ' + services[j].trust_level + '</div>');
+					// $('#service_trust_' + services[j].id).append('<div class=\'row\'><div class=\'col-md-8 pull-left svc_content_tl\'>' + tm_name + '</div><div class=\'col-md-4\'>' + services[j].trust_level + '</div></div>');
+					$('#service_trust_' + services[j].id).append('<tr class=\'svc_content_tl\'><td>' + tm_name + '</td><td>' + services[j].trust_level + '</td></tr>');
 				}
 				algos_html += "</table>";
 				algos_html += "</div>";
