@@ -99,13 +99,24 @@ exports.get_services_trust_level_for_module = function(ids, trust_module, cb) {
 }
 
 exports.get_trust_configuration = function(module_name, cb) {
-	var sql = "SELECT data FROM Trust_Configurations WHERE module_name = '" + module_name + "'";
-	if (err)
-		throw err;
-	if (rows.length == 0)
-		cb(-1)
-	else
-		cb(rows);
+	var sql = "SELECT data FROM Trust_Configurations WHERE id = '" + module_name + "'";
+	connection.query(sql, function(err, rows, fields) {
+		if (err)
+			throw err;
+
+		if (rows.length == 0)
+			cb(-1)
+		else
+			cb(rows);
+	});
+}
+
+exports.set_trust_configuration = function(module_name, data) {
+	var sql = "UPDATE Trust_Configurations SET data = '" + data + "' WHERE id = '" + module_name + "'";
+	connection.query(sql, function(err, rows, fields) {
+		if (err)
+			throw err;
+	});
 }
 
 exports.set_service_trust_level_for_module = function(id, trust_module, trust_level) {

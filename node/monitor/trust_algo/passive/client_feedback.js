@@ -11,7 +11,8 @@ var mean_fading = 0.5;
 var client_feedback_trust = function(interaction_id) {
 
 	db.get_trust_configuration(module_name, function(config) {
-	 feedback_summary = JSON.parse(config);
+		console.log('config: ' + config);
+		//feedback_summary = JSON.parse(config);
 	});
 
 	//Get from and to service IDs from the interaction table
@@ -79,6 +80,9 @@ var client_feedback_trust = function(interaction_id) {
 
 					//Update trust level of service
 					db.set_service_trust_level_for_module(interaction_data.to_service, module_name, dest_svc_trust);
+
+					db.set_trust_configuration(module_name, "this data");
+
 				});
 			});
 
