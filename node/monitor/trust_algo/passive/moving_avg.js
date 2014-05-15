@@ -3,7 +3,7 @@ var module_name = 'Moving Average';
 var moving_avg_weight = 0.8;
 var init_trust = 5;
 
-var moving_avg_trust = function moving_avg_trust_update(interaction_id) {
+var moving_avg_trust = function(interaction_id) {
 
 	//Get from and to service IDs from the interaction table
 	db.get_interaction_data(interaction_id, function(interaction_data) {

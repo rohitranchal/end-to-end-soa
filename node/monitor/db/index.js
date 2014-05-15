@@ -98,6 +98,16 @@ exports.get_services_trust_level_for_module = function(ids, trust_module, cb) {
 	});
 }
 
+exports.get_trust_configuration = function(module_name, cb) {
+	var sql = "SELECT data FROM Trust_Configurations WHERE module_name = '" + module_name + "'";
+	if (err)
+		throw err;
+	if (rows.length == 0)
+		cb(-1)
+	else
+		cb(rows);
+}
+
 exports.set_service_trust_level_for_module = function(id, trust_module, trust_level) {
 	var sql = "INSERT INTO Service_Trust(service_id, trust_module, trust_level, last_updated) " +
 				"VALUES (" + id + " ,'" + trust_module + "', " + trust_level + " , NOW()) " +
@@ -199,7 +209,7 @@ exports.get_interactions = function(cb) {
 }
 
 exports.get_servicce_interactions = function(from, to, size, cb) {
-		var sql =  "SELECT * FROM Interaction WHERE from_service = '" + from + "' and to_service = '" + to + "' and feedback <> 'null' order by ts DESC LIMIT 0," + size;
+		var sql =  "SELECT * FROM Interaction WHERE from_service = '" + from + "' and to_service = '" + to + "' and feedback <> 'null' order by ts DESC LIMIT " + size;
 		connection.query(sql, function(err, rows, fields) {
 			if (err) throw err;
 			cb(rows);

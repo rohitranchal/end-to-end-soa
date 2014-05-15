@@ -78,9 +78,9 @@ CREATE TABLE Interaction_Trust (
 	from_post FLOAT,
 	to_pre FLOAT,
 	to_post FLOAT,
-	ts TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+	ts TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+	PRIMARY KEY(interaction_id, trust_module)
 );
-
 
 DROP TABLE IF EXISTS Heartbeat_Data;
 CREATE TABLE Heartbeat_Data (
@@ -98,5 +98,11 @@ CREATE TABLE Inflow_Data (
 	service VARCHAR(2048),
 	from_ip VARCHAR(2048),
 	protocol VARCHAR(1024),
+	data TEXT
+);
+
+DROP TABLE IF EXISTS  Trust_Confgurations;
+CREATE TABLE Trust_Configurations (
+	id VARCHAR(512) PRIMARY KEY,
 	data TEXT
 );
