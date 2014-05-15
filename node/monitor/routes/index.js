@@ -228,7 +228,7 @@ exports.interaction_block = function(req, res){
 	var start  = req.query.start;
 	var end  = req.query.end;
 	var data = req.query.data;
-	var feedback = req.query.feedback;
+	var feedback = req.query.service_feedback;
 
 	if(typeof start == 'undefined') {
 		start = null;
