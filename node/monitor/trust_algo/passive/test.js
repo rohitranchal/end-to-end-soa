@@ -1,6 +1,6 @@
 var db = require('../../db');
-var module_name = 'Moving Average 2';
-var moving_avg_weight = 0.8;
+var module_name = 'Test Module';
+var moving_avg_weight = 0.5;
 var init_trust = 5;
 
 var moving_avg_trust = function moving_avg_trust_update(interaction_id) {
