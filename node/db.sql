@@ -101,7 +101,7 @@ CREATE TABLE Inflow_Data (
 	data TEXT
 );
 
-DROP TABLE IF EXISTS  Trust_Confgurations;
+DROP TABLE IF EXISTS Trust_Configurations;
 CREATE TABLE Trust_Configurations (
 	id VARCHAR(512) PRIMARY KEY,
 	data TEXT
