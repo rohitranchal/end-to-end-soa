@@ -2,6 +2,11 @@ var db = require('../../db');
 var module_name = 'Client Feedback';
 var client_feedback_weight = 0.8;
 var init_trust = 5;
+var intr_window = 5;
+var conf_belief, int_belief;
+var dest_svc_trust;
+var mean_weight;
+var mean_fading = 0.5;
 
 var client_feedback_trust = function client_feedback_trust_update(interaction_id) {
 
@@ -12,51 +17,43 @@ var client_feedback_trust = function client_feedback_trust_update(interaction_id
 			return;
 		}
 
-		var svc_feedback = JSON.parse(interaction_data.feedback);
+		db.get_servicce_interactions(1, 2, intr_window, function(interactions) {
 
-		db.get_service_trust_level_for_module(interaction_data.from_service, module_name, function(from_trust){
+			console.log('interactions data: ' + interactions);
 
-			db.get_service_trust_level_for_module(interaction_data.to_service, module_name, function(to_trust){
+			var svc_feedback, svc_sat, svc_wt, fading;
+			var summation_cb = 0, coefficient = 0, sum_wts = 0, summation_ib;
 
-				if(from_trust == -1) {
-					from_trust = init_trust;//bootstrap trust with a default value
-				} else {
-					from_trust = from_trust.trust_level;
-				}
+			for(var i = 0; i < intr_window; i++) {
+				svc_feedback = JSON.parse(interactions[i].feedback);
+				svc_sat = svc_feedback.satisfaction;
+				svc_wt = svc_feedback.weight;
+				fading = intr_window - i / intr_window;
+				summation_cb += svc_sat * svc_wt * fading;
+				coefficient += svc_wt * fading;
+				sum_wts += svc_wt;
+			}
 
-				if(to_trust == -1) {
-					to_trust = init_trust;//bootstrap trust with a default value
-				} else {
-					to_trust = to_trust.trust_level;
-				}
+			conf_belief = summation_cb / coefficient;
 
-				//Calculate new trust value for the caller
+			mean_weight = sum_wts / intr_window;
 
-				//Service feedback used to update to_trust
-				//Service feedback integrity used to update from_trust
-				var svc_sat = svc_feedback.satisfaction;
-				var svc_wt = svc_feedback.weight;
+			for(var i = 0; i < intr_window; i++) {
+				svc_feedback = JSON.parse(interactions[i].feedback);
+				svc_sat = svc_feedback.satisfaction;
+				summation_ib += (svc_sat * mean_weight * mean_fading - conf_belief)^2
+			}
 
-				//Get integrity of this interaction from db
-				//TODO: Logic for calculating integrity belief
-				//To logic: To trust is adjusted according to client feedback and its wt
-				//From Logic: SM interaction parameters: basically to's existing trust level.
+			int_belief = (summation_ib / intr_window)^0.5;
 
-				//To Logic: Heartbeat/Inflow data/Service view
-				var ib = 0.8;
+			dest_svc_trust = conf_belief - int_belief / 2;
 
-				console.log('\n---interaction: ' + svc_feedback.satisfaction);
+			console.log("cb: " + conf_belief);
+			console.log("ib: " + int_belief);
+			console.log("st: " + dest_svc_trust);
 
-				var tmp_trust_level = from_trust * client_feedback_satisfaction * client_feedback_weight * ib;
-				var new_trust_level = tmp_trust_level.toFixed(3);
-
-				//Update interaction trust levels
-				db.set_interaction_trust_level_for_module(interaction_id, module_name, from_trust, new_trust_level, to_trust, to_trust);
-
-				//Update trust level of service
-				db.set_service_trust_level_for_module(interaction_data.from_service, module_name, new_trust_level);
-			});
 		});
+
 	});
 };
 

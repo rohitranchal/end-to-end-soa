@@ -84,8 +84,8 @@ exports.get_service_trust_level_for_module = function(id, trust_module, cb) {
 
 //Returns trust levels for multiple services
 exports.get_services_trust_level_for_module = function(ids, trust_module, cb) {
-	var sql = "SELECT Service.id, Service.display_name, trust_level " + 
-				"FROM Service_Trust JOIN Service ON Service_Trust.service_id = Service.id " + 
+	var sql = "SELECT Service.id, Service.display_name, trust_level " +
+				"FROM Service_Trust JOIN Service ON Service_Trust.service_id = Service.id " +
 				"WHERE service_id IN (" + ids.join() + ") AND trust_module = '" + trust_module + "'";
 
 	connection.query(sql, function(err, rows, fields) {
@@ -190,13 +190,21 @@ exports.get_interaction_data = function(interaction_id, cb) {
 }
 
 exports.get_interactions = function(cb) {
-	var sql = "SELECT f.name AS from_service, t.name AS to_service, i.start, i.end, (i.end - i.start) AS duration, i.ts, i.data, i.feedback " + 
+	var sql = "SELECT f.name AS from_service, t.name AS to_service, i.start, i.end, (i.end - i.start) AS duration, i.ts, i.data, i.feedback " +
 				"FROM Interaction i INNER JOIN Service f ON f.id = i.from_service INNER JOIN Service t ON t.id = i.to_service;";
 	connection.query(sql, function(err, rows, fields) {
 		if (err) throw err;
 		cb(rows);
 	});
 }
+
+exports.get_servicce_interactions = function(from, to, size, cb) {
+		var sql =  "SELECT * FROM Interaction WHERE from_service = '" + from + "' and to_service = '" + to + "' and feedback <> 'null' order by ts DESC LIMIT 0," + size;
+		connection.query(sql, function(err, rows, fields) {
+			if (err) throw err;
+			cb(rows);
+		});
+	}
 
 exports.add_stat = function(service, data) {
 
