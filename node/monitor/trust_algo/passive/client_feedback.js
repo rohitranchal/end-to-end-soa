@@ -7,16 +7,20 @@ var conf_belief, int_belief;
 var dest_svc_trust;
 var mean_weight;
 var mean_fading = 0.5;
-var fb_summary;
+var fb_summary = null;
+
+// Loading the initial trust module configuration if available
+db.get_trust_configuration(module_name, function(config) {
+	if (typeof config != 'undefined') {
+		fb_summary = JSON.parse(config.data);
+	} else {
+		fb_summary = new Array();
+	}
+});
 
 var client_feedback_trust = function(interaction_id) {
 
 	db.get_trust_configuration(module_name, function(config) {
-		if (typeof config != 'undefined') {
-			fb_summary = JSON.parse(config.data);
-		} else {
-			fb_summary = new Array();
-		}
 
 		//Get from and to service IDs from the interaction table
 		db.get_interaction_data(interaction_id, function(interaction_data) {
