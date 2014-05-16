@@ -103,16 +103,13 @@ exports.get_trust_configuration = function(module_name, cb) {
 	connection.query(sql, function(err, rows, fields) {
 		if (err)
 			throw err;
-
-		if (rows.length == 0)
-			cb(-1)
-		else
-			cb(rows);
+		cb(rows);
 	});
 }
 
 exports.set_trust_configuration = function(module_name, data) {
-	var sql = "UPDATE Trust_Configurations SET data = '" + data + "' WHERE id = '" + module_name + "'";
+	var sql = "INSERT INTO Trust_Configurations VALUES('" + module_name + "','" + data + "') ON DUPLICATE KEY UPDATE data = '" + data + "'";
+	console.log(sql);
 	connection.query(sql, function(err, rows, fields) {
 		if (err)
 			throw err;
@@ -122,7 +119,7 @@ exports.set_trust_configuration = function(module_name, data) {
 exports.set_service_trust_level_for_module = function(id, trust_module, trust_level) {
 	var sql = "INSERT INTO Service_Trust(service_id, trust_module, trust_level, last_updated) " +
 				"VALUES (" + id + " ,'" + trust_module + "', " + trust_level + " , NOW()) " +
-				"ON DUPLICATE KEY UPDATE trust_level=" + trust_level + ", last_updated=NOW()";
+				"ON DUPLICATE KEY UPDATE trust_level =" + trust_level + ", last_updated=NOW()";
 
 	connection.query(sql, function(err, rows, fields) {
 		if (err) throw err;

@@ -7,12 +7,17 @@ var conf_belief, int_belief;
 var dest_svc_trust;
 var mean_weight;
 var mean_fading = 0.5;
+var fb_summary;
 
 var client_feedback_trust = function(interaction_id) {
 
 	db.get_trust_configuration(module_name, function(config) {
 		console.log('config: ' + config);
-		//feedback_summary = JSON.parse(config);
+		if (config.length != 0) {
+			fb_summary = JSON.parse(JSON.stringify(config));
+		} else {
+			fb_summary = new Array();
+		}
 	});
 
 	//Get from and to service IDs from the interaction table
@@ -53,6 +58,47 @@ var client_feedback_trust = function(interaction_id) {
 
 			int_belief = (summation_ib / intr_window)^0.5;
 
+			for (var i = 0; i < fb_summary.length; i++) {
+
+				if (fb_summary[i].id == interaction_data.to_service) {
+
+					// have interaction records about this dest
+					for (var j = 0; j < fb_summary[i].callers.length; j++) {
+
+						if (fb_summary[i].callers[j].id == interaction_data.from_service) {
+
+							// have interaction records for this caller
+							// increment num calls, cal new cb, ib
+							fb_summary[i].callers[j].cb = (fb_summary[i].callers[j].cb * fb_summary[i].callers[j].num_calls + conf_belief) / (num_calls + 1);
+							fb_summary[i].callers[j].ib = (fb_summary[i].callers[j].ib * fb_summary[i].callers[j].num_calls + int_belief) / (num_calls + 1);
+							fb_summary[i].callers[j].num_calls++;
+							break;
+						}
+					}
+					if (j == fb_summary[i].callers.length) {
+
+						// don't have interaction records for this caller
+						var tmp_caller = {'id' : interaction_data.from_service, 'num_calls' : 1};
+						tmp_caller.cb = conf_belief;
+						tmp_caller.ib = int_belief;
+						fb_summary[i].callers[j] = tmp_caller;
+					}
+					break;
+				}
+			}
+			if (i == fb_summary.length) {
+
+				// don't have interaction records about this dest
+				var tmp_caller = {'id' : interaction_data.from_service, 'num_calls' : 1};
+				tmp_caller.cb = conf_belief;
+				tmp_caller.ib = int_belief;
+				var tmp_fb = {'id' : interaction_data.to_service};
+				tmp_fb.callers = new Array();
+				tmp_fb.callers[i] = tmp_caller;
+				fb_summary[i] = tmp_fb;
+			}
+
+			console.log("fbs: " + JSON.stringify(fb_summary));
 			dest_svc_trust = conf_belief - int_belief / 2;
 
 			console.log("cb: " + conf_belief);
@@ -81,7 +127,7 @@ var client_feedback_trust = function(interaction_id) {
 					//Update trust level of service
 					db.set_service_trust_level_for_module(interaction_data.to_service, module_name, dest_svc_trust);
 
-					db.set_trust_configuration(module_name, "this data");
+					db.set_trust_configuration(module_name, JSON.stringify(fb_summary));
 
 				});
 			});
