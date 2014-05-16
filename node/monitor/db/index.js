@@ -103,13 +103,12 @@ exports.get_trust_configuration = function(module_name, cb) {
 	connection.query(sql, function(err, rows, fields) {
 		if (err)
 			throw err;
-		cb(rows);
+		cb(rows[0]);
 	});
 }
 
 exports.set_trust_configuration = function(module_name, data) {
 	var sql = "INSERT INTO Trust_Configurations VALUES('" + module_name + "','" + data + "') ON DUPLICATE KEY UPDATE data = '" + data + "'";
-	console.log(sql);
 	connection.query(sql, function(err, rows, fields) {
 		if (err)
 			throw err;
