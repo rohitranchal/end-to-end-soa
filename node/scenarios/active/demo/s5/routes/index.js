@@ -31,6 +31,10 @@ exports.dos_attack = function(req, res) {
 	res.send('Service delay: ' + global.delay);
 };
 
+exports.fix_dos_attack = function(req, res) {
+	global.delay = 0;
+	res.send('Service delay: ' + global.delay);
+};
 
 
 /*

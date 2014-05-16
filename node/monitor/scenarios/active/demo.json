@@ -13,6 +13,7 @@
 			{"id": 14 , "x" : 900, "y" : 200}, 
 			{"id": 15 , "x" : 500, "y" : 400}],
 	"actions" : [{"name" : "DoS Attack: Overload Service", "type" : "attack", "invoke_url" : "http://localhost:5113/dos_attack"},
+				{"name" : "Undo DoS Attack", "type" : "fix", "invoke_url" : "http://localhost:5113/fix_dos_attack"},
 				{"name" : "Insider Reconfigure Transport", "type" : "attack", "invoke_url" : "http://localhost:4111/attack_transport"}],
 	"status" : [ {"service" : 15, "status" : "svc_backup"}]
 }

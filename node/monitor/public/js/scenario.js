@@ -178,7 +178,7 @@
 					var action_html = "";
 					for(var i = 0; i < data.actions.length; i++) {
 						var action = data.actions[i];
-						action_html += "<div class='panel'><button data-url='" + action.invoke_url + "' class='btn svc_act btn-default'><img height='50px' src='images/" + action.type + ".png'/>" + action.name + "</button></div>";
+						action_html += "<div class='panel'><button data-url='" + action.invoke_url + "' class='btn svc_act btn-default'><img height='35px' src='images/" + action.type + ".png'/>" + action.name + "</button></div>";
 					}
 					$('#scenario-actions').html(action_html);
 				}
@@ -232,7 +232,7 @@ $( document ).ready(function() {
 				algos_html += "<tr><th>Service</th><th>Trust Level</th></tr>";
 				for(var j = 0; j < services.length; j++) {
 					algos_html += "<tr><td>" + services[j].display_name + "</td><td>" + services[j].trust_level + "</td></tr>";
-					$('#service_trust_' + services[j].id).append('<tr class=\'svc_content_tl\'><td>' + tm_name + '</td><td>' + services[j].trust_level + '</td></tr>');
+					$('#service_trust_' + services[j].id).append('<tr class=\'svc_content_tl\'><td>' + tm_name + '</td><td>' + services[j].trust_level.toFixed(3) + '</td></tr>');
 				}
 				algos_html += "</table>";
 				algos_html += "</div>";

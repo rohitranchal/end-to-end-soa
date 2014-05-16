@@ -40,7 +40,7 @@ global.eval_interaction = function(target, start, end, results) {
 
 var req_delay = function(request, response, next) {
 
-	if(request.url == '/dos_attack') {
+	if(request.url == '/dos_attack' || request.url == '/fix_dos_attack') {
 
 		//Do not delay attack simulation requests
 		next();
@@ -77,6 +77,8 @@ if ('development' == app.get('env')) {
 
 app.get('/', routes.index);
 app.get('/dos_attack', routes.dos_attack);
+app.get('/fix_dos_attack', routes.fix_dos_attack);
+
 
 http.createServer(app).listen(app.get('port') + 1000, function(){
   console.log('Express server listening on port ' + (app.get('port') + 1000));
