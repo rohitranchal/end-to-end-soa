@@ -4,7 +4,6 @@ var client_feedback_weight = 0.8;
 var init_trust = 5;
 var intr_window = 5;
 var conf_belief, int_belief;
-var dest_svc_trust;
 var mean_weight;
 var mean_fading = 0.5;
 var fb_summary = null;
@@ -98,7 +97,7 @@ var client_feedback_trust = function(interaction_id) {
 					fb_summary[i] = tmp_fb;
 				}
 
-				dest_svc_trust = conf_belief - int_belief / 2;
+				var dest_svc_trust = conf_belief - int_belief / 2;
 
 				db.get_service_trust_level_for_module(interaction_data.from_service, module_name, function(from_trust){
 
