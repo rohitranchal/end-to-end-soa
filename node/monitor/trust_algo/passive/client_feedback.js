@@ -72,6 +72,9 @@ var client_feedback_trust = function(interaction_id) {
 							fb_summary[i].callers[j].cb = (fb_summary[i].callers[j].cb * fb_summary[i].callers[j].num_calls + conf_belief) / (num_calls + 1);
 							fb_summary[i].callers[j].ib = (fb_summary[i].callers[j].ib * fb_summary[i].callers[j].num_calls + int_belief) / (num_calls + 1);
 							fb_summary[i].callers[j].num_calls++;
+
+							conf_belief = fb_summary[i].callers[j].cb;
+							int_belief = fb_summary[i].callers[j].ib;
 							break;
 						}
 					}
