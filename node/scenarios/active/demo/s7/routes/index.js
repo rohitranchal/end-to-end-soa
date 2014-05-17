@@ -1,7 +1,7 @@
 var request = require('../../../../../instr_request_block');
 
 exports.index = function(req, res) {
-
+		console.log('BACKUP SERVICE ACCESSED');
 		global.my_url = 'http://' + global.my_host + ':' + global.my_port;
 		request('http://' + global.my_host + ':4114/', function (error, response, body) {
 			if (!error && response.statusCode == 200) {
