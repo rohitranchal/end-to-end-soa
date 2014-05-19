@@ -8,6 +8,8 @@ To install:
 - Use db.sql to initialize it.
 - Optional: Use any init.x script in the experiment directory to assign default trust values.
 - Set the mysql username and password in monitor/db/index.php
+- Install maven
+- Build ../policy project with "mvn clean install"
 
 - run ./install
 
