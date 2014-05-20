@@ -9,12 +9,16 @@ var auth = function(from, to, id, cb) {
 	//Obtain trust values for to the service based on Client Feedback algo
 	db.get_service_trust_level_for_module(to.id, 'Client Feedback', function(to_trust_value) {
 		if(to_trust_value != -1) {
-			if(to_trust_value.trust_level < 0.8) {
-				console.log('redirect');
+			if(to_trust_value.trust_level < 0.9) {
+				console.log('redirect' + to_trust_value.trust_level);
 				cb(id, {code : 200, data : 'http://localhost:4115/'});
 
 				//Rewire topology
+				//Breack connection from.id to to.id
+				scenarios.break_connection(from.id, to.id);
 
+				//Add connection from.id to 16
+				scenarios.add_connection(from.id, 15);
 
 			} else {
 				cb(id, {code : 200});	

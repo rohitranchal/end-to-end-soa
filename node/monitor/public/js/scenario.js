@@ -1,4 +1,9 @@
 //Based on http://jsplumbtoolkit.com/demo/statemachine/demo-jquery.js
+var live_connections = new Array();
+
+//The number of updates already applied
+var update_index = 0;
+
 ;(function() {
 	jsPlumb.ready(function() {
 
@@ -37,7 +42,7 @@
 			if ($(this).hasClass('btn-default')) {
 				for (var i=0; i<count; i++) {
 					if (svcs_toggle[i][1] == -1) {
-						console.log('Start id:' + svcs_toggle[i][0]);
+
 						var svc_id = svcs_toggle[i][0];
 						$.post("/toggle_service", {service_id : svc_id}, function (data) {
 							location.reload();
@@ -47,7 +52,7 @@
 			} else {
 				for (var i=0; i<count; i++) {
 					if (svcs_toggle[i][1] != -1) {
-						console.log('Stop id:' + svcs_toggle[i][0]);
+
 						var svc_id = svcs_toggle[i][0];
 						$.post("/toggle_service", {service_id : svc_id}, function (data) {
 							location.reload();
@@ -168,9 +173,30 @@
 				//Create connections
 				for(var i = 0; i < data.connections.length; i++) {
 					var conn = data.connections[i];
-					instance.connect({ source:'service' + conn[0],
+					var c = jsPlumb.connect({ source:'service' + conn[0],
 										target:'service' + conn[1],
-										paintStyle:{ strokeStyle:"red", lineWidth:10 }});
+										anchor:"Continuous",
+										connector:["Straight"],
+										paintStyle:{ lineWidth:2, strokeStyle:"#6E6E6E" },
+										endpoint: "Blank",
+										overlays:[
+											["Arrow", {
+												location:1,
+												id:"arrow",
+												length:14,
+												foldback:0.8
+											}]
+										]
+									});
+
+					//Store the connection globally to be able to access it later
+					var connections_from = live_connections[conn[0]];
+					if( connections_from == null) {
+						connections_from = new Array();
+						live_connections[conn[0]] = connections_from;
+					}
+					connections_from[conn[1]] = c;
+
 				}
 
 				//Populate actions
@@ -188,6 +214,50 @@
 						alert(data);
 					});
 				});
+
+
+				//Periodically get connection updates
+				setInterval(function() {
+
+					$.get('/get_connection_updates?from=' + update_index, function(updates) {
+
+						update_index += updates.length;
+
+						for(var i = 0; i < updates.length; i++) {
+							var update = updates[i];
+							if(update.action == 'break') {
+
+								//See if we have the from connection
+								var connections_from = live_connections[update.from];
+								if( connections_from != null ) {
+
+									//See if we have the to connection
+									var conn = connections_from[update.to];
+
+									//break connection
+									jsPlumb.detach(conn);
+								}
+							} else {
+
+								var c = jsPlumb.connect({ source:'service' +  update.from,
+											target:'service' +  update.to,
+											anchor:"Continuous",
+											connector:["Straight"],
+											paintStyle:{ lineWidth:4 , strokeStyle:"#81BEF7" },
+											endpoint: "Blank",
+											overlays:[
+												["Arrow", {
+													location:1,
+													id:"arrow",
+													length:14,
+													foldback:0.8
+												}]
+												]
+										});
+							}
+						}
+					});
+				}, 5000);
 
 			});
 
@@ -238,9 +308,8 @@ $( document ).ready(function() {
 				algos_html += "</div>";
 			}
 			$('#trust-mgmt-policies').html(algos_html);
-			console.log('updated');
-		});
-	}, 3000);
 
+		});
+	}, 1000);
 
 });
