@@ -22,7 +22,7 @@ app.set('port', process.env.PORT || 3000);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 app.use(express.favicon());
-app.use(express.logger('dev'));
+// app.use(express.logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded());
 app.use(express.methodOverride());
@@ -52,6 +52,8 @@ app.post('/add_service_process', routes.add_service_process);
 app.get('/add_service_show', routes.add_service_show);
 app.get('/get_scenario_trust_levels', scenario.get_scenario_trust_levels);
 app.get('/get_connection_updates', scenario.get_connection_updates);
+app.get('/get_service_updates', scenario.get_service_updates);
+
 
 app.get('/trust_algo_list', routes.trust_algo_list);
 app.get('/get_int_authz_algo_list', routes.get_default_active_trust_algo_list);

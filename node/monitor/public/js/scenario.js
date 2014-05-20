@@ -4,6 +4,8 @@ var live_connections = new Array();
 //The number of updates already applied
 var update_index = 0;
 
+var service_update_index = 0;
+
 ;(function() {
 	jsPlumb.ready(function() {
 
@@ -257,7 +259,7 @@ var update_index = 0;
 							}
 						}
 					});
-				}, 5000);
+				}, 1000);
 
 			});
 
@@ -309,6 +311,25 @@ $( document ).ready(function() {
 			}
 			$('#trust-mgmt-policies').html(algos_html);
 
+		});
+	}, 1000);
+
+
+	//Periodically get service updates
+	setInterval(function() {
+
+		$.get('/get_service_updates?from=' + service_update_index , function(updates) {
+
+			service_update_index += updates.length;
+
+			for(var i = 0; i < updates.length; i++) {
+				var update = updates[i];
+				if(update.action == 'add') {
+					$('#service' + update.service).addClass(update.state);
+				} else {
+					$('#service' + update.service).removeClass(update.state);
+				}
+			}
 		});
 	}, 1000);
 

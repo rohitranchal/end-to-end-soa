@@ -3,6 +3,8 @@ var fs = require('fs');
 var trust = require('../trust_algo');
 
 var connection_updates = new Array();
+var service_updates = new Array();
+
 
 console.log('Loading scenarios ... ');
 var files = fs.readdirSync('./scenarios/passive/');
@@ -38,6 +40,15 @@ for(var i = 0; i < files.length; i++) {
 	});	
 }
 
+exports.update_service_status = function(service_id, state, action) {
+	service_updates[service_updates.length] = {'service': service_id, 'state' : state , 'action' : action};
+};
+
+exports.get_service_updates = function(req, res) {
+	//Only return items from the point required
+	var ret = service_updates.slice(req.query.from);
+	res.send(ret);
+};
 
 exports.break_connection = function(from, to) {
 

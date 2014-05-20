@@ -20,6 +20,12 @@ var auth = function(from, to, id, cb) {
 				//Add connection from.id to 16
 				scenarios.add_connection(from.id, 15);
 
+				scenarios.update_service_status(to.id, 'svc_live', 'remove');
+				scenarios.update_service_status(to.id, 'svc_under_attack', 'add');
+				scenarios.update_service_status(15, 'svc_backup', 'remove');
+				scenarios.update_service_status(15, 'svc_live', 'add');
+
+
 			} else {
 				cb(id, {code : 200});	
 			}
