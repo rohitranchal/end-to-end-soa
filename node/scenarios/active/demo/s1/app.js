@@ -15,29 +15,29 @@ global.my_port = 4109;
 
 //Evaluate interactions
 global.eval_interaction = function(target, start, end, results) {
-  var feedback = {};
-  var time = end - start;
+	var feedback = {};
+	var time = end - start;
+	console.log(time);
+	if(time < 1000) {
 
-  if(time < 6000) {
+	//If less than 100ms
+	feedback.satisfaction = 1;
 
-    //If less than 100ms
-    feedback.satisfaction = 1;
+	} else if(time > 1000 & time < 2000) {
 
-  } else if(time > 6000 & time < 10000) {
+	//If within 100ms and 1s
+	feedback.satisfaction = 0.5
 
-    //If within 100ms and 1s
-    feedback.satisfaction = 0.5
+	} else {
 
-  } else {
+	//If more than 1s
+	feedback.satisfaction = 0.1
 
-    //If more than 1s
-    feedback.satisfaction = 0.1
+	}
 
-  }
+	feedback.weight = 1;
 
-  feedback.weight = 1;
-
-  results(feedback);
+	results(feedback);
 };
 
 // all environments
@@ -53,12 +53,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // development only
 if ('development' == app.get('env')) {
-  app.use(express.errorHandler());
+	app.use(express.errorHandler());
 }
 
 app.get('/', routes.index);
 
 
 http.createServer(app).listen(app.get('port'), function(){
-  console.log('Express server listening on port ' + app.get('port'));
+	console.log('Express server listening on port ' + app.get('port'));
 });
