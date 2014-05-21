@@ -6,7 +6,7 @@
 		<AnyOf>
 			<AllOf>			
 				<Match MatchId="urn:oasis:names:tc:xacml:1.0:function:string-regexp-match">
-						<AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">localhost:610[0-9]+</AttributeValue>					
+						<AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">^localhost:</AttributeValue>					
 					<AttributeDesignator
 						AttributeId="urn:oasis:names:tc:xacml:1.0:resource:resource-id"
 						Category="urn:oasis:names:tc:xacml:3.0:attribute-category:resource"
@@ -28,7 +28,7 @@
 		<AnyOf>
 			<AllOf>
 				<Match MatchId="urn:oasis:names:tc:xacml:1.0:function:string-regexp-match">
-					<AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">localhost:610[0-9]+</AttributeValue>
+					<AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">^localhost:</AttributeValue>
 					<AttributeDesignator
 						AttributeId="http://endtoendsoa.cs.purdue.edu/policy/service_uri"
 						Category="urn:oasis:names:tc:xacml:1.0:subject-category:access-subject"
@@ -48,7 +48,7 @@
 							DataType="http://www.w3.org/2001/XMLSchema#integer"
 							MustBePresent="true" />
 					</Apply>
-					<AttributeValue DataType="http://www.w3.org/2001/XMLSchema#integer">5</AttributeValue>
+					<AttributeValue DataType="http://www.w3.org/2001/XMLSchema#integer">10</AttributeValue>
 				</Apply>
 				
 				<Apply FunctionId="urn:oasis:names:tc:xacml:1.0:function:or">

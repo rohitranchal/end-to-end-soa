@@ -68,7 +68,7 @@ var my_req = function() {
 				if (typeof global.eval_interaction !== 'undefined') {
 
 					//Obtain service feedback
-					global.eval_interaction(sm_data.to, start, end, function(service_feedback) {
+					global.eval_interaction(_args[0], start, end, function(service_feedback) {
 						sm_data[sm_data.length] = new Array('service_feedback', JSON.stringify(service_feedback));
 
 						//this is async
@@ -84,6 +84,9 @@ var my_req = function() {
 			_args[1] = profiling_cb;
 			_req.apply(this, _args);
 		} else {
+			error = body;
+			response = 403;
+			body = '';
 			_args[1](error, response, body);
 			return;
 		}

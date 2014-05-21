@@ -17,26 +17,23 @@ global.my_port = 4109;
 global.eval_interaction = function(target, start, end, results) {
 	var feedback = {};
 	var time = end - start;
-	console.log(time);
+
 	if(time < 1000) {
 
-	//If less than 100ms
-	feedback.satisfaction = 1;
+		feedback.satisfaction = 1;
 
 	} else if(time > 1000 & time < 2000) {
 
-	//If within 100ms and 1s
-	feedback.satisfaction = 0.5
+		feedback.satisfaction = 0.5
 
 	} else {
 
-	//If more than 1s
-	feedback.satisfaction = 0.1
+		feedback.satisfaction = 0.1
 
 	}
 
 	feedback.weight = 1;
-
+	console.log(target + '>' + time + ':' + feedback.satisfaction);
 	results(feedback);
 };
 
