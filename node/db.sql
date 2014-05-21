@@ -40,8 +40,6 @@ INSERT INTO Service(id, name, display_name, grade, host, port, url, params, stat
 (20, 'localhost:6103','Travel Agent', 10.0, 'localhost', 6103, 'http://localhost:6103', '{}', -1, 'scenarios/active/demo_airline/s1'),
 (21, 'localhost:6104','Airline', 10.0, 'localhost', 6104, 'http://localhost:6104', '{}', -1, 'scenarios/active/demo_airline/s2'),
 (22, 'localhost:6105','Advertiser', 10.0, 'localhost', 6105, 'http://localhost:6105', '{}', -1, 'scenarios/active/demo_airline/s3'),
-(23, 'localhost:6106','Travel Agent', 10.0, 'localhost', 6106, 'http://localhost:6106', '{}', -1, 'scenarios/active/demo_https/s1'),
-(24, 'localhost:6107','Airline', 10.0, 'localhost', 6107, 'http://localhost:6107', '{}', -1, 'scenarios/active/demo_https/s2'),
 (25, 'localhost:6108','Travel Agent', 10.0, 'localhost', 6108, 'http://localhost:6108', '{}', -1, 'scenarios/active/demo_post/s1'),
 (26, 'localhost:6109','Payment Gateway', 10.0, 'localhost', 6109, 'http://localhost:6109', '{}', -1, 'scenarios/active/demo_post/s2'),
 (30, 'localhost:6110','localhost:6110', 10.0, 'localhost', 6110, 'http://localhost:6110', '{}', -1, 'scenarios/active/demo_redirect/s1'),
