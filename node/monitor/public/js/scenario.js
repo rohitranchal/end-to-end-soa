@@ -231,13 +231,15 @@ var service_update_index = 0;
 
 								//See if we have the from connection
 								var connections_from = live_connections[update.from];
-								if( connections_from != null ) {
+								if(connections_from != null) {
 
 									//See if we have the to connection
 									var conn = connections_from[update.to];
 
-									//break connection
-									jsPlumb.detach(conn);
+									if(typeof conn != 'undefined') {
+										//break connection
+										jsPlumb.detach(conn);
+									}
 								}
 							} else {
 

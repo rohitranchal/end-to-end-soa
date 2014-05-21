@@ -75,7 +75,31 @@ var auth = function(from, to, id, cb) {
 			console.log('Authorization response: ' + result);
 			if(result == 'Deny') {
 				cb(id, {code : 403});
-				scenarios.break_connection(from.id, to.id);
+
+				//Find out if there's a parent service
+				db.get_service(to.id, function(svc_entry) {
+
+					if(svc_entry == null) {
+
+						//We should not reach this
+						scenarios.break_connection(from.id, to.id);
+
+					} else {
+						var params = JSON.parse(svc_entry.params);
+						if(typeof params.parent_service_id != 'undefined') {
+							
+							//Break connection to the parent of the target
+							scenarios.break_connection(from.id, params.parent_service_id);
+
+						} else {
+
+							//Break connection to the target
+							scenarios.break_connection(from.id, to.id);
+
+						}
+					}
+				});
+				
 			} else {
 				cb(id, {code : 200});
 			}

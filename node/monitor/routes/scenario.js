@@ -53,6 +53,7 @@ exports.get_service_updates = function(req, res) {
 exports.break_connection = function(from, to) {
 
 	var update_id = 'break_' + from + '_' + to;
+	console.log(update_id);
 	//This is very inefficient. TODO: Find a better way to stop adding duplicate items
 	for(var i = 0; i < connection_updates.length; i++) {
 		if(connection_updates[i].id == update_id) {
