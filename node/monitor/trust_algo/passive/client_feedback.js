@@ -1,7 +1,7 @@
 var db = require('../../db');
 var module_name = 'Client Feedback';
 var client_feedback_weight = 0.8;
-var init_trust = 5;
+var init_trust = 1;
 var intr_window = 5;
 var conf_belief, int_belief;
 var mean_weight;
