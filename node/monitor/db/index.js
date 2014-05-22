@@ -3,7 +3,7 @@ var uuid			 = require('node-uuid');
 var connection = mysql.createConnection({
 	host     : 'localhost',
 	user     : 'root',
-	password : '',
+	password : 'pim01',
 	database : 'soa_trust',
 	multipleStatements: true
 });

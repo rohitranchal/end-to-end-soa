@@ -1,15 +1,85 @@
-Port Assignment
-monitor : 3000
+REST/SOA Service Interaction Monitoring Framework
+
+A Framework for Service Activity Monitoring
+
+Project Page: https://www.cs.purdue.edu/homes/rranchal/ngcsoa_webpage/
+Source Code: https://code.google.com/p/end-to-end-soa/
+License: MIT License Copyright 2013 
+
+In a service-oriented architecture (SOA) environment, a service can dynamically
+select and invoke any service from a group of services to offload part of its
+functionality. This is very useful to build large systems with existing
+services and dynamically add services to support new features. One of the main
+problems with such a system is that, it is very difficult to trust the service
+interaction life-cycle and assume that the services behave as expected and
+respect the system policies. We propose a centralized service monitor, that
+audits and detects malicious activity or compromised services by analyzing
+information collected via monitoring agents. The service monitor includes two
+modes of operation - active and passive - where one can evaluate service
+topologies with various policies.
 
 
-To install:
-- Install nodejs
-- Setup a new mysql database named : soa_trust
-- Use db.sql to initialize it.
-- Optional: Use any init.x script in the experiment directory to assign default trust values.
-- Set the mysql username and password in monitor/db/index.php
+OBTAINING THE SOURCE:
 
-- run ./install
+The source code can be downloaded using git.  If git does not exist it can
+be installed by running the command:
+  sudo apt-get install git
+  
+To download the source run the following command:
+  git clone https://code.google.com/p/end-to-end-soa/
+
+
+INSTALLATION:
+
+Required Software Packages:
+The following software packages must be installed prior to running the main
+install procedure:
+- nodejs
+  To install on Ubuntu run:
+    sudo apt-get install nodejs
+- mysql
+  To install on Ubuntu run:
+    sudo apt-get install mysql
+- maven (required version 2 or greater)
+  To install on Ubuntu run:
+    sudo apt-get install maven
+  If upgrading from an older version of maven ensure that maven2 is no longer
+  installed by running:
+    sudo apt-get remove maven2
+- java7
+  Verify the installed version of java by running:
+    java -version 
+  If the output indicates tha version of at least "1.7.0" then java7 is
+  already installed
+  To install on Ubuntu run:
+    sudo apt-get install default-jre
+
+MySQL Database Setup:
+A MySQL database named soa_trust is used by the framework for storing vital
+information.  This database must be set up prior to running the main install
+procedure.  A file containing an SQL script for database setup is provided in
+the "node" directory of the project source.
+
+- To execute this file to create the database run:
+  mysql -u ROOT_USER -p < db.sql
+  Where ROOT_USER is the name of the root mysql user that was created as part
+  of MySQL installation.
+- Set the MySQL username and password in node/monitor/db/index.js to a user that
+  has read and write access to the soa_trust database.
+- Optional: Use any init.x script in the experiment directory to assign
+  default trust values.
+
+Main Install Procedure:
+
+- Build the policy using maven: 
+  From the "policy" directory of the project source run:
+     mvn clean install
+- Install the framework:
+  From the "node" directory of the project source run:
+     ./install
+	 
+
+RUNNING THE FRAMEWORK:
 
 To start service monitor:
 ./start
@@ -18,5 +88,7 @@ To stop everything:
 ./stop
 
 
-All services in scenarios are assigned ports starting with 4101.
+PORT ASSIGNMENTS:
+The monitor will use port 3000 and all services in scenarios are assigned ports
+  starting with 4101.
 Please make sure there are no conflicts.
