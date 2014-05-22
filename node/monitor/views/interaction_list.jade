@@ -8,20 +8,20 @@ html(lang="en")
 				h2 Service Interactions
 			div(class="panel panel-default")
 				div(class="panel-body")
-					div(class="row")
-						div(class="col-md-3")
-							strong From
-						div(class="col-md-3")
-							strong To
-						div(class="col-md-2")
-							strong Duration (ms)
-						div(class="col-md-4")
-							strong Feedback
-					for entry in entries
-						div(class="row")
-							div(class="col-md-3")=entry.from_service
-							div(class="col-md-3")=entry.to_service
-							div(class="col-md-2")=entry.duration
-							div(class="col-md-4")
-								pre=entry.feedback
+					table(class="table table-striped table-hover")
+						tr
+							th From
+							th To
+							th Duration (ms)
+							th Request Data
+							th Feedback
+						for entry in entries
+							tr
+								td=entry.from_service
+								td=entry.to_service
+								td=entry.duration
+								td
+									pre=entry.data
+								td
+									pre=entry.feedback
 
