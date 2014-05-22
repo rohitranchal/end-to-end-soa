@@ -208,7 +208,7 @@ exports.get_interaction_data = function(interaction_id, cb) {
 
 exports.get_interactions = function(cb) {
 	var sql = "SELECT f.name AS from_service, t.name AS to_service, i.start, i.end, (i.end - i.start) AS duration, i.ts, i.data, i.feedback " +
-				"FROM Interaction i INNER JOIN Service f ON f.id = i.from_service INNER JOIN Service t ON t.id = i.to_service;";
+				"FROM Interaction i INNER JOIN Service f ON f.id = i.from_service INNER JOIN Service t ON t.id = i.to_service WHERE i.start IS NOT NULL";
 	connection.query(sql, function(err, rows, fields) {
 		if (err) throw err;
 		cb(rows);
