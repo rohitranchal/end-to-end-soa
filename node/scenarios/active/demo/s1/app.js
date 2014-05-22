@@ -33,7 +33,7 @@ global.eval_interaction = function(target, start, end, results) {
 	}
 
 	feedback.weight = 1;
-	console.log(target + '>' + time + ':' + feedback.satisfaction);
+
 	results(feedback);
 };
 

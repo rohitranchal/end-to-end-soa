@@ -24,14 +24,6 @@ npm install request
 cd -
 
 
-cd scenarios/active/simple/s1/
-npm install
-cd -
-
-cd scenarios/active/simple/s2/
-npm install
-cd -
-
 cd scenarios/active/demo/s1/
 npm install
 cd -
@@ -65,33 +57,9 @@ cd scenarios/active/demo_airline/s3/
 npm install
 cd -
 
-cd scenarios/active/demo_post/s1/
-npm install
-cd -
-cd scenarios/active/demo_post/s2/
-npm install
-cd -
-
-cd scenarios/active/demo_https/s1/
-npm install
-cd -
-cd scenarios/active/demo_https/s2/
-npm install
-cd -
-
-cd scenarios/active/demo_redirect/s1/
-npm install
-cd -
-cd scenarios/active/demo_redirect/s2/
-npm install
-cd -
-cd scenarios/active/demo_redirect/s3/
-npm install
-cd -
 
 cd scenarios/passive/simple/s1/
 npm install
-cp -r ../../../instr_request ./node_modules/request
 cd -
 cp -r heartbeat scenarios/simple/s1/node_modules/
 cd scenarios/passive/simple/s2/
