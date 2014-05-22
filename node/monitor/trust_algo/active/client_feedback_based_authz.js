@@ -38,4 +38,4 @@ var auth = function(from, to, id, cb) {
 	
 };
 
-module.exports = {name :'Client Feedback Based Authorization', authorize : auth, policy : "NONE"};
+module.exports = {name :'Trust Based Re-routing', authorize : auth, policy : "NONE"};
