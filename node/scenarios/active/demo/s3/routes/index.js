@@ -18,8 +18,9 @@ exports.index = function(req, res) {
 				val.price += 200;
 				res.send(JSON.stringify(val));
 			} else {
-				console.log(error);
-				res.send('Internal Error: Blocked by Service Monitor : status code :' + response.statusCode);
+				// res.send('Internal Error: Blocked by Service Monitor : status code :' + response.statusCode);
+				var val = {'price' : 'Communication Interrupted'};
+				res.send(JSON.stringify(val));
 			}
 		});
 

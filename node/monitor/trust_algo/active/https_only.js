@@ -3,6 +3,7 @@ var java = require('java');
 var xml2js = require('xml2js');
 var fs = require('fs');
 var uuid = require('node-uuid');
+var scenarios = require('../../routes/scenario');
 
 //Java dependancies
 var jars_dir = process.cwd() + '/lib/';
@@ -63,25 +64,47 @@ var auth = function(from, to, id, cb) {
 	var builder = new xml2js.Builder();
 	var req_xml = builder.buildObject(req);
 
-	console.log(req_xml);
-	
 	//Write policy to a tmp file
 	var tmp_policy_file = '/tmp/' + uuid.v4();
 	fs.writeFileSync(tmp_policy_file, policy_text);
-	console.log(tmp_policy_file);
 
 	ac.evaluate(tmp_policy_file, req_xml, function(err, result) {
 		if(err) {
 			console.log(err);
 		} else {
 			console.log('Authorization response: ' + result);
-			if(result == 'Permit') {
-				cb(id, {code : 200});
-			} else {
+			if(result == 'Deny') {
 				cb(id, {code : 403});
+
+				//Find out if there's a parent service
+				db.get_service(to.id, function(svc_entry) {
+
+					if(svc_entry == null) {
+
+						//We should not reach this
+						scenarios.break_connection(from.id, to.id);
+
+					} else {
+						var params = JSON.parse(svc_entry.params);
+						if(typeof params.parent_service_id != 'undefined') {
+							
+							//Break connection to the parent of the target
+							scenarios.break_connection(from.id, params.parent_service_id);
+
+						} else {
+
+							//Break connection to the target
+							scenarios.break_connection(from.id, to.id);
+
+						}
+					}
+				});
+				
+			} else {
+				cb(id, {code : 200});
 			}
 		}
 	});
 };
 
-module.exports = {name :'XACML-Policy : Block Insecure Transports', alg : trust, authorize : auth, policy : policy_text};
+module.exports = {name :'[XACML]Block Insecure Transports', alg : trust, authorize : auth, policy : policy_text};

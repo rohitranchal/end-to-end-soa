@@ -1,5 +1,5 @@
 var request = require('request');
-
+var url = require("url");
 
 var monitor_addr = 'localhost';
 if( typeof process.env.SVC_MONITOR_ADDR == 'string') {
@@ -38,13 +38,19 @@ var my_req = function() {
 	sm_data[0] = new Array('from', global.my_url);
 	sm_data[1] = new Array('to', arguments[0]);
 
+	//Check whether there are any url parameters
+	url_parts = url.parse(arguments[0]);
+	if(typeof url_parts.search != 'undefined') {
+		sm_data[sm_data.length] = new Array('data', url_parts.search);
+	}
+
 	var _args = arguments;
 	var _this = this;
 	sm_log(sm_data, function(error, response, body) {
 		if(!error && response.statusCode == 200) {
 			if(body != 'OK') {
 				_args[0] = body;
-				sm_data[1] = new Array('to', body);
+				sm_data[sm_data.length] = new Array('to', body);
 			}
 			var start = new Date().getTime();
 
@@ -55,14 +61,14 @@ var my_req = function() {
 				var end = new Date().getTime();
 				cb(error, response, body);
 
-				sm_data[2] = new Array('start', start);
-				sm_data[3] = new Array('end', end);
+				sm_data[sm_data.length] = new Array('start', start);
+				sm_data[sm_data.length] = new Array('end', end);
 
 				//If the service provides any feedback about the interaction
 				if (typeof global.eval_interaction !== 'undefined') {
 
 					//Obtain service feedback
-					global.eval_interaction(sm_data.to, start, end, function(service_feedback) {
+					global.eval_interaction(_args[0], start, end, function(service_feedback) {
 						sm_data[sm_data.length] = new Array('service_feedback', JSON.stringify(service_feedback));
 
 						//this is async
@@ -78,6 +84,9 @@ var my_req = function() {
 			_args[1] = profiling_cb;
 			_req.apply(this, _args);
 		} else {
+			error = body;
+			response = 403;
+			body = '';
 			_args[1](error, response, body);
 			return;
 		}

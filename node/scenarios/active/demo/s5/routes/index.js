@@ -4,7 +4,7 @@ global.delay = 0;
 exports.index = function(req, res) {
 
 	if(typeof req.client.pair == 'undefined') {
-		console.log('Payment Gateway Accessed via Insecure Transport');
+		console.log('Payment Gateway Accessed via INSECURE Transport!!!');
 	} else {
 		console.log('Payment Gateway Accessed via Secure Transport');
 	}

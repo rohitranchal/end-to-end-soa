@@ -24,7 +24,7 @@
 }
 
 .svc_under_attack {
-	border:4px solid #FF0000;
+	border:4px dotted #FF0000;
 }
 
 .svc_backup {

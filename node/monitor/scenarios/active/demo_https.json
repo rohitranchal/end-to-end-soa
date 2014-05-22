@@ -1,8 +1,0 @@
-{
-	"id" : 3,
-	"access_url" : "http://localhost:6106/get_deal",
-	"description" : "Travel Agent -> Airline (HTTPS)",
-	"name": "DEMO: Travel Agent: HTTPS Airline",
-	"services" : [23, 24],
-	"connections" :[[23,24]]
-}

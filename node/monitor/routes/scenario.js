@@ -2,8 +2,13 @@ var db = require('../db');
 var fs = require('fs');
 var trust = require('../trust_algo');
 
+var connection_updates = new Array();
+var service_updates = new Array();
+
+
 console.log('Loading scenarios ... ');
 var files = fs.readdirSync('./scenarios/passive/');
+
 
 var scenarios = new Array();
 //Load all availbale scenarios
@@ -35,7 +40,48 @@ for(var i = 0; i < files.length; i++) {
 	});	
 }
 
+exports.update_service_status = function(service_id, state, action) {
+	service_updates[service_updates.length] = {'service': service_id, 'state' : state , 'action' : action};
+};
 
+exports.get_service_updates = function(req, res) {
+	//Only return items from the point required
+	var ret = service_updates.slice(req.query.from);
+	res.send(ret);
+};
+
+exports.break_connection = function(from, to) {
+
+	var update_id = 'break_' + from + '_' + to;
+	console.log(update_id);
+	//This is very inefficient. TODO: Find a better way to stop adding duplicate items
+	for(var i = 0; i < connection_updates.length; i++) {
+		if(connection_updates[i].id == update_id) {
+			return;
+		}
+	}
+
+	connection_updates[connection_updates.length] = {'id':  update_id, 'action' : 'break', 'from' : from, 'to' : to};
+};
+
+exports.add_connection = function(from, to) {
+
+	var update_id = 'add_' + from + '_' + to;
+	//This is very inefficient. TODO: Find a better way to stop adding duplicate items
+	for(var i = 0; i < connection_updates.length; i++) {
+		if(connection_updates[i].id == update_id) {
+			return;
+		}
+	}
+
+	connection_updates[connection_updates.length] = {'id': update_id, 'action' : 'add', 'from' : from, 'to' : to};
+};
+
+exports.get_connection_updates = function(req, res) {
+	//Only return items from the point required
+	var ret = connection_updates.slice(req.query.from);
+	res.send(ret);
+};
 
 exports.show_all = function(req, res) {
 	res.render('scenario_list', {passive_sl : scenarios, active_sl : active_scenarios});
