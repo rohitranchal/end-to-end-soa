@@ -15,10 +15,10 @@ html(lang="en")
 				h2 Scenario Statistics
 			div(class="panel panel-default")
 				div(class="panel-body")
-					table
+					div(class="panel-group" id="accordion")
 						for service in services
-							div(class="panel panel-default")
+							div(class="panel panel-default" id='service_panel_' + service)
 								div(class="panel-heading")
-									h3(class="panel-title", id='service_name_' + service) 
-								div(class="panel-body")
-									div(class="service", id=service, style="height:300px; width:1000px;")
+									a(data-toggle="collapse", data-parent="#accordion", href='#collapse' + service, class="panel-title", id='service_name_' + service) 
+								div(class="panel-body panel-collapse collapse in" id="collapse" + service)
+									div(class="service", id=service)

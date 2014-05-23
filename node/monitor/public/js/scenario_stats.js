@@ -4,16 +4,13 @@ $( document ).ready(function() {
 		var svc_id = $(this).attr('id');
 
 		$.get('./get_service_stats?id=' + svc_id, function(stats) {
-			console.log(stats)
 			var to = stats.to;
 			var from = stats.from;
-			var to_charts = new Array();
-			var from_charts = new Array();
 
 			$('#service_name_' + svc_id).text(stats.svc_data.display_name);
 
 			if(to.modules.length == 0) {
-				$('#' + svc_id).remove();
+				$('#service_panel_' + svc_id).remove();
 			}
 
 			var chart_added = false;
@@ -23,7 +20,6 @@ $( document ).ready(function() {
 				
 				var chart = new Array();
 				//Go through to.data to gather values for this module
-				var ticks = new Array();
 				for(var j = 0; j < to.data.length; j++) {
 					var entry = to.data[j];
 
@@ -33,24 +29,22 @@ $( document ).ready(function() {
 						//Get the post trust value of to service
 						chart[chart.length] = entry.to_post;
 					}
-					ticks[ticks.length] = j;
 				}
 
 				if(chart.length != 0) {
 
 					chart_added = true;
-					var plot1 = $.jqplot(svc_id, [chart], { 
-						title: stats.svc_data.display_name + ': ' + mod_name,
+					$('#' + svc_id).append('<div id = "' + svc_id+ '_' + i + '"></div>');
+					var plot1 = $.jqplot(svc_id + '_' + i, [chart], {
+						title: mod_name,
 						series:[{showMarker:false}],
 						axes:{
 							xaxis:{
 								label:'Interactions', min:0,
-								ticks: ticks
 							},
 							yaxis:{
 								label:'Trust Value', min:0, max:1
 							}
-
 						}
 					});
 
@@ -64,5 +58,6 @@ $( document ).ready(function() {
 		});
 	});
 
+	$('.collapse').collapse()
 
 });
