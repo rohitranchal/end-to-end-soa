@@ -23,7 +23,7 @@ global.eval_interaction = function(target, start, end, results) {
 		//If less than 100ms
 		feedback.satisfaction = 1;
 
-	} else if(time > 200 & time < 2000) {
+	} else if(time > 200 & time < 1000) {
 
 		//If within 100ms and 1s
 		feedback.satisfaction = 0.4

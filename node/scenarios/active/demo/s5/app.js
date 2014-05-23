@@ -48,7 +48,6 @@ var req_delay = function(request, response, next) {
 	} else {
 
 		//Delay request by the set number of miliseconds
-		console.log(global.my_host + ":" + global.my_port + " > delay: " + global.delay)
 		setTimeout(function() {
 			next();
 		},global.delay);

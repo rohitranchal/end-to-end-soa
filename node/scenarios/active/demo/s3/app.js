@@ -18,15 +18,15 @@ global.eval_interaction = function(target, start, end, results) {
 	var feedback = {};
 	var time = end - start;
 
-	if(time < 100) {
+	if(time < 200) {
 
 		//If less than 100ms
 		feedback.satisfaction = 1;
 
-	} else if(time > 100 & time < 1000) {
+	} else if(time > 200 & time < 1000) {
 
 		//If within 100ms and 1s
-		feedback.satisfaction = 0.7
+		feedback.satisfaction = 0.55
 
 	} else {
 
