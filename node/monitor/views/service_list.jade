@@ -21,9 +21,9 @@ html(lang="en")
 							td Grade
 						div(class="col-md-2")
 								td Status
-						div(class="col-md-2")
-							td Start/Stop
 						div(class="col-md-1")
+							td Start/Stop
+						div(class="col-md-2")
 							td Stats
 					for entry in entries
 						div(class="row top-buffer")
@@ -38,9 +38,9 @@ html(lang="en")
 								div=entry.grade
 							div(class="col-md-2")
 									div(id=entry.id, class="svc_data")=entry.status
-							div(class="col-md-2")
+							div(class="col-md-1")
 								div
 									button(id="svc_" + entry.id, class="btn btn-success btn-sm") Start
-							div(class="col-md-1")
+							div(class="col-md-2")
 									div
-										a(href=('./hb_stats_service_view?service=' + entry.name)) Stats
+										a(href=('./show_service_stats?id=' + entry.id)) Trust Values
