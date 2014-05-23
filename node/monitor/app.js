@@ -53,6 +53,8 @@ app.get('/add_service_show', routes.add_service_show);
 app.get('/get_scenario_trust_levels', scenario.get_scenario_trust_levels);
 app.get('/get_connection_updates', scenario.get_connection_updates);
 app.get('/get_service_updates', scenario.get_service_updates);
+app.get('/show_service_stats', routes.show_service_stats);
+app.get('/get_service_stats', routes.get_service_stats);
 
 
 app.get('/trust_algo_list', routes.trust_algo_list);

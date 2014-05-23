@@ -277,3 +277,44 @@ exports.inflow_service_req_rates = function(service, cb) {
 		cb(rows);
 	});
 }
+
+
+exports.get_interaction_trust_data_to_service = function(service, cb) {
+	var sql = 'SELECT * FROM Interaction JOIN Interaction_Trust ON Interaction.id = Interaction_Trust.interaction_id ' + 
+			'WHERE Interaction.start IS NOT NULL AND Interaction.to_service = ' + service + 
+			' ORDER BY Interaction.start';
+	connection.query(sql, function(err, rows, fields) {
+		if (err) throw err;
+		cb(rows);
+	});
+}
+
+exports.get_interaction_trust_data_from_service = function(service, cb) {
+	var sql = 'SELECT * FROM Interaction JOIN Interaction_Trust ON Interaction.id = Interaction_Trust.interaction_id ' + 
+			'WHERE Interaction.start IS NOT NULL AND Interaction.from_service = ' + service + 
+			' ORDER BY Interaction.start';
+	connection.query(sql, function(err, rows, fields) {
+		if (err) throw err;
+		cb(rows);
+	});
+}
+
+exports.get_interaction_trust_modules_to_service = function(service, cb) {
+	var sql = 'SELECT DISTINCT trust_module FROM Interaction JOIN Interaction_Trust ON Interaction.id = Interaction_Trust.interaction_id ' + 
+			'WHERE Interaction.start IS NOT NULL AND Interaction.from_service = ' + service + 
+			' ORDER BY Interaction.start';
+	connection.query(sql, function(err, rows, fields) {
+		if (err) throw err;
+		cb(rows);
+	});
+}
+
+exports.get_interaction_trust_modules_from_service = function(service, cb) {
+	var sql = 'SELECT DISTINCT trust_module FROM Interaction JOIN Interaction_Trust ON Interaction.id = Interaction_Trust.interaction_id ' + 
+			'WHERE Interaction.start IS NOT NULL AND Interaction.from_service = ' + service + 
+			' ORDER BY Interaction.start';
+	connection.query(sql, function(err, rows, fields) {
+		if (err) throw err;
+		cb(rows);
+	});
+}

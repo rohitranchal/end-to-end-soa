@@ -286,3 +286,24 @@ exports.interaction_block = function(req, res){
 	});
 };
 
+exports.show_service_stats = function(req, res) {
+	var service_id = req.query.id;
+	res.render('service_stats', {service: service_id});
+}
+
+exports.get_service_stats = function(req, res) {
+	//Get any service trust chanegs from the interaction_trust
+	var service_id = req.query.id;
+	db.get_interaction_trust_modules_to_service(service_id, function(to_modules) {
+		db.get_interaction_trust_modules_to_service(service_id, function(from_modules) {
+			db.get_interaction_trust_data_to_service(service_id, function(to_res) {
+				db.get_interaction_trust_data_from_service(service_id, function(from_res) {
+					var r = {'to' : {'modules' : to_modules, 'data' : to_res}, 
+							'from' : {'modules' : from_modules, 'data' : from_res}}
+					res.send(r);
+				});
+			});
+		});
+	});
+}
+

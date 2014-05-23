@@ -1,0 +1,17 @@
+html(lang="en")
+	include header
+	script(src="./js/service_stats.js")
+	script(src="./jqplot/jquery.jqplot.min.js")
+	script(src="./jqplot/plugins/jqplot.canvasTextRenderer.min.js")
+	script(src="./jqplot/plugins/jqplot.canvasAxisLabelRenderer.min.js")
+	link(rel="stylesheet", href="./jqplot/jquery.jqplot.min.css")
+	body
+		div(id="service_id", style="visibility:hidden;")=service
+		include nav
+		div(class="container")
+			div(class="panel panel-default text-center")
+				h2 Service Statistics
+			div(class="panel panel-default")
+				div(class="panel-body")
+					div(id="trust_values_to")
+					div(id="trust_values_from")
