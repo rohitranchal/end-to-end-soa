@@ -50,7 +50,7 @@ var my_req = function() {
 		if(!error && response.statusCode == 200) {
 			if(body != 'OK') {
 				_args[0] = body;
-				sm_data[sm_data.length] = new Array('to', body);
+				sm_data[1] = new Array('to', body);
 			}
 			var start = new Date().getTime();
 
