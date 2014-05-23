@@ -1,18 +1,24 @@
 html(lang="en")
 	include header
-	script(src="./js/service_stats.js")
+	script(src="./js/scenario_stats.js")
 	script(src="./jqplot/jquery.jqplot.min.js")
 	script(src="./jqplot/plugins/jqplot.canvasTextRenderer.min.js")
 	script(src="./jqplot/plugins/jqplot.canvasAxisLabelRenderer.min.js")
 	script(src="./jqplot/plugins/jqplot.cursor.min.js")
 	link(rel="stylesheet", href="./jqplot/jquery.jqplot.min.css")
 	body
-		div(id="service_id", style="visibility:hidden;")=service
+		div(id="scenario_id", style="visibility:hidden;")=id
+		div(id="scenario_type", style="visibility:hidden;")=type
 		include nav
 		div(class="container")
 			div(class="panel panel-default text-center")
-				h2 Service Statistics
+				h2 Scenario Statistics
 			div(class="panel panel-default")
 				div(class="panel-body")
-					div(id="trust_values_to")
-					div(id="trust_values_from")
+					table
+						for service in services
+							div(class="panel panel-default")
+								div(class="panel-heading")
+									h3(class="panel-title", id='service_name_' + service) 
+								div(class="panel-body")
+									div(class="service", id=service, style="height:300px; width:1000px;")

@@ -116,9 +116,29 @@ exports.show = function(req, res){
 		res.render('scenario', scenario);
 		scenario.services = tmp_s;
 	});	
-
-	
 };
+
+exports.show_scenario_stats = function(req, res) {
+	var s_id = req.query.s_id;
+	var type = req.query.type;
+
+	var scenario = null;
+	if(type == 'passive') {
+		for(var i = 0; i < scenarios.length; i++) {
+			if(scenarios[i].id == s_id) {
+				scenario = scenarios[i];
+			}
+		}
+	} else {
+		for(var i = 0; i < active_scenarios.length; i++) {
+			if(active_scenarios[i].id == s_id) {
+				scenario = active_scenarios[i];
+			}
+		}
+	}
+
+	res.render('scenario_stats', {'services' : scenario.services});
+}
 
 //Return the trust levels of currently enabled trust modules
 exports.get_scenario_trust_levels = function(req, res) {

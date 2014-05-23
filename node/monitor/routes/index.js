@@ -298,12 +298,14 @@ exports.get_service_stats = function(req, res) {
 		db.get_interaction_trust_modules_to_service(service_id, function(from_modules) {
 			db.get_interaction_trust_data_to_service(service_id, function(to_res) {
 				db.get_interaction_trust_data_from_service(service_id, function(from_res) {
-					var r = {'to' : {'modules' : to_modules, 'data' : to_res}, 
-							'from' : {'modules' : from_modules, 'data' : from_res}}
-					res.send(r);
+					db.get_service(service_id, function(svc_data) {
+						var r = {'svc_data' : svc_data,
+								'to' : {'modules' : to_modules, 'data' : to_res}, 
+								'from' : {'modules' : from_modules, 'data' : from_res}}
+						res.send(r);
+					});
 				});
 			});
 		});
 	});
 }
-
