@@ -72,7 +72,11 @@ var auth = function(from, to, id, cb) {
 		if(err) {
 			console.log(err);
 		} else {
-			console.log('Authorization response: ' + result);
+
+			if(result != 'NotApplicable') {
+				console.log('Authorization response: ' + result);
+			}
+
 			if(result == 'Deny') {
 				cb(id, {code : 403});
 
