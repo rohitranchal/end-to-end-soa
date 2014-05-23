@@ -10,6 +10,11 @@
 	max-width:852px;
 }
 
+.scenario_stats {
+	padding-top: 10px;
+	font-size:20px;
+}
+
 .svc_live {
 	border:4px solid #04B404;
 }
